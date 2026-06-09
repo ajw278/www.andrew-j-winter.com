@@ -408,14 +408,6 @@ def build_html(docs):
             <span>Journal articles</span>
           </div>
           <div class="pub-stat">
-            <strong>{n_conferences}</strong>
-            <span>Conference talks</span>
-          </div>
-          <div class="pub-stat">
-            <strong>{n_proposals}</strong>
-            <span>Observing proposals</span>
-          </div>
-          <div class="pub-stat">
             <strong><a href="https://ui.adsabs.harvard.edu/user/libraries/PK0RWOWOTIKWfo-5Fck9sg"
                        target="_blank" rel="noopener">ADS &#8599;</a></strong>
             <span>Full library</span>
@@ -430,10 +422,10 @@ def build_html(docs):
             Journal Articles ({n_articles})
           </button>
           <button class="tab-btn" onclick="switchTab('conferences', this)">
-            Conference Talks ({n_conferences})
+            Published Conference Talks ({n_conferences})
           </button>
           <button class="tab-btn" onclick="switchTab('proposals', this)">
-            Observing Proposals ({n_proposals})
+            Published Observing Proposals ({n_proposals})
           </button>
         </div>
 
