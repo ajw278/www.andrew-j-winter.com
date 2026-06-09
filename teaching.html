@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teaching — A. J. Winter</title>
+  <meta name="description" content="Teaching by Andrew J. Winter — Physical Cosmology course at Queen Mary University of London, including course notes and Colab notebooks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ---- Teaching-specific styles ---- */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: var(--shadow);
+      transition: all 0.25s;
+    }
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+
+    .resource-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .resource-icon.pdf  { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+    .resource-icon.colab { background: linear-gradient(135deg, #e67e22, #f39c12); }
+    .resource-icon.soon  { background: linear-gradient(135deg, #7f8c8d, #95a5a6); }
+
+    .resource-card h3 { font-size: 1.1rem; margin: 0; }
+    .resource-card p  { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0; flex: 1; }
+
+    .resource-card .btn {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+    }
+
+    .notebook-list {
+      margin-top: 3rem;
+    }
+
+    .notebook-list h3 {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .notebook-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .notebook-item:last-child { border-bottom: none; }
+
+    .notebook-item-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .notebook-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--navy-mid), var(--accent));
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .notebook-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .notebook-desc {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .course-overview {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .overview-stat strong {
+      display: block;
+      font-size: 1.6rem;
+      font-family: var(--font-serif);
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .overview-stat span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">A. J. Winter</a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="teaching.html" class="active">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="https://ui.adsabs.harvard.edu/user/libraries/PK0RWOWOTIKWfo-5Fck9sg" target="_blank" rel="noopener">Publications</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page hero -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="section-label">QMUL</span>
+      <h1>Teaching</h1>
+      <p>Course materials for Physical Cosmology at Queen Mary University of London —
+         including lecture notes and interactive Python notebooks.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Course overview -->
+    <section>
+      <div class="container">
+        <p class="section-label">Module</p>
+        <h2 class="section-heading">Physical Cosmology</h2>
+        <p style="color:var(--text-muted); max-width:65ch;">
+          An advanced undergraduate / postgraduate module covering the theoretical and observational
+          foundations of modern cosmology, from the geometry of spacetime to the large-scale structure
+          of the Universe. The course emphasises quantitative problem-solving alongside conceptual understanding,
+          supported by hands-on computational notebooks.
+        </p>
+
+        <div class="course-overview">
+          <div class="overview-stat">
+            <strong>QMUL</strong>
+            <span>Institution</span>
+          </div>
+          <div class="overview-stat">
+            <strong>UG / PG</strong>
+            <span>Level</span>
+          </div>
+          <div class="overview-stat">
+            <strong>Python</strong>
+            <span>Computational tool</span>
+          </div>
+          <div class="overview-stat">
+            <strong>Colab</strong>
+            <span>Notebook platform</span>
+          </div>
+        </div>
+
+        <!-- Main resources -->
+        <div class="resource-grid">
+
+          <!-- Course notes PDF -->
+          <div class="resource-card">
+            <div class="resource-icon pdf">&#128196;</div>
+            <div>
+              <h3>Course Notes</h3>
+              <p>Full lecture notes for the Physical Cosmology module in PDF format.
+                 Covers all topics from the Friedmann equations to CMB physics and structure formation.</p>
+            </div>
+            <!-- Replace href with the actual PDF path once uploaded, e.g. "notes/cosmology_notes.pdf" -->
+            <a href="#" class="btn btn-primary">&#8595; Download Notes</a>
+          </div>
+
+          <!-- Colab notebooks landing -->
+          <div class="resource-card">
+            <div class="resource-icon colab">&#128218;</div>
+            <div>
+              <h3>Colab Notebooks</h3>
+              <p>Interactive Python notebooks hosted on Google Colab. No local installation needed —
+                 open directly in your browser and run the code.</p>
+            </div>
+            <!-- Replace href with your Colab folder or individual notebook links below -->
+            <a href="#notebooks" class="btn btn-primary">Browse Notebooks &#8595;</a>
+          </div>
+
+        </div>
+
+        <!-- Notebook list -->
+        <div class="notebook-list" id="notebooks">
+          <h3>Colab Notebooks</h3>
+
+          <!-- Add / remove notebook entries as the course develops -->
+          <div class="notebook-item">
+            <div class="notebook-item-left">
+              <div class="notebook-num">1</div>
+              <div>
+                <div class="notebook-title">The Expanding Universe</div>
+                <div class="notebook-desc">Hubble's law, redshift, and the scale factor</div>
+              </div>
+            </div>
+            <!-- Replace href with the actual Colab link -->
+            <a href="#" class="btn btn-primary" style="font-size:0.82rem; padding:0.45rem 1rem;">Open in Colab &#8599;</a>
+          </div>
+
+          <div class="notebook-item">
+            <div class="notebook-item-left">
+              <div class="notebook-num">2</div>
+              <div>
+                <div class="notebook-title">Friedmann Equations</div>
+                <div class="notebook-desc">Solving the Friedmann equations for different cosmologies</div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary" style="font-size:0.82rem; padding:0.45rem 1rem;">Open in Colab &#8599;</a>
+          </div>
+
+          <div class="notebook-item">
+            <div class="notebook-item-left">
+              <div class="notebook-num">3</div>
+              <div>
+                <div class="notebook-title">Distance Measures</div>
+                <div class="notebook-desc">Comoving distance, luminosity distance, and angular diameter distance</div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary" style="font-size:0.82rem; padding:0.45rem 1rem;">Open in Colab &#8599;</a>
+          </div>
+
+          <div class="notebook-item">
+            <div class="notebook-item-left">
+              <div class="notebook-num">4</div>
+              <div>
+                <div class="notebook-title">The CMB</div>
+                <div class="notebook-desc">Blackbody radiation, recombination, and the power spectrum</div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary" style="font-size:0.82rem; padding:0.45rem 1rem;">Open in Colab &#8599;</a>
+          </div>
+
+          <div class="notebook-item">
+            <div class="notebook-item-left">
+              <div class="notebook-num">5</div>
+              <div>
+                <div class="notebook-title">Structure Formation</div>
+                <div class="notebook-desc">Linear perturbation theory and the matter power spectrum</div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary" style="font-size:0.82rem; padding:0.45rem 1rem;">Open in Colab &#8599;</a>
+          </div>
+
+        </div><!-- /notebook-list -->
+
+      </div><!-- /container -->
+    </section>
+
+  </main>
+
+  <!-- Contact -->
+  <section class="contact-section">
+    <div class="container">
+      <p class="section-label">Questions?</p>
+      <h2 class="section-heading">Get in Touch</h2>
+      <p>For questions about the course or materials, please get in touch by email.</p>
+      <div class="contact-grid" style="margin-top:2rem;">
+        <div class="contact-item">
+          <div class="contact-icon">&#9993;</div>
+          <div class="contact-item-text">
+            <small>Email</small>
+            <a href="mailto:andrew.winter@qmul.ac.uk">andrew.winter@qmul.ac.uk</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#127968;</div>
+          <div class="contact-item-text">
+            <small>Institution</small>
+            <span>Queen Mary University of London</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Andrew J. Winter &mdash; Queen Mary University of London</p>
+  </footer>
+
+</body>
+</html>
