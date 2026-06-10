@@ -29,7 +29,7 @@ LIBRARY_ID = os.getenv("ADS_LIBRARY_ID", "PK0RWOWOTIKWfo-5Fck9sg")
 OUT_FILE   = Path(__file__).parent / "publications.html"
 
 FIRST_AUTHOR_RE = re.compile(
-    r"^Winter,\s+(Andrew(?:\s+J\.?)*\.?|A\.\s*J\.?)", re.IGNORECASE
+    r"^Winter,\s+(Andrew(?:\s+J\.?)*\.?|A\.(?:\s*J\.?)?)\s*$", re.IGNORECASE
 )
 
 # doctype groups
@@ -139,31 +139,50 @@ def categorise(doc):
     return "article"
 
 
+def author_display(raw):
+    """Convert 'Last, First Middle' → 'F. M. Last'."""
+    if "," in raw:
+        last, first = raw.split(",", 1)
+        inits = " ".join(p[0] + "." for p in first.strip().split() if p)
+        return f"{inits} {last.strip()}"
+    return raw.strip()
+
+
 def format_authors(doc):
-    """Return HTML author string, bolding A. J. Winter."""
+    """Return HTML author string, bolding any Winter, A* variant.
+
+    If my name falls outside the first 5 authors the string reads:
+        Author1, Author2, Author3, …, <strong>A. Winter</strong>, et al.
+    """
     authors  = doc.get("author") or []
     nauthors = int(doc.get("author_count") or len(authors))
-    MAX_SHOW = 6
+    MAX_SHOW = 5
+
+    # Locate my name once across the full list
+    me_idx, me_raw = None, None
+    for i, a in enumerate(authors):
+        if FIRST_AUTHOR_RE.match(a):
+            me_idx, me_raw = i, a
+            break
 
     parts = []
-    found_me = False
-    for i, a in enumerate(authors[:MAX_SHOW]):
-        if "," in a:
-            last, first = a.split(",", 1)
-            inits = " ".join(p[0] + "." for p in first.strip().split() if p)
-            display = f"{inits} {last.strip()}"
-        else:
-            display = a.strip()
 
-        if FIRST_AUTHOR_RE.match(a):
-            display = f"<strong>{display}</strong>"
-            found_me = True
-
-        parts.append(display)
-
-    if nauthors > MAX_SHOW:
-        if not found_me:
-            parts.append("<strong>A. J. Winter</strong>")
+    if me_idx is not None and me_idx < MAX_SHOW:
+        # My name is within the first 5 — show up to MAX_SHOW authors normally
+        for i, a in enumerate(authors[:MAX_SHOW]):
+            display = author_display(a)
+            if i == me_idx:
+                display = f"<strong>{display}</strong>"
+            parts.append(display)
+        if nauthors > MAX_SHOW:
+            parts.append("<em>et al.</em>")
+    else:
+        # My name is beyond position 5 — show first 3, ellipsis, my name, et al.
+        for a in authors[:3]:
+            parts.append(author_display(a))
+        parts.append("&hellip;")
+        if me_raw:
+            parts.append(f"<strong>{author_display(me_raw)}</strong>")
         parts.append("<em>et al.</em>")
 
     return ", ".join(parts)
