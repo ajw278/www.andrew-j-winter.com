@@ -360,6 +360,7 @@ nav .nav-inner {
   padding: 0 0.2rem;
 }
 .img-credit a { color: inherit; text-decoration: underline; }
+.card-img .img-credit { font-size: 0.6rem; }
 
 .research-topic-img-block img {
   width: 100%;
