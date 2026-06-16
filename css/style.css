@@ -507,6 +507,8 @@ footer {
 
 .research-topic-img-block img {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: var(--radius);
   display: block;
 }
