@@ -510,8 +510,13 @@ footer {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  object-position: center;
   border-radius: var(--radius);
   display: block;
+}
+
+#disc-dynamics .research-topic-img-block img {
+  object-position: left center;
 }
 
 .research-topic-content h2 { font-size: 1.6rem; margin-bottom: 0.75rem; }
