@@ -516,7 +516,8 @@ footer {
 }
 
 #disc-dynamics .research-topic-img-block img {
-  object-position: left center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .research-topic-content h2 { font-size: 1.6rem; margin-bottom: 0.75rem; }
