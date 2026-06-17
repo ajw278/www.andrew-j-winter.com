@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software — A. J. Winter</title>
+  <meta name="description" content="Open-source astrophysics codes by Andrew J. Winter: warpfitter and excursion_BHL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .software-grid {
+      display: grid;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .software-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .software-card-body { min-width: 0; }
+
+    .software-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .software-name code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.3rem;
+    }
+
+    .software-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .software-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .software-desc {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      max-width: 70ch;
+    }
+
+    .software-paper {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    .software-paper strong {
+      color: var(--text);
+    }
+
+    .software-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+
+    .sw-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .sw-link-github {
+      background: var(--navy);
+      color: #fff;
+    }
+    .sw-link-github:hover {
+      background: var(--navy-mid);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .sw-link-ads {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .sw-link-ads:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 640px) {
+      .software-card {
+        grid-template-columns: 1fr;
+      }
+      .software-links {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">A. J. Winter</a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="software.html" class="active">Software</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="publications.html">Publications</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page hero -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="section-label">Code</span>
+      <h1>Software</h1>
+      <p>
+        Open-source Python codes accompanying my research. All repositories are hosted on GitHub
+        and linked to their associated publications.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="software-grid">
+
+        <!-- warpfitter -->
+        <div class="software-card">
+          <div class="software-card-body">
+            <div class="software-name"><code>warpfitter</code></div>
+            <div class="software-meta">
+              <span class="software-tag">Python</span>
+              <span class="software-tag">Protoplanetary discs</span>
+              <span class="software-tag">Kinematics</span>
+            </div>
+            <p class="software-desc">
+              Fits warp profiles to velocity residual maps of protoplanetary discs. Grids
+              molecular-line velocity residuals onto polar coordinates, decomposes them
+              trigonometrically to isolate the warp signal, and applies Gaussian-process
+              smoothing (Mat&eacute;rn kernel) to produce radial tilt-angle profiles with
+              uncertainty envelopes. Used to show that large-scale kinematic structures in
+              exoALMA discs are consistent with moderate warping rather than embedded planets.
+            </p>
+            <p class="software-paper">
+              <strong>Paper:</strong> Winter et al. 2025,
+              <em>ApJL</em> 990, L10 &mdash;
+              &ldquo;exoALMA. XVIII. Interpreting Large-scale Kinematic Structures as Moderate Warping&rdquo;
+            </p>
+          </div>
+          <div class="software-links">
+            <a href="https://github.com/ajw278/warpfitter" target="_blank" rel="noopener" class="sw-link sw-link-github">
+              GitHub &#8599;
+            </a>
+            <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...990L..10W/abstract" target="_blank" rel="noopener" class="sw-link sw-link-ads">
+              Paper &#8599;
+            </a>
+          </div>
+        </div>
+
+        <!-- excursion_BHL -->
+        <div class="software-card">
+          <div class="software-card-body">
+            <div class="software-name"><code>excursion_BHL</code></div>
+            <div class="software-meta">
+              <span class="software-tag">Python</span>
+              <span class="software-tag">Disc evolution</span>
+              <span class="software-tag">Galactic environment</span>
+            </div>
+            <p class="software-desc">
+              An excursion-set model for Bondi&ndash;Hoyle&ndash;Lyttleton (BHL) accretion onto
+              planet-forming discs. Computes star-forming-region trajectories through galactic
+              density and velocity fields, models gravitational collapse and cloud formation, and
+              builds a statistical database of disc infall histories. Used to demonstrate that
+              galactic-scale interstellar turbulence regulates disc replenishment and, in turn,
+              planet formation efficiency across the Galaxy.
+            </p>
+            <p class="software-paper">
+              <strong>Paper:</strong> Winter et al. 2024,
+              <em>ApJL</em> 972, L9 &mdash;
+              &ldquo;Planet Formation Regulated by Galactic-scale Interstellar Turbulence&rdquo;
+            </p>
+          </div>
+          <div class="software-links">
+            <a href="https://github.com/ajw278/excursion_BHL" target="_blank" rel="noopener" class="sw-link sw-link-github">
+              GitHub &#8599;
+            </a>
+            <a href="https://ui.adsabs.harvard.edu/abs/2024ApJ...972L...9W/abstract" target="_blank" rel="noopener" class="sw-link sw-link-ads">
+              Paper &#8599;
+            </a>
+          </div>
+        </div>
+
+        <!-- starclustergen -->
+        <div class="software-card">
+          <div class="software-card-body">
+            <div class="software-name"><code>starclustergen</code></div>
+            <div class="software-meta">
+              <span class="software-tag">Python</span>
+              <span class="software-tag">N-body dynamics</span>
+              <span class="software-tag">Star clusters</span>
+            </div>
+            <p class="software-desc">
+              Generates initial conditions for N-body star cluster simulations and interfaces
+              with the NBODY6++ code. Used to model the dynamical evolution of young stellar
+              clusters and quantify star&ndash;disc encounter rates in realistic cluster environments,
+              including the Taurus star-forming region.
+            </p>
+            <p class="software-paper">
+              <strong>Paper:</strong> Winter et al. 2024,
+              <em>A&amp;A</em> 691, A43 &mdash;
+              &ldquo;Running with the bulls: The frequency of star&ndash;disc encounters in the Taurus star-forming region&rdquo;
+            </p>
+          </div>
+          <div class="software-links">
+            <a href="https://github.com/ajw278/starclustergen" target="_blank" rel="noopener" class="sw-link sw-link-github">
+              GitHub &#8599;
+            </a>
+            <a href="https://ui.adsabs.harvard.edu/abs/2024A%26A...691A..43W/abstract" target="_blank" rel="noopener" class="sw-link sw-link-ads">
+              Paper &#8599;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-heading">Contact</h2>
+      <p>I welcome enquiries from prospective PhD students and collaborators.</p>
+
+      <div class="contact-grid" style="margin-top:2rem;">
+        <div class="contact-item">
+          <div class="contact-icon">&#9993;</div>
+          <div class="contact-item-text">
+            <small>Email</small>
+            <a href="mailto:andrew.winter@qmul.ac.uk">andrew.winter@qmul.ac.uk</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">&#128196;</div>
+          <div class="contact-item-text">
+            <small>Publications</small>
+            <a href="https://ui.adsabs.harvard.edu/user/libraries/PK0RWOWOTIKWfo-5Fck9sg" target="_blank" rel="noopener">NASA ADS Library</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Andrew J. Winter &mdash; Queen Mary University of London</p>
+  </footer>
+
+</body>
+</html>

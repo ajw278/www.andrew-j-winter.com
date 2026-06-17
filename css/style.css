@@ -497,11 +497,12 @@ footer {
 
 .research-topic--with-img {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 2rem;
   align-items: start;
 }
 
+.research-topic--with-img.reverse { grid-template-columns: 1fr 300px; }
 .research-topic--with-img.reverse .research-topic-img-block { order: 2; }
 .research-topic--with-img.reverse .research-topic-content  { order: 1; }
 
