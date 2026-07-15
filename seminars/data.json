@@ -1,0 +1,44 @@
+{
+  "adminEmail": "andrew.winter@qmul.ac.uk",
+  "passwordHash": "421801f03ccc8d7628f65d4098c0ba225400dd8d11b708f0f2f0ed67f167e9fd",
+  "contacts": {
+    "plasma": {
+      "name": "Plasma Group Contact",
+      "email": "plasma.contact@qmul.ac.uk"
+    },
+    "planets": {
+      "name": "Planets Group Contact",
+      "email": "planets.contact@qmul.ac.uk"
+    },
+    "cosmology": {
+      "name": "Cosmology Group Contact",
+      "email": "cosmology.contact@qmul.ac.uk"
+    }
+  },
+  "slots": [
+    {"date": "2026-10-02", "group": "plasma",     "status": "special",  "event": "AU Jamboree", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-10-16", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-10-23", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-10-30", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-11-06", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-11-20", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-11-27", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-12-04", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2026-12-18", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-01-15", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-01-22", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-01-29", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-02-05", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-02-19", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-02-26", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-03-05", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-03-19", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-03-26", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-04-30", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-05-07", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-05-21", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-05-28", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-06-04", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
+    {"date": "2027-06-18", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""}
+  ]
+}

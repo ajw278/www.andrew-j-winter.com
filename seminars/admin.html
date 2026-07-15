@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — QMUL Seminars</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { background: var(--bg-light); }
+
+    /* ── Gate ─────────────────────────────────────────────── */
+    .gate-overlay {
+      position: fixed; inset: 0;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+    .gate-card {
+      background: #fff; border-radius: 12px; padding: 2.5rem;
+      max-width: 380px; width: 90%;
+      box-shadow: 0 24px 60px rgba(0,0,0,.35);
+    }
+    .gate-card h2 { margin-bottom: .4rem; }
+    .gate-card p  { color: var(--text-muted); font-size: .9rem; margin-bottom: 1.5rem; }
+    .gate-input {
+      width: 100%; padding: .7rem 1rem; border: 1px solid var(--border);
+      border-radius: var(--radius); font-size: 1rem; font-family: var(--font-sans);
+      margin-bottom: .9rem;
+    }
+    .gate-input:focus { outline: none; border-color: var(--accent); }
+    .gate-btn {
+      width: 100%; padding: .75rem; background: var(--accent);
+      color: #fff; border: none; border-radius: var(--radius);
+      font-size: 1rem; font-weight: 600; cursor: pointer; font-family: var(--font-sans);
+      transition: background .2s;
+    }
+    .gate-btn:hover { background: var(--navy-mid); }
+    .gate-error { color: #e74c3c; font-size: .85rem; margin-top: .6rem; display: none; }
+    .gate-back { font-size: .8rem; color: var(--text-muted); margin-top: 1.25rem; }
+    .gate-back a { color: var(--accent); }
+
+    /* ── Admin panel ──────────────────────────────────────── */
+    .admin-wrap { display: none; min-height: 100vh; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--navy); color: #fff;
+      height: 58px; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topbar-title { font-family: var(--font-serif); font-size: 1.05rem; }
+    .topbar-actions { display: flex; gap: .6rem; align-items: center; }
+    .tbtn {
+      padding: .38rem 1rem; border-radius: var(--radius);
+      font-size: .83rem; font-weight: 600; cursor: pointer; border: none;
+      font-family: var(--font-sans); transition: background .2s;
+    }
+    .tbtn-save   { background: #27ae60; color: #fff; }
+    .tbtn-save:hover { background: #219a52; }
+    .tbtn-logout { background: rgba(255,255,255,.15); color: #fff; }
+    .tbtn-logout:hover { background: rgba(255,255,255,.25); }
+
+    /* Tabs */
+    .tabbar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      display: flex; padding: 0 2rem;
+      position: sticky; top: 58px; z-index: 40;
+    }
+    .tab {
+      padding: .85rem 1.4rem; border: none; background: none;
+      font-family: var(--font-sans); font-size: .875rem; font-weight: 500;
+      color: var(--text-muted); cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all .18s;
+    }
+    .tab:hover { color: var(--accent); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .admin-body { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+    .admin-h2 { font-family: var(--font-serif); color: var(--navy); margin-bottom: .75rem; }
+    .admin-sub { color: var(--text-muted); font-size: .875rem; margin-bottom: 1.5rem; }
+
+    /* Slots table */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: .84rem; }
+    thead th {
+      background: var(--bg-light); padding: .55rem .75rem;
+      text-align: left; font-weight: 700; font-size: .75rem;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 115px; /* topbar + tabbar heights */
+    }
+    tbody td { padding: .45rem .65rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tbody tr:hover td { background: var(--bg-light); }
+    .term-row td {
+      background: #eaf0f7; font-weight: 700; font-size: .75rem;
+      text-transform: uppercase; letter-spacing: .07em; color: var(--navy-mid);
+      padding: .35rem .75rem;
+    }
+    .date-cell { font-weight: 600; color: var(--navy); white-space: nowrap; }
+
+    .ti {
+      width: 100%; padding: .32rem .5rem; border: 1px solid var(--border);
+      border-radius: 4px; font-size: .83rem; font-family: var(--font-sans); color: var(--text);
+    }
+    .ti:focus { outline: none; border-color: var(--accent); }
+    .ta { min-height: 56px; resize: vertical; }
+
+    /* Status colour hint on select */
+    .si-unfilled    { border-left: 3px solid #e74c3c; }
+    .si-provisional { border-left: 3px solid #f39c12; }
+    .si-confirmed   { border-left: 3px solid #27ae60; }
+
+    /* Contacts */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+    .contact-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.4rem; box-shadow: var(--shadow);
+    }
+    .contact-card h3 { font-size: .95rem; margin-bottom: .9rem; display: flex; align-items: center; gap: .5rem; }
+    .cbadge {
+      padding: .15rem .6rem; border-radius: 2rem;
+      font-size: .72rem; font-weight: 700; color: #fff; text-transform: uppercase;
+    }
+    .cfield { margin-bottom: .6rem; }
+    .cfield label { display: block; font-size: .78rem; font-weight: 600; color: var(--text-muted); margin-bottom: .25rem; }
+    .cfield input { width: 100%; padding: .45rem .65rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: .875rem; font-family: var(--font-sans); }
+    .cfield input:focus { outline: none; border-color: var(--accent); }
+
+    .admin-email-row { margin-top: 1.5rem; max-width: 380px; }
+    .admin-email-row label { display: block; font-size: .85rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+    .admin-email-row input { width: 100%; padding: .55rem .8rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: .9rem; font-family: var(--font-sans); }
+    .admin-email-row input:focus { outline: none; border-color: var(--accent); }
+
+    /* Password tab */
+    .pw-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.75rem; max-width: 480px; box-shadow: var(--shadow);
+    }
+    .pw-card p { font-size: .875rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; }
+    .hash-result {
+      font-family: monospace; font-size: .78rem; background: var(--bg-light);
+      border: 1px solid var(--border); border-radius: 4px; padding: .75rem;
+      word-break: break-all; margin-top: .65rem; color: var(--navy); min-height: 48px;
+    }
+    .current-hash { font-size: .8rem; color: var(--text-muted); margin-top: 1rem; }
+    .current-hash code { font-size: .73rem; word-break: break-all; }
+
+    /* Save bar */
+    .save-bar {
+      position: sticky; bottom: 0; background: #fff;
+      border-top: 1px solid var(--border); padding: .9rem 2rem;
+      display: flex; align-items: center; gap: 1rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.07);
+    }
+    .save-bar-note { font-size: .78rem; color: var(--text-muted); }
+    .save-bar-note code { font-size: .73rem; background: var(--bg-light); padding: .1rem .3rem; border-radius: 3px; }
+
+    .btn-dl {
+      padding: .65rem 1.4rem; background: #27ae60; color: #fff;
+      border: none; border-radius: var(--radius); font-family: var(--font-sans);
+      font-size: .9rem; font-weight: 600; cursor: pointer; transition: background .2s;
+      white-space: nowrap;
+    }
+    .btn-dl:hover { background: #219a52; }
+
+    .hidden { display: none !important; }
+    @media (max-width: 700px) { .admin-body { padding: 1rem; } }
+  </style>
+</head>
+<body>
+
+  <!-- ── Password gate ──────────────────────────────────────── -->
+  <div id="gate" class="gate-overlay">
+    <div class="gate-card">
+      <h2>Seminar Admin</h2>
+      <p>Enter the admin password to access the editing panel.</p>
+      <input type="password" id="pw-input" class="gate-input" placeholder="Password"
+             onkeydown="if(event.key==='Enter')login()">
+      <button class="gate-btn" onclick="login()">Log In</button>
+      <p id="gate-error" class="gate-error">&#10007; Incorrect password. Please try again.</p>
+      <p class="gate-back"><a href="index.html">&#8592; Back to seminar page</a></p>
+    </div>
+  </div>
+
+  <!-- ── Admin panel ────────────────────────────────────────── -->
+  <div id="admin-wrap" class="admin-wrap">
+
+    <div class="topbar">
+      <span class="topbar-title">QMUL Seminars &mdash; Admin Panel</span>
+      <div class="topbar-actions">
+        <button class="tbtn tbtn-save" onclick="saveAll()">&#8595; Download Updated Files</button>
+        <button class="tbtn tbtn-logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <button class="tab active" onclick="showTab('slots',this)">Seminar Slots</button>
+      <button class="tab" onclick="showTab('contacts',this)">Group Contacts</button>
+      <button class="tab" onclick="showTab('password',this)">Password</button>
+    </div>
+
+    <!-- Slots tab -->
+    <div id="tab-slots" class="tab-pane active">
+      <div class="admin-body">
+        <h2 class="admin-h2">Seminar Slots</h2>
+        <p class="admin-sub">
+          Edit slot details below. When finished, click <strong>Download data.json</strong>,
+          place the downloaded file in the <code>seminars/</code> folder, and commit it to GitHub
+          to update the live site.
+        </p>
+        <div class="table-wrap">
+          <table id="slots-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Group</th>
+                <th>Status</th>
+                <th>Speaker</th>
+                <th>Affiliation</th>
+                <th>Host</th>
+                <th>Title</th>
+                <th>Abstract</th>
+              </tr>
+            </thead>
+            <tbody id="slots-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contacts tab -->
+    <div id="tab-contacts" class="tab-pane">
+      <div class="admin-body">
+        <h2 class="admin-h2">Group Contacts</h2>
+        <p class="admin-sub">
+          These names and email addresses are used for swap request emails.
+          Ensure they are kept up to date.
+        </p>
+        <div class="contact-grid" id="contacts-form"></div>
+        <div class="admin-email-row">
+          <label for="admin-email">Organiser Email (CC on all submissions)</label>
+          <input type="email" id="admin-email" placeholder="andrew.winter@qmul.ac.uk">
+        </div>
+      </div>
+    </div>
+
+    <!-- Password tab -->
+    <div id="tab-password" class="tab-pane">
+      <div class="admin-body">
+        <h2 class="admin-h2">Change Admin Password</h2>
+        <div class="pw-card">
+          <p>
+            Type a new password below to generate its SHA-256 hash. Then open
+            <code>seminars/admin.html</code> in a text editor and replace the value of
+            <code>ADMIN_HASH</code> near the top of the <code>&lt;script&gt;</code> block
+            with the hash shown below. Commit the change to make it live.
+          </p>
+          <input type="text" class="ti" id="pw-new" placeholder="Type new password…" oninput="generateHash()">
+          <div class="hash-result" id="hash-result">Hash will appear here…</div>
+          <p class="current-hash">
+            Current hash in use:<br>
+            <code id="current-hash-display"></code>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save bar -->
+    <div class="save-bar">
+      <button class="btn-dl" onclick="saveAll()">&#8595; Download Updated Files</button>
+      <p class="save-bar-note">
+        Downloads <code>data.json</code> and an updated <code>index.html</code> with the data embedded.
+        Place both in the <code>seminars/</code> folder and commit to GitHub.
+      </p>
+    </div>
+
+  </div><!-- /admin-wrap -->
+
+  <script>
+    // ── Config ─────────────────────────────────────────────────
+    // SHA-256 of 'seminars2026' — replace to change the password
+    // (use the Password tab to generate a new hash, then update this constant)
+    const ADMIN_HASH = '421801f03ccc8d7628f65d4098c0ba225400dd8d11b708f0f2f0ed67f167e9fd';
+
+    const GROUP_COLORS = { plasma: '#2e86c1', planets: '#8e44ad', cosmology: '#16a085' };
+
+    // ── State ───────────────────────────────────────────────────
+    let DATA = null;
+
+    // ── SHA-256 ─────────────────────────────────────────────────
+    async function sha256(msg) {
+      const buf = new TextEncoder().encode(msg);
+      const hash = await crypto.subtle.digest('SHA-256', buf);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    // ── Auth ────────────────────────────────────────────────────
+    async function login() {
+      const pw = document.getElementById('pw-input').value;
+      if (!pw) return;
+      const hash = await sha256(pw);
+      if (hash === ADMIN_HASH) {
+        document.getElementById('gate').classList.add('hidden');
+        document.getElementById('admin-wrap').style.display = 'block';
+        document.getElementById('current-hash-display').textContent = ADMIN_HASH;
+        await loadData();
+      } else {
+        document.getElementById('gate-error').style.display = 'block';
+        document.getElementById('pw-input').value = '';
+        document.getElementById('pw-input').focus();
+      }
+    }
+
+    function logout() {
+      document.getElementById('gate').classList.remove('hidden');
+      document.getElementById('admin-wrap').style.display = 'none';
+      document.getElementById('pw-input').value = '';
+      DATA = null;
+    }
+
+    // ── Data ────────────────────────────────────────────────────
+    async function loadData() {
+      try {
+        const r = await fetch('data.json?v=' + Date.now());
+        DATA = await r.json();
+        renderSlotsTable();
+        renderContactsForm();
+        document.getElementById('admin-email').value = DATA.adminEmail || '';
+      } catch (e) {
+        alert('Failed to load data.json: ' + e.message);
+      }
+    }
+
+    // ── Tabs ────────────────────────────────────────────────────
+    function showTab(name, btn) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // ── Slots table ─────────────────────────────────────────────
+    function fmtAdmin(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+    }
+    function termOf(d) {
+      if (d <= '2026-12-31') return 'Autumn Term 2026';
+      if (d <= '2027-03-31') return 'Spring Term 2027';
+      return 'Summer Term 2027';
+    }
+
+    function renderSlotsTable() {
+      const tbody = document.getElementById('slots-tbody');
+      let html = '';
+      let lastTerm = null;
+
+      DATA.slots.forEach((slot, i) => {
+        const term = termOf(slot.date);
+        if (term !== lastTerm) {
+          html += `<tr class="term-row"><td colspan="8">${term}</td></tr>`;
+          lastTerm = term;
+        }
+
+        const statusSel = ['unfilled','provisional','confirmed'].map(s =>
+          `<option value="${s}" ${slot.status===s?'selected':''}>${s.charAt(0).toUpperCase()+s.slice(1)}</option>`
+        ).join('');
+
+        const groupSel = ['plasma','planets','cosmology'].map(g =>
+          `<option value="${g}" ${slot.group===g?'selected':''}>${g.charAt(0).toUpperCase()+g.slice(1)}</option>`
+        ).join('');
+
+        html += `
+          <tr data-row="${i}">
+            <td class="date-cell">${fmtAdmin(slot.date)}</td>
+            <td>
+              <select class="ti sl-group si-${slot.status}" style="min-width:90px">
+                ${groupSel}
+              </select>
+            </td>
+            <td>
+              <select class="ti sl-status si-${slot.status}" style="min-width:100px"
+                      onchange="this.className='ti sl-status si-'+this.value">
+                ${statusSel}
+              </select>
+            </td>
+            <td><input type="text" class="ti sl-speaker" value="${escAttr(slot.speaker||'')}" placeholder="Speaker name" style="min-width:140px"></td>
+            <td><input type="text" class="ti sl-affil"   value="${escAttr(slot.affiliation||'')}" placeholder="Affiliation"  style="min-width:140px"></td>
+            <td><input type="text" class="ti sl-host"    value="${escAttr(slot.host||'')}"    placeholder="Host name"     style="min-width:120px"></td>
+            <td><input type="text" class="ti sl-title"   value="${escAttr(slot.title||'')}"   placeholder="Talk title"    style="min-width:160px"></td>
+            <td><textarea class="ti ta sl-abstract" placeholder="Abstract…" style="min-width:200px">${escHtml(slot.abstract||'')}</textarea></td>
+          </tr>`;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    // ── Contacts form ───────────────────────────────────────────
+    function renderContactsForm() {
+      const container = document.getElementById('contacts-form');
+      let html = '';
+      ['plasma','planets','cosmology'].forEach(g => {
+        const c = (DATA.contacts && DATA.contacts[g]) || {};
+        html += `
+          <div class="contact-card">
+            <h3>
+              <span class="cbadge" style="background:${GROUP_COLORS[g]}">${g.charAt(0).toUpperCase()+g.slice(1)}</span>
+              Group Contact
+            </h3>
+            <div class="cfield">
+              <label>Contact Name</label>
+              <input type="text" id="cn-${g}" value="${escAttr(c.name||'')}" placeholder="Dr. Full Name">
+            </div>
+            <div class="cfield">
+              <label>Contact Email</label>
+              <input type="email" id="ce-${g}" value="${escAttr(c.email||'')}" placeholder="name@qmul.ac.uk">
+            </div>
+          </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // ── Collect & download ──────────────────────────────────────
+    function collectData() {
+      if (!DATA) return null;
+
+      const slots = DATA.slots.map((slot, i) => {
+        const row = document.querySelector(`tr[data-row="${i}"]`);
+        if (!row) return slot;
+        return {
+          date:        slot.date,
+          group:       row.querySelector('.sl-group').value,
+          status:      row.querySelector('.sl-status').value,
+          speaker:     row.querySelector('.sl-speaker').value.trim(),
+          affiliation: row.querySelector('.sl-affil').value.trim(),
+          host:        row.querySelector('.sl-host').value.trim(),
+          title:       row.querySelector('.sl-title').value.trim(),
+          abstract:    row.querySelector('.sl-abstract').value.trim(),
+        };
+      });
+
+      const contacts = {};
+      ['plasma','planets','cosmology'].forEach(g => {
+        contacts[g] = {
+          name:  (document.getElementById('cn-' + g) || {value:''}).value.trim(),
+          email: (document.getElementById('ce-' + g) || {value:''}).value.trim(),
+        };
+      });
+
+      return {
+        adminEmail:   (document.getElementById('admin-email') || {value:''}).value.trim() || DATA.adminEmail,
+        passwordHash: ADMIN_HASH,
+        contacts,
+        slots,
+      };
+    }
+
+    function triggerDownload(content, filename, type) {
+      const blob = new Blob([content], { type });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
+
+    async function saveAll() {
+      const data = collectData();
+      if (!data) { alert('No data loaded yet.'); return; }
+
+      const jsonStr = JSON.stringify(data, null, 2);
+
+      // 1. Always download data.json
+      triggerDownload(jsonStr, 'data.json', 'application/json');
+
+      // 2. Fetch index.html and update its inline <script id="seminar-data"> block
+      try {
+        const r = await fetch('index.html?v=' + Date.now());
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        let html = await r.text();
+
+        // Replace the JSON content inside the seminar-data script tag
+        html = html.replace(
+          /(<script[^>]+id="seminar-data"[^>]*>)([\s\S]*?)(<\/script>)/,
+          `$1\n${jsonStr}\n  $3`
+        );
+
+        triggerDownload(html, 'index.html', 'text/html');
+      } catch(e) {
+        // fetch failed (likely file:// mode) — data.json already downloaded above
+        alert(
+          'data.json downloaded.\n\n' +
+          'To also update the offline fallback in index.html, please run from a ' +
+          'local server (python3 -m http.server) or use the live site admin panel.'
+        );
+      }
+    }
+
+    // ── Password hash generator ─────────────────────────────────
+    async function generateHash() {
+      const pw = document.getElementById('pw-new').value;
+      const el = document.getElementById('hash-result');
+      if (!pw) { el.textContent = 'Hash will appear here…'; return; }
+      el.textContent = await sha256(pw);
+    }
+
+    // ── Utils ───────────────────────────────────────────────────
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function escAttr(s) {
+      return String(s).replace(/"/g,'&quot;').replace(/</g,'&lt;');
+    }
+  </script>
+</body>
+</html>

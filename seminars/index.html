@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminars — QMUL Astronomy Unit</title>
+  <meta name="description" content="QMUL Astronomy Unit seminar schedule for the academic year 2026/27. Friday seminars organised by the Plasma, Planets, and Cosmology groups.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ---- Seminar page ---- */
+
+    .hero-seminars {
+      padding: 7rem 0 3.5rem;
+      background: linear-gradient(160deg, var(--navy) 0%, #1a3a60 100%);
+    }
+    .hero-seminars .hero-eyebrow { color: var(--accent-light); }
+    .hero-seminars h1 { color: #fff; }
+    .hero-seminars p  { color: rgba(255,255,255,.75); margin-top: .5rem; font-size: 1.05rem; }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: .9rem 1.25rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      font-size: .875rem;
+    }
+    .legend-item { display: flex; align-items: center; gap: .45rem; color: var(--text-muted); }
+    .ldot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .ldot-unfilled   { background: #e74c3c; }
+    .ldot-provisional{ background: #f39c12; }
+    .ldot-confirmed  { background: #27ae60; }
+    .legend-sep { width: 1px; height: 20px; background: var(--border); }
+    .gbadge {
+      padding: .15rem .65rem; border-radius: 2rem;
+      font-size: .72rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .g-plasma    { background: #2e86c1; }
+    .g-planets   { background: #8e44ad; }
+    .g-cosmology { background: #16a085; }
+
+    /* Filter tabs */
+    .filter-tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .ftab {
+      padding: .4rem 1rem; border-radius: 2rem;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text-muted); font-size: .85rem; font-weight: 500; cursor: pointer; transition: all .18s;
+    }
+    .ftab:hover { border-color: var(--accent); color: var(--accent); }
+    .ftab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Term divider */
+    .term-divider {
+      display: flex; align-items: center; gap: .8rem;
+      margin: 2rem 0 .8rem;
+    }
+    .term-divider h3 {
+      font-family: var(--font-sans); font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .term-divider::after { content:''; flex:1; height:1px; background: var(--border); }
+
+    /* Slot cards */
+    .slot-list { display: flex; flex-direction: column; gap: .65rem; }
+    .slot-card {
+      display: grid; grid-template-columns: 4px 1fr;
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      overflow: hidden; border: 1px solid var(--border);
+      background: var(--bg-card); transition: transform .15s, box-shadow .15s;
+    }
+    .slot-card:hover { transform: translateX(4px); box-shadow: var(--shadow-hover); }
+    .slot-stripe { width: 4px; }
+    .slot-card.s-unfilled    .slot-stripe { background: #e74c3c; }
+    .slot-card.s-provisional .slot-stripe { background: #f39c12; }
+    .slot-card.s-confirmed   .slot-stripe { background: #27ae60; }
+    .slot-card.s-special     .slot-stripe { background: #8e44ad; }
+    .slot-card.s-special { background: #faf7fd; }
+    .slot-event { font-weight: 600; color: #6c3483; font-size: .95rem; }
+    .slot-event-note { font-size: .82rem; color: var(--text-muted); font-style: italic; margin-top: .15rem; }
+
+    .slot-body { padding: .9rem 1.2rem; }
+    .slot-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: .4rem; margin-bottom: .45rem;
+    }
+    .slot-date { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--navy); }
+    .slot-badges { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+
+    .status-badge {
+      display: flex; align-items: center; gap: .3rem;
+      font-size: .78rem; font-weight: 500; color: var(--text-muted);
+    }
+    .sdot { width: 8px; height: 8px; border-radius: 50%; }
+    .s-unfilled    .sdot { background: #e74c3c; }
+    .s-provisional .sdot { background: #f39c12; }
+    .s-confirmed   .sdot { background: #27ae60; }
+    .s-special     .sdot { background: #8e44ad; }
+
+    .slot-speaker { font-weight: 600; color: var(--navy); margin-bottom: .1rem; }
+    .slot-affil { font-size: .85rem; color: var(--text-muted); margin-bottom: .1rem; }
+    .slot-title { font-style: italic; color: var(--text); margin-bottom: .4rem; }
+    .slot-empty { color: var(--text-muted); font-size: .875rem; font-style: italic; }
+    .slot-host { font-size: .8rem; color: var(--text-muted); margin-top: .25rem; }
+    .slot-host strong { color: var(--navy); font-weight: 600; }
+    .abs-toggle {
+      font-size: .78rem; color: var(--accent); cursor: pointer;
+      background: none; border: none; padding: 0; text-decoration: underline; font-family: var(--font-sans);
+    }
+    .abs-text {
+      display: none; margin-top: .5rem; font-size: .865rem; color: var(--text-muted);
+      line-height: 1.65; padding: .7rem .9rem; background: var(--bg-light); border-radius: 4px;
+    }
+
+    /* Forms */
+    .form-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow);
+    }
+    .form-note-box {
+      background: rgba(46,134,193,.07); border: 1px solid rgba(46,134,193,.22);
+      border-radius: var(--radius); padding: .85rem 1.1rem;
+      margin-bottom: 1.5rem; font-size: .875rem; color: var(--navy-mid);
+    }
+    .fgrid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.1rem; margin-bottom: 1.25rem;
+    }
+    .fg { display: flex; flex-direction: column; gap: .35rem; }
+    .fg.full { grid-column: 1 / -1; }
+    .fg label { font-size: .85rem; font-weight: 600; color: var(--navy); }
+    .fg input, .fg select, .fg textarea {
+      padding: .6rem .85rem; border: 1px solid var(--border); border-radius: var(--radius);
+      font-family: var(--font-sans); font-size: .9rem; color: var(--text);
+      background: var(--bg); transition: border-color .2s; width: 100%;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .fg textarea { resize: vertical; min-height: 110px; }
+
+    .sbtn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .7rem 1.6rem; border-radius: var(--radius); border: none;
+      font-family: var(--font-sans); font-size: .95rem; font-weight: 600; cursor: pointer; transition: background .2s;
+    }
+    .sbtn-primary { background: var(--accent); color: #fff; }
+    .sbtn-primary:hover { background: var(--navy-mid); }
+    .sbtn-secondary { background: var(--bg); color: var(--accent); border: 2px solid var(--accent); }
+    .sbtn-secondary:hover { background: var(--accent); color: #fff; }
+
+    .fn { font-size: .8rem; color: var(--text-muted); margin-top: .6rem; }
+
+    .swap-arrow { text-align: center; font-size: 1.6rem; color: var(--text-muted); margin: .6rem 0; }
+
+    /* Loading / empty */
+    .loading { text-align: center; padding: 3rem; color: var(--text-muted); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      display: inline-block; width: 18px; height: 18px;
+      border: 2px solid var(--border); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle; margin-left: .4rem;
+    }
+    .no-slots { padding: 2rem; text-align: center; color: var(--text-muted); font-style: italic; }
+
+    @media (max-width: 600px) {
+      .slot-top { flex-direction: column; }
+      .legend { gap: .75rem; }
+      .legend-sep { display: none; }
+    }
+
+    /* ── Invite a Speaker section ─────────────────────────────── */
+    .guidance-block {
+      margin-bottom: 2rem;
+      max-width: 72ch;
+    }
+    .guidance-heading {
+      font-family: var(--font-sans);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: .4rem;
+      margin: 0 0 1rem;
+    }
+    .guidance-block p {
+      font-size: .925rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0 0 .85rem;
+    }
+    .guidance-block p:last-child { margin-bottom: 0; }
+    .guidance-list {
+      margin: .25rem 0 0 1.1rem;
+      padding: 0;
+      font-size: .925rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .guidance-list li { margin-bottom: .5rem; }
+    .guidance-list strong { color: var(--navy); }
+    .req { color: #e74c3c; font-weight: 700; }
+
+    .contacts-strip {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .contacts-label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-muted);
+      margin-right: .25rem;
+      white-space: nowrap;
+    }
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: .3rem .85rem .3rem .5rem;
+      font-size: .82rem;
+    }
+    .contact-chip-group {
+      font-weight: 700;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #fff;
+      padding: .15rem .55rem;
+      border-radius: 2rem;
+    }
+    .contact-chip.g-planets  .contact-chip-group { background: #8e44ad; }
+    .contact-chip.g-plasma   .contact-chip-group { background: #2e86c1; }
+    .contact-chip.g-cosmology .contact-chip-group { background: #16a085; }
+    .contact-chip-name { color: var(--navy); font-weight: 600; }
+    .contact-chip-tbd  { color: var(--text-muted); font-weight: 400; font-style: italic; }
+    .contact-chip-email { color: var(--accent); text-decoration: none; font-size: .8rem; }
+    .contact-chip-email:hover { text-decoration: underline; }
+
+    .email-draft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .email-draft-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      box-shadow: var(--shadow); position: relative;
+    }
+    .email-draft-card h3 { font-size: 1.1rem; margin-bottom: 0; }
+    .email-draft-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-weight: 700; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: .75rem;
+    }
+    .dates-preview {
+      background: var(--bg-light); border: 1px solid var(--border);
+      border-radius: 6px; padding: .75rem 1rem;
+      font-family: monospace; font-size: .82rem;
+      color: var(--navy); white-space: pre-line; min-height: 56px;
+    }
+    .logistics-list {
+      padding-left: 1.1rem; margin: 0;
+      font-size: .85rem; color: var(--text-muted); line-height: 1.9;
+    }
+    .sbtn-dl {
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+      padding: .65rem 1rem; border-radius: var(--radius);
+      border: 2px solid var(--accent); background: #fff; color: var(--accent);
+      font-family: var(--font-sans); font-size: .875rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: all .18s;
+      margin-top: .6rem; width: 100%; text-align: center;
+    }
+    .sbtn-dl:hover { background: var(--accent); color: #fff; }
+
+    @media (max-width: 600px) {
+      .email-draft-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login gate -->
+  <div id="login-gate" style="display:none;position:fixed;inset:0;z-index:9999;
+       background:linear-gradient(160deg,var(--navy) 0%,#1a3a60 100%);
+       align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:12px;padding:2.5rem 2rem;width:100%;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.25);">
+      <p style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--navy);margin:0 0 .25rem;">AU Seminars</p>
+      <p style="font-size:.85rem;color:var(--text-muted);margin:0 0 1.75rem;">Queen Mary University of London</p>
+      <div class="fg" style="margin-bottom:1rem;">
+        <label for="lg-user" style="font-size:.8rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">Username</label>
+        <input id="lg-user" type="text" autocomplete="username" style="width:100%;margin-top:.35rem;padding:.6rem .85rem;border:1px solid var(--border);border-radius:6px;font-size:.95rem;" placeholder="au-group">
+      </div>
+      <div class="fg" style="margin-bottom:1.5rem;">
+        <label for="lg-pass" style="font-size:.8rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">Password</label>
+        <input id="lg-pass" type="password" autocomplete="current-password" style="width:100%;margin-top:.35rem;padding:.6rem .85rem;border:1px solid var(--border);border-radius:6px;font-size:.95rem;" placeholder="••••••••••">
+      </div>
+      <p id="lg-err" style="display:none;color:#e74c3c;font-size:.85rem;margin:-1rem 0 1rem;">Incorrect username or password.</p>
+      <button onclick="doLogin()" style="width:100%;padding:.7rem;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;">Sign in</button>
+    </div>
+  </div>
+
+  <!-- Main content (hidden until logged in) -->
+  <div id="page-content" style="display:none;">
+
+  <!-- Hero -->
+  <header class="hero-seminars">
+    <div class="container">
+      <span class="hero-eyebrow">Queen Mary University of London</span>
+      <h1>Astronomy Unit Seminars</h1>
+      <p>Academic Year 2026/27 &mdash; Friday Programme</p>
+    </div>
+  </header>
+
+  <!-- ── Group contacts ───────────────────────────────────────── -->
+  <div style="background:#fff;border-bottom:1px solid var(--border);padding:1.25rem 0;">
+    <div class="container">
+      <div class="contacts-strip">
+        <span class="contacts-label">Group contacts</span>
+        <div class="contact-chip g-planets">
+          <span class="contact-chip-group">Planets</span>
+          <span class="contact-chip-name">Andrew Winter</span>
+          <a href="mailto:andrew.winter@qmul.ac.uk" class="contact-chip-email">andrew.winter@qmul.ac.uk</a>
+        </div>
+        <div class="contact-chip g-plasma">
+          <span class="contact-chip-group">Plasma</span>
+          <span class="contact-chip-name contact-chip-tbd">TBC</span>
+        </div>
+        <div class="contact-chip g-cosmology">
+          <span class="contact-chip-group">Cosmology</span>
+          <span class="contact-chip-name contact-chip-tbd">TBC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Invite a Speaker ─────────────────────────────────────── -->
+  <section id="invite" style="background:var(--bg-light)">
+    <div class="container">
+      <p class="section-label">For Group Organisers</p>
+      <h2 class="section-heading">Inviting a Speaker</h2>
+
+      <!-- Sub-section 1: Who makes a good speaker -->
+      <div class="guidance-block">
+        <h3 class="guidance-heading">Who would make a good seminar speaker?</h3>
+        <p>Our seminars are intended to serve the whole Astronomy Unit, so we generally aim for more senior researchers — people who can offer a broad perspective on a field rather than a single paper or highly focused result. That said, there are always exceptions: junior researchers who have produced genuinely exciting work are very welcome, and quality of science and communication should always come first.</p>
+        <p>Please be mindful of our budget constraints when inviting speakers from further afield. Our budget does not typically cover international flights, so speakers based in the UK or within easy travelling distance should be the priority. Groups are encouraged to invite visitors whose travel costs are already covered by other means — this is an excellent way to make the most of the budget. If you believe there is a strong case for inviting someone from abroad at the AU&rsquo;s expense, please discuss this with your group contact before extending an invitation.</p>
+        <p>We actively encourage groups to look beyond their own immediate research area. When assembling the programme, please also be mindful of our Athena SWAN commitments: maintaining gender balance across the seminar series is something the unit takes seriously, and it should be a factor in who you consider inviting.</p>
+      </div>
+
+      <!-- Sub-section 2: Choosing a date -->
+      <div class="guidance-block">
+        <h3 class="guidance-heading">Choosing a date</h3>
+        <p>The seminar schedule for the academic year is shown in the calendar below. Seminars take place on Fridays during term time, with the second Friday of each month kept free for <a href="https://ras.ac.uk" target="_blank" rel="noopener">Royal Astronomical Society</a> meetings in London — these slots will not appear in the schedule.</p>
+        <p>The remaining Fridays are divided between the three research groups — Plasma, Planets, and Cosmology — rotating across the year. Each group is responsible for filling its own allocated slots. The calendar shows which slots are unfilled, provisionally booked, or confirmed, and which group each belongs to, so you can quickly see what is available for your group.</p>
+        <p>If your group&rsquo;s assigned slot does not work for the speaker you have in mind, you can request a swap with another group using the form further down this page. Fill in your slot and the target slot and a draft email will be generated to the relevant group contact, with the seminar organiser CC&rsquo;d.</p>
+      </div>
+
+      <!-- Sub-section 3: Guidelines for the talk -->
+      <div class="guidance-block">
+        <h3 class="guidance-heading">Guidelines for the talk</h3>
+        <p>When inviting a speaker, please pass on the following requests:</p>
+        <ul class="guidance-list">
+          <li><strong>Career path slide.</strong> We ask all speakers to include a short section on their career trajectory. Students and early-career researchers in the unit find it genuinely valuable to see the diverse routes people take into research.</li>
+          <li><strong>Broad accessibility.</strong> Talks should be pitched to a general astrophysics audience spanning plasma physics, planet formation, and cosmology, and should be accessible to junior researchers. Avoid assuming specialist knowledge outside the speaker&rsquo;s own area.</li>
+          <li><strong>Accessible abstract and title.</strong> The abstract and title will appear on our website and be circulated to the unit. Please ask speakers to keep them jargon-light and broadly intelligible.</li>
+          <li><strong>Publicity image.</strong> If possible, ask for a figure or image we can use to advertise the talk on the AU website.</li>
+        </ul>
+      </div>
+
+      <!-- Sub-section 3: Logistical organisation -->
+      <div class="guidance-block">
+        <h3 class="guidance-heading">Logistical organisation</h3>
+        <p>For speakers travelling significant distances, the AU budget can cover one night&rsquo;s accommodation on campus via <strong>Academic Lets</strong>. If you think this applies, ask the speaker whether they would like to arrange this. If so, email <a href="mailto:academiclets@qmul.ac.uk">academiclets@qmul.ac.uk</a> to arrange it — there is a draft email in the workflow steps below.</p>
+        <p>For speakers making the journey on the day, we also offer a subsidised pub lunch at 12:30 before the seminar. Speaker costs are covered in full; AU students may claim up to &pound;10 and postdocs up to &pound;15. The host is responsible for covering these costs on the day and claiming them back — see the hosting duties step below for details.</p>
+        <p>Travel expenses are reimbursed by the university using budget code <strong>SPC4005B</strong>. The logistics email draft includes full instructions and a link to the expense claim form.</p>
+      </div>
+
+      <!-- Sub-section: In-reach seminar -->
+      <div class="guidance-block">
+        <h3 class="guidance-heading">In-reach seminars</h3>
+        <p>Once or twice a year we aim to invite a speaker from outside astronomy — particularly people working in industry who apply skills or knowledge developed in a research context to different problems. These talks offer a valuable perspective on career paths beyond academia and broaden the range of the programme. An in-reach seminar can fill any available slot in the schedule.</p>
+        <p>If you have someone in mind who you think would make a good in-reach speaker, please use the nomination form at the bottom of this page. Nominations can be made anonymously — only the speaker&rsquo;s name and a brief justification are required. The seminar organiser will follow up with nominees directly.</p>
+      </div>
+
+      <!-- Workflow steps -->
+      <h3 class="guidance-heading" style="margin-top:2rem;">Organising a seminar: step by step</h3>
+      <div class="email-draft-grid">
+
+        <!-- Step 1: Invitation email -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">1</div>
+          <h3>Initial Invitation</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            Send to a potential speaker to gauge interest and available dates.
+          </p>
+          <div class="fg" style="margin-bottom:.85rem;">
+            <label for="invite-group">Your group (filters available dates)</label>
+            <select id="invite-group" onchange="updateInviteDates()">
+              <option value="">Select group&hellip;</option>
+              <option value="plasma">Plasma</option>
+              <option value="planets">Planets</option>
+              <option value="cosmology">Cosmology</option>
+            </select>
+          </div>
+          <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:.4rem;font-weight:600;">AVAILABLE DATES (unfilled/provisional slots):</p>
+          <div class="dates-preview" id="invite-dates-preview"><em style="color:var(--text-muted)">Select your group above&hellip;</em></div>
+          <button class="sbtn sbtn-primary" style="width:100%;margin-top:1.1rem;" onclick="openInviteEmail(false)">
+            &#9993; Open Draft Invitation Email
+          </button>
+        </div>
+
+        <!-- Step 2: Logistics email -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">2</div>
+          <h3>Logistics &amp; Details</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            Send once the speaker has confirmed. Covers everything they need to know.
+          </p>
+          <ul class="logistics-list">
+            <li>Request for title, abstract &amp; publicity image</li>
+            <li>Venue &mdash; G. O. Jones building, 14:30</li>
+            <li>Lunch from 12:30 at Mile End</li>
+            <li>Career path slide request</li>
+            <li>Accessible talk guidance</li>
+            <li>Expense instructions &amp; budget code (SPC4005B)</li>
+          </ul>
+          <label style="display:flex;align-items:center;gap:.6rem;margin-top:1.1rem;font-size:.875rem;cursor:pointer;">
+            <input type="checkbox" id="log-pub" style="width:1rem;height:1rem;cursor:pointer;">
+            Speaker is travelling (include pub lunch invite)
+          </label>
+          <button class="sbtn sbtn-primary" style="width:100%;margin-top:.75rem;" onclick="openLogisticsEmail()">
+            &#9993; Open Draft Logistics Email
+          </button>
+          <a href="Expense%20Claim%20Template%20-%20Jan%202026.xlsx" download class="sbtn-dl">
+            &#8595; Download Expense Claim Form
+          </a>
+        </div>
+
+        <!-- Step 3: Submit speaker details -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">3</div>
+          <h3>Submit Speaker Details</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            Once a speaker has confirmed, submit their details using the form further down this page.
+            This sends the information to the seminar organiser and updates the schedule.
+          </p>
+          <ul class="logistics-list">
+            <li>Speaker name &amp; affiliation</li>
+            <li>Designated host (your name)</li>
+            <li>Seminar title &amp; abstract</li>
+          </ul>
+          <a href="#submit" class="sbtn sbtn-primary"
+             style="display:block;width:100%;text-align:center;margin-top:1.1rem;text-decoration:none;">
+            &#8595; Go to Submission Form
+          </a>
+        </div>
+
+        <!-- Step 4: Accommodation (if needed) -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">4</div>
+          <h3>Accommodation (if needed)</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            If the speaker is travelling far and would like to stay overnight, one night&rsquo;s on-campus accommodation can be arranged through Academic Lets at the AU&rsquo;s expense.
+          </p>
+          <ul class="logistics-list">
+            <li>Ask the speaker if they need overnight accommodation</li>
+            <li>Email <strong>academiclets@qmul.ac.uk</strong> with the speaker&rsquo;s name, date of the seminar, and arrival/departure</li>
+            <li>CC the speaker so they can coordinate directly</li>
+          </ul>
+          <button class="sbtn sbtn-primary" style="width:100%;margin-top:1.1rem;" onclick="openAccommodationEmail()">
+            &#9993; Open Draft Accommodation Email
+          </button>
+        </div>
+
+        <!-- Step 5: Hosting duties -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">5</div>
+          <h3>Hosting Duties</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            As the designated host, you are the speaker&rsquo;s main point of contact for the day. Please make sure you:
+          </p>
+          <ul class="logistics-list">
+            <li>Get in touch with the speaker ahead of the event to introduce yourself and confirm arrangements</li>
+            <li>Meet the speaker on their arrival at the G.&thinsp;O. Jones building</li>
+            <li>Take the speaker for the pub lunch at 12:30, if this was offered — you cover the costs on the day and claim them back afterwards. If this is a problem, speak to your group&rsquo;s nominated contact before the event</li>
+            <li>Purchase refreshments on the morning of the seminar (up to around &pound;40, to be reimbursed)</li>
+            <li>Introduce the speaker at the seminar</li>
+            <li>Stay for refreshments with the speaker after the talk</li>
+          </ul>
+        </div>
+
+        <!-- Step 6: Claim expenses -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">6</div>
+          <h3>Claim Expenses</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            After the seminar, claim back any costs you covered (pub lunch, refreshments, etc.) using the AU budget code <strong>SPC4005B</strong>. There are two ways to do this:
+          </p>
+          <ul class="logistics-list">
+            <li><strong>T4 expenses system</strong> — submit online via <a href="https://ubw.unit4cloud.com/uk_qml_prod_web/" target="_blank" rel="noopener">Unit4 Business World</a> using budget code SPC4005B</li>
+            <li><strong>Expense claim form</strong> — fill in the form, attach receipts, and email to <a href="mailto:spcs-operations@qmul.ac.uk">spcs-operations@qmul.ac.uk</a>, stating you hosted an AU seminar and are claiming expenses (CC <a href="mailto:andrew.winter@qmul.ac.uk">andrew.winter@qmul.ac.uk</a>)</li>
+          </ul>
+          <a href="Expense%20Claim%20Template%20-%20Jan%202026.xlsx" download class="sbtn-dl" style="margin-top:1.1rem;">
+            &#8595; Download Expense Claim Form
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Calendar ──────────────────────────────────────────────── -->
+  <section id="calendar">
+    <div class="container">
+      <p class="section-label">Schedule Overview</p>
+      <h2 class="section-heading">Seminar Calendar</h2>
+      <p class="section-intro">
+        Seminars are held on Fridays during term time, excluding the second Friday of each month.
+        Each slot is assigned to one of the three research groups.
+      </p>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item"><span class="ldot ldot-unfilled"></span>Unfilled</div>
+        <div class="legend-item"><span class="ldot ldot-provisional"></span>Provisional</div>
+        <div class="legend-item"><span class="ldot ldot-confirmed"></span>Confirmed</div>
+        <div class="legend-sep"></div>
+        <div class="legend-item"><span class="gbadge g-plasma">Plasma</span></div>
+        <div class="legend-item"><span class="gbadge g-planets">Planets</span></div>
+        <div class="legend-item"><span class="gbadge g-cosmology">Cosmology</span></div>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-tabs">
+        <button class="ftab active" onclick="setFilter('all',this)">All Terms</button>
+        <button class="ftab" onclick="setFilter('autumn',this)">Autumn 2026</button>
+        <button class="ftab" onclick="setFilter('spring',this)">Spring 2027</button>
+        <button class="ftab" onclick="setFilter('summer',this)">Summer 2027</button>
+      </div>
+
+      <div id="cal-container">
+        <div class="loading">Loading schedule<span class="spinner"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Submit a speaker ──────────────────────────────────────── -->
+  <section id="submit" style="background:var(--bg-light)">
+    <div class="container">
+      <p class="section-label">Organising a Seminar?</p>
+      <h2 class="section-heading">Submit a Speaker</h2>
+      <p class="section-intro">
+        Fill in the details below for your group&rsquo;s slot. Title and abstract are not needed at this stage — just the speaker, date, and host.
+        Clicking <em>Prepare Email</em> will open your email client with a pre-filled message to the seminar organiser — review and press Send.
+      </p>
+      <div class="form-card">
+        <div class="form-note-box">
+          &#9993;&nbsp; Submissions are sent by email. Your email client will open with all details pre-filled.
+        </div>
+        <form id="submit-form" onsubmit="handleSubmit(event)">
+          <div class="fgrid">
+            <div class="fg">
+              <label for="sub-group">Your Group</label>
+              <select id="sub-group" required onchange="updateSubDates()">
+                <option value="">Select group…</option>
+                <option value="plasma">Plasma</option>
+                <option value="planets">Planets</option>
+                <option value="cosmology">Cosmology</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="sub-date">Seminar Date</label>
+              <select id="sub-date" required>
+                <option value="">Select your group first…</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="sub-speaker">Speaker Name</label>
+              <input type="text" id="sub-speaker" placeholder="e.g. Dr. Jane Smith" required>
+            </div>
+            <div class="fg">
+              <label for="sub-affil">Speaker Affiliation</label>
+              <input type="text" id="sub-affil" placeholder="e.g. Imperial">
+            </div>
+            <div class="fg">
+              <label for="sub-host">Speaker Host (your name)</label>
+              <input type="text" id="sub-host" placeholder="e.g. Andrew Winter" required>
+            </div>
+            <div class="fg full">
+              <label for="sub-title">Seminar Title <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>
+              <input type="text" id="sub-title" placeholder="Full title of the talk — can be added later">
+            </div>
+            <div class="fg full">
+              <label for="sub-abstract">Abstract <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>
+              <textarea id="sub-abstract" placeholder="Paste the abstract here — can be added later"></textarea>
+            </div>
+            <div class="fg full">
+              <label for="sub-image">Publicity Image <span style="font-weight:400;color:var(--text-muted)">(optional — for the AU website)</span></label>
+              <input type="file" id="sub-image" accept="image/*" style="padding:.45rem .5rem;">
+              <p style="font-size:.78rem;color:var(--text-muted);margin:.35rem 0 0;">The image filename will appear in the email. <strong>Remember to attach the file</strong> to the email before sending.</p>
+            </div>
+          </div>
+          <button type="submit" class="sbtn sbtn-primary">&#9993; Prepare Submission Email</button>
+          <p class="fn">This opens your default email client with a pre-filled message. If nothing opens, check your browser's pop-up settings.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Request a swap ────────────────────────────────────────── -->
+  <section id="swap">
+    <div class="container">
+      <p class="section-label">Need a Different Slot?</p>
+      <h2 class="section-heading">Request a Slot Swap</h2>
+      <p class="section-intro">
+        Select the slot you want to offer and the slot you would like in return.
+        An email will be drafted to the nominated contact of the target group,
+        with the seminar organiser CC'd, containing all the relevant dates.
+      </p>
+      <div class="form-card">
+        <div class="form-note-box">
+          &#8646;&nbsp; The swap request email will be sent to the target group's contact,
+          with Andrew Winter CC'd as organiser.
+        </div>
+
+        <div class="fgrid">
+          <div class="fg">
+            <label for="sw-my-group">Your Group</label>
+            <select id="sw-my-group" onchange="updateSwapMyDates()">
+              <option value="">Select your group…</option>
+              <option value="plasma">Plasma</option>
+              <option value="planets">Planets</option>
+              <option value="cosmology">Cosmology</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="sw-my-date">Your Slot to Offer</label>
+            <select id="sw-my-date">
+              <option value="">Select your group first…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="swap-arrow">&#8646;</div>
+
+        <div class="fgrid">
+          <div class="fg">
+            <label for="sw-tgt-group">Target Group</label>
+            <select id="sw-tgt-group" onchange="updateSwapTgtDates()">
+              <option value="">Select target group…</option>
+              <option value="plasma">Plasma</option>
+              <option value="planets">Planets</option>
+              <option value="cosmology">Cosmology</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="sw-tgt-date">Their Slot You Want</label>
+            <select id="sw-tgt-date">
+              <option value="">Select target group first…</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="sbtn sbtn-secondary" onclick="handleSwap()">&#9993; Draft Swap Request Email</button>
+        <p class="fn">Opens your email client with a pre-filled swap request addressed to the target group's contact.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── In-reach nomination ───────────────────────────────────── -->
+  <section id="inreach" style="background:var(--bg-light)">
+    <div class="container">
+      <p class="section-label">Open to Everyone</p>
+      <h2 class="section-heading">Nominate an In-reach Speaker</h2>
+      <p class="section-intro">
+        Know someone outside astronomy who would give a compelling talk — a researcher who has moved into industry, a data scientist, an engineer, or anyone applying skills from a research background in a different context?
+        Submit a nomination below. Nominations are confidential and can be made anonymously.
+      </p>
+      <div class="form-card">
+        <form id="inreach-form" onsubmit="handleInreach(event)">
+          <div class="fgrid">
+            <div class="fg">
+              <label for="ir-name">Speaker Name <span class="req">*</span></label>
+              <input type="text" id="ir-name" placeholder="e.g. Dr. Jane Smith" required>
+            </div>
+            <div class="fg">
+              <label for="ir-email">Speaker Contact Email <span class="req">*</span></label>
+              <input type="email" id="ir-email" placeholder="e.g. j.smith@company.com" required>
+            </div>
+            <div class="fg full">
+              <label for="ir-nominator">Your Name <span style="font-weight:400;color:var(--text-muted)">(optional — leave blank to nominate anonymously)</span></label>
+              <input type="text" id="ir-nominator" placeholder="Anonymous">
+            </div>
+            <div class="fg full">
+              <label for="ir-justification">Why would they make a good in-reach speaker? <span class="req">*</span></label>
+              <textarea id="ir-justification" placeholder="Briefly describe their background, what they work on, and why their perspective would be valuable to the AU…" required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="sbtn sbtn-primary" id="ir-submit">Submit Nomination</button>
+          <p class="fn">Your nomination is sent directly to the seminar organiser — no email client opens.</p>
+        </form>
+        <div id="ir-success" style="display:none;text-align:center;padding:2rem 0;">
+          <p style="font-size:1.5rem;margin-bottom:.5rem;">&#10003;</p>
+          <p style="font-weight:600;color:var(--navy);margin-bottom:.25rem;">Nomination received — thank you!</p>
+          <p style="font-size:.875rem;color:var(--text-muted);">The seminar organiser will be in touch with the nominee if they decide to follow up.</p>
+        </div>
+        <div id="ir-error" style="display:none;margin-top:1rem;">
+          <p style="color:#e74c3c;font-size:.875rem;">Something went wrong — please try again, or email <a href="mailto:andrew.winter@qmul.ac.uk">andrew.winter@qmul.ac.uk</a> directly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin link -->
+  <div style="background:var(--bg-light);padding:1.5rem 0;text-align:center;border-top:1px solid var(--border);">
+    <p style="font-size:.85rem;color:var(--text-muted);">
+      Seminar organiser?
+      <a href="admin.html" style="color:var(--accent);">Access the admin panel</a>
+      to edit entries and manage contacts.
+    </p>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Andrew J. Winter &mdash; Queen Mary University of London</p>
+  </footer>
+
+  </div><!-- /page-content -->
+
+  <!-- Inline data — works with file:// and as fallback when fetch is unavailable.
+       On the live site, fetch() below will override this with the latest data.json. -->
+  <script type="application/json" id="seminar-data">
+{
+  "adminEmail": "andrew.winter@qmul.ac.uk",
+  "passwordHash": "421801f03ccc8d7628f65d4098c0ba225400dd8d11b708f0f2f0ed67f167e9fd",
+  "contacts": {
+    "plasma":    { "name": "Plasma Group Contact",    "email": "plasma.contact@qmul.ac.uk" },
+    "planets":   { "name": "Planets Group Contact",   "email": "planets.contact@qmul.ac.uk" },
+    "cosmology": { "name": "Cosmology Group Contact", "email": "cosmology.contact@qmul.ac.uk" }
+  },
+  "slots": [
+    {"date":"2026-10-02","group":"plasma",    "status":"special","event":"AU Jamboree","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-10-16","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-10-23","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-10-30","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-11-06","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-11-20","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-11-27","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-12-04","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-12-18","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-01-15","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-01-22","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-01-29","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-02-05","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-02-19","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-02-26","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-03-05","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-03-19","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-03-26","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-04-30","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-05-07","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-05-21","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-05-28","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-06-04","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2027-06-18","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""}
+  ]
+}
+  </script>
+
+  <script>
+    let DATA = null;
+    let currentFilter = 'all';
+
+    // ── Invite-a-speaker helpers ─────────────────────────────────
+    function ordinal(n) {
+      const s = ['th','st','nd','rd'];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    function buildInviteDateStr(group) {
+      if (!DATA) return '';
+      const slots = DATA.slots.filter(s =>
+        (!group || s.group === group) && s.status !== 'confirmed'
+      );
+      if (!slots.length) return group ? '(No unfilled slots for this group)' : '(No unfilled slots)';
+
+      const byMonth = {};
+      const order   = [];
+      slots.forEach(s => {
+        const d   = new Date(s.date + 'T12:00:00');
+        const key = d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+        if (!byMonth[key]) { byMonth[key] = []; order.push(key); }
+        byMonth[key].push(d.getDate());
+      });
+      return order.map(k => `${k}: ${byMonth[k].map(ordinal).join(', ')}`).join('\n');
+    }
+
+    function updateInviteDates() {
+      const group   = document.getElementById('invite-group').value;
+      const preview = document.getElementById('invite-dates-preview');
+      if (!group) {
+        preview.innerHTML = '<em style="color:var(--text-muted)">Select your group above…</em>';
+        return;
+      }
+      const str = buildInviteDateStr(group);
+      preview.textContent = str || '(No unfilled slots for this group)';
+    }
+
+    function openInviteEmail(withPub) {
+      const group   = document.getElementById('invite-group').value;
+      const dateStr = group ? buildInviteDateStr(group) : '[INSERT AVAILABLE DATES]';
+      const to      = '';
+      const subject = 'QMUL Astronomy Unit Seminar Invitation';
+
+      const pubParagraph = withPub ? [
+        '',
+        'As you\'ll be making the journey to QMUL, we\'d also love to invite you to join us for lunch at a local pub before the seminar — we usually leave at 12:30, and your costs would be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk.',
+      ] : [];
+
+      const body = [
+        'Dear [Name],',
+        '',
+        'My name is [SENDER NAME], and I am organising the astronomy seminars at Queen Mary University of London. I would be delighted if you were interested in giving a talk at our weekly seminar. They take place on Fridays at 14:30 at the Mile End campus. Typically this involves going to lunch before and some casual refreshments afterwards.',
+        ...pubParagraph,
+        '',
+        'Research in our department is broad—ranging from exoplanets and planet & star formation to plasma physics and cosmology—and we are interested in keeping an equally broad seminar programme.',
+        '',
+        'At the moment we are organising the upcoming schedule, so if you would be interested then it\'d be great if you could indicate your availability among these dates:',
+        '',
+        dateStr,
+        '',
+        'If you have any questions, do let me know.',
+        '',
+        'Best wishes,',
+        '[SENDER NAME]',
+      ].join('\n');
+
+      window.location.href =
+        'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    function openLogisticsEmail() {
+      const withPub = document.getElementById('log-pub').checked;
+      const to      = '';
+      const subject = 'QMUL Astronomy Seminar — Logistics';
+      const expenseUrl = window.location.origin + window.location.pathname.replace('index.html','') +
+                         'Expense%20Claim%20Template%20-%20Jan%202026.xlsx';
+      const pubLine = withPub
+        ? 'We\'d love to invite you to join us for lunch at a local pub before the seminar — we usually leave from Mile End at 12:30, and your costs will be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk. Let me know if that works for you.'
+        : 'We would normally go for lunch with the speaker beforehand, leaving from Mile End at 12:30 — let me know if that works for you.';
+      const body = [
+        'Dear [Name],',
+        '',
+        'Many thanks for agreeing to give a seminar at QMUL — we\'re really looking forward to it!',
+        '',
+        'Whenever you have a chance, could you send me a title, abstract, and perhaps an image or figure to advertise your talk? That would be great.',
+        '',
+        'We ask all our speakers to include a brief slide (or a few) about their career path — our students and early-career researchers find it really valuable to see the diverse routes people take into research. Please also aim to pitch the abstract and talk to as broad an astrophysics audience as possible, as we have researchers and students spanning plasma physics, planet formation, and cosmology.',
+        '',
+        'The seminar is at 14:30 in the G. O. Jones building at the Mile End campus. There\'s a campus map here:',
+        'https://www.qmul.ac.uk/about/howtofindus/mileend/',
+        '',
+        pubLine,
+        '',
+        'When you know your arrival time, please let me know so I can meet you at the G. O. Jones building.',
+        '',
+        'For travel expenses, the instructions are below (budget code: SPC4005B):',
+        '  • Fill out the attached expense form (also available to download from our seminar page).',
+        '  • Finance prefers the form in Excel format — the signature can just be typed.',
+        '  • Please use budget code: SPC4005B',
+        '  • Attach your receipts (scanned or photographed).',
+        '  • Send the completed form and receipts to: spcs-operations@qmul.ac.uk, stating that you gave an AU seminar and are claiming travel expenses.',
+        '  • Please CC me so I can help if there are any queries.',
+       
+        '',
+        'Do let me know if you have any questions — I\'ll be in touch with any further details closer to the time.',
+        '',
+        'Best wishes,',
+        '[SENDER NAME]',
+      ].join('\n');
+
+      window.location.href =
+        'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    function openAccommodationEmail() {
+      const to      = 'academiclets@qmul.ac.uk';
+      const subject = 'Accommodation Request — QMUL Astronomy Unit Seminar';
+      const body = [
+        'Dear Academic Lets,',
+        '',
+        'I am writing to arrange one night\'s on-campus accommodation for a visitor giving a seminar in the Astronomy Unit at Queen Mary University of London.',
+        '',
+        'Speaker name:   [Name]',
+        'Arrival date:   [Date]',
+        'Departure date: [Date]',
+        '',
+        'Please could you let me know availability? The cost should be charged to the Astronomy Unit budget (budget code: SPC4005B).',
+        '',
+        'Many thanks,',
+        '[SENDER NAME]',
+      ].join('\n');
+
+      window.location.href =
+        'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    // ── Data ────────────────────────────────────────────────────
+    // Step 1: always read inline data (works with file:// and when offline)
+    // Step 2: try fetching data.json to override with latest (works on a server)
+    function renderAll() {
+      renderCalendar();
+      updateInviteDates();
+      updateSubDates();
+      updateSwapMyDates();
+      updateSwapTgtDates();
+    }
+
+    async function loadData() {
+      // Render immediately from inline data so the page works on file://
+      const inlineEl = document.getElementById('seminar-data');
+      if (inlineEl) {
+        try {
+          DATA = JSON.parse(inlineEl.textContent);
+          renderAll();
+        } catch(e) {}
+      }
+
+      // Then try to pull fresher data from the server (non-blocking for initial render)
+      try {
+        const r = await fetch('data.json?v=' + Date.now());
+        if (r.ok) {
+          DATA = await r.json();
+          renderAll();
+        }
+      } catch(e) {
+        // fetch failed (file:// or network error) — inline render above is fine
+      }
+
+      if (!DATA) {
+        document.getElementById('cal-container').innerHTML =
+          '<p style="color:#e74c3c;padding:2rem 0;">Error parsing seminar data.</p>';
+      }
+    }
+
+    // ── Helpers ─────────────────────────────────────────────────
+    function fmtDate(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    }
+    function fmtShort(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    }
+    function getTerm(d) {
+      if (d <= '2026-12-31') return 'autumn';
+      if (d <= '2027-03-31') return 'spring';
+      return 'summer';
+    }
+    function termLabel(t) {
+      return { autumn:'Autumn Term 2026', spring:'Spring Term 2027', summer:'Summer Term 2027' }[t];
+    }
+    function gLabel(g) {
+      return { plasma:'Plasma', planets:'Planets', cosmology:'Cosmology' }[g] || g;
+    }
+    function sLabel(s) {
+      return { unfilled:'Unfilled', provisional:'Provisional', confirmed:'Confirmed', special:'Special Event' }[s] || s;
+    }
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── Calendar ─────────────────────────────────────────────────
+    function setFilter(f, btn) {
+      currentFilter = f;
+      document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      if (!DATA) return;
+      const container = document.getElementById('cal-container');
+      let slots = DATA.slots;
+      if (currentFilter !== 'all') slots = slots.filter(s => getTerm(s.date) === currentFilter);
+      if (!slots.length) {
+        container.innerHTML = '<div class="no-slots">No slots for this term.</div>';
+        return;
+      }
+
+      let html = '<div class="slot-list">';
+      let lastTerm = null;
+
+      for (const slot of slots) {
+        const term = getTerm(slot.date);
+        if (currentFilter === 'all' && term !== lastTerm) {
+          html += `<div class="term-divider"><h3>${termLabel(term)}</h3></div>`;
+          lastTerm = term;
+        }
+
+        const absId = 'abs-' + slot.date.replace(/-/g,'');
+        let content = '';
+        if (slot.status === 'special') {
+          content = `
+            <p class="slot-event">${esc(slot.event || 'Special Event')}</p>
+            <p class="slot-event-note">No regular seminar this week.</p>`;
+        } else if (slot.speaker) {
+          content = `
+            <p class="slot-speaker">${esc(slot.speaker)}</p>
+            ${slot.affiliation ? `<p class="slot-affil">${esc(slot.affiliation)}</p>` : ''}
+            <p class="slot-title">&ldquo;${esc(slot.title)}&rdquo;</p>
+            ${slot.host ? `<p class="slot-host">Host: <strong>${esc(slot.host)}</strong></p>` : ''}
+            ${slot.abstract ? `
+              <button class="abs-toggle" onclick="toggleAbs('${absId}',this)">Show abstract &#9660;</button>
+              <div class="abs-text" id="${absId}">${esc(slot.abstract)}</div>
+            ` : ''}`;
+        } else {
+          content = '<p class="slot-empty">No speaker scheduled yet.</p>';
+        }
+
+        const showGroupBadge = slot.status !== 'special';
+        html += `
+          <div class="slot-card s-${slot.status}">
+            <div class="slot-stripe"></div>
+            <div class="slot-body">
+              <div class="slot-top">
+                <span class="slot-date">${fmtDate(slot.date)}</span>
+                <div class="slot-badges">
+                  ${showGroupBadge ? `<span class="gbadge g-${slot.group}">${gLabel(slot.group)}</span>` : ''}
+                  <span class="status-badge"><span class="sdot"></span>${sLabel(slot.status)}</span>
+                </div>
+              </div>
+              ${content}
+            </div>
+          </div>`;
+      }
+
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function toggleAbs(id, btn) {
+      const el = document.getElementById(id);
+      const vis = el.style.display === 'block';
+      el.style.display = vis ? 'none' : 'block';
+      btn.innerHTML = vis ? 'Show abstract &#9660;' : 'Hide abstract &#9650;';
+    }
+
+    // ── Submit form ──────────────────────────────────────────────
+    function updateSubDates() {
+      if (!DATA) return;
+      const group = document.getElementById('sub-group').value;
+      const sel = document.getElementById('sub-date');
+      if (!group) { sel.innerHTML = '<option value="">Select your group first…</option>'; return; }
+      const slots = DATA.slots.filter(s => s.group === group && s.status !== 'confirmed');
+      sel.innerHTML = slots.length
+        ? '<option value="">Select date…</option>' + slots.map(s =>
+            `<option value="${s.date}">${fmtShort(s.date)}${s.status === 'provisional' ? ' (provisional)' : ''}</option>`
+          ).join('')
+        : '<option value="">No available slots</option>';
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const group    = document.getElementById('sub-group').value;
+      const date     = document.getElementById('sub-date').value;
+      const speaker  = document.getElementById('sub-speaker').value;
+      const affil    = document.getElementById('sub-affil').value;
+      const host     = document.getElementById('sub-host').value;
+      const title    = document.getElementById('sub-title').value;
+      const abstract = document.getElementById('sub-abstract').value;
+      const imgInput = document.getElementById('sub-image');
+      const imgFile  = imgInput.files && imgInput.files[0] ? imgInput.files[0].name : null;
+
+      const to = DATA.adminEmail || 'andrew.winter@qmul.ac.uk';
+      const subject = `Seminar Submission — ${gLabel(group)} — ${fmtShort(date)}`;
+      const lines = [
+        'Dear Andrew,',
+        '',
+        `Please find below a seminar submission from the ${gLabel(group)} group.`,
+        '',
+        `Date:        ${fmtDate(date)}`,
+        `Group:       ${gLabel(group)}`,
+        `Speaker:     ${speaker}`,
+        affil ? `Affiliation: ${affil}` : null,
+        `Host:        ${host}`,
+        title    ? `Title:       ${title}`    : null,
+        abstract ? `\nAbstract:\n${abstract}` : null,
+        imgFile  ? `\nPublicity image: ${imgFile} (attached)` : null,
+        '',
+        'Submitted via the QMUL Seminars website.',
+      ].filter(l => l !== null).join('\n');
+
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+    }
+
+    // ── Swap form ────────────────────────────────────────────────
+    function updateSwapMyDates() {
+      if (!DATA) return;
+      const group = document.getElementById('sw-my-group').value;
+      const sel = document.getElementById('sw-my-date');
+      if (!group) { sel.innerHTML = '<option value="">Select your group first…</option>'; return; }
+      const slots = DATA.slots.filter(s => s.group === group);
+      sel.innerHTML = slots.length
+        ? '<option value="">Select your slot…</option>' + slots.map(s =>
+            `<option value="${s.date}">${fmtShort(s.date)} (${sLabel(s.status)})</option>`
+          ).join('')
+        : '<option value="">No slots found</option>';
+    }
+
+    function updateSwapTgtDates() {
+      if (!DATA) return;
+      const group = document.getElementById('sw-tgt-group').value;
+      const sel = document.getElementById('sw-tgt-date');
+      if (!group) { sel.innerHTML = '<option value="">Select target group first…</option>'; return; }
+      const slots = DATA.slots.filter(s => s.group === group);
+      sel.innerHTML = slots.length
+        ? '<option value="">Select their slot…</option>' + slots.map(s =>
+            `<option value="${s.date}">${fmtShort(s.date)} (${sLabel(s.status)})</option>`
+          ).join('')
+        : '<option value="">No slots found</option>';
+    }
+
+    function handleSwap() {
+      const myGroup  = document.getElementById('sw-my-group').value;
+      const myDate   = document.getElementById('sw-my-date').value;
+      const tgtGroup = document.getElementById('sw-tgt-group').value;
+      const tgtDate  = document.getElementById('sw-tgt-date').value;
+
+      if (!myGroup || !myDate || !tgtGroup || !tgtDate) {
+        alert('Please complete all four fields before drafting the swap request.');
+        return;
+      }
+      if (myGroup === tgtGroup) {
+        alert('You cannot request a swap with your own group.');
+        return;
+      }
+
+      const contact = DATA.contacts && DATA.contacts[tgtGroup];
+      if (!contact || !contact.email || contact.email.includes('placeholder')) {
+        alert('No contact email is set for the ' + gLabel(tgtGroup) + ' group.\nPlease ask the seminar organiser to update the contact information in the admin panel.');
+        return;
+      }
+
+      const to      = contact.email;
+      const cc      = DATA.adminEmail || 'andrew.winter@qmul.ac.uk';
+      const subject = `Seminar Slot Swap Request — ${fmtShort(myDate)} ↔ ${fmtShort(tgtDate)}`;
+      const body = [
+        `Dear ${contact.name || gLabel(tgtGroup) + ' group'},`,
+        '',
+        'We would like to propose a swap of seminar slots between our two groups.',
+        '',
+        'Proposed exchange:',
+        `  Our slot  (${gLabel(myGroup)}):   ${fmtDate(myDate)}`,
+        `  Your slot (${gLabel(tgtGroup)}): ${fmtDate(tgtDate)}`,
+        '',
+        'Please let us know whether this works for you. If both groups are happy to proceed,',
+        'please reply to this email so Andrew can update the schedule accordingly.',
+        '',
+        'Many thanks,',
+        `${gLabel(myGroup)} group`,
+        '',
+        `[Andrew Winter (${cc}) has been CC\'d as seminar organiser.]`,
+      ].join('\n');
+
+      window.location.href =
+        `mailto:${to}?cc=${encodeURIComponent(cc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    // ── In-reach nomination (Formspree) ─────────────────────────
+    // Sign up free at https://formspree.io, create a form, and paste your form ID below.
+    // e.g. if your endpoint is https://formspree.io/f/abcd1234, set FORMSPREE_ID = 'abcd1234'
+    const FORMSPREE_ID = 'mbdnlvdj';
+
+    async function handleInreach(e) {
+      e.preventDefault();
+      const btn = document.getElementById('ir-submit');
+      const errEl = document.getElementById('ir-error');
+      errEl.style.display = 'none';
+
+      if (!FORMSPREE_ID) {
+        errEl.style.display = 'block';
+        errEl.querySelector('p').textContent =
+          'Nominations are not yet configured — please email andrew.winter@qmul.ac.uk directly.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const payload = {
+        speaker:     document.getElementById('ir-name').value.trim(),
+        email:       document.getElementById('ir-email').value.trim(),
+        nominator:   document.getElementById('ir-nominator').value.trim() || 'Anonymous',
+        justification: document.getElementById('ir-justification').value.trim(),
+      };
+
+      try {
+        const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          document.getElementById('inreach-form').style.display = 'none';
+          document.getElementById('ir-success').style.display = 'block';
+        } else {
+          throw new Error('non-ok response');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Submit Nomination';
+        errEl.style.display = 'block';
+      }
+    }
+
+    // ── Init ─────────────────────────────────────────────────────
+    loadData();
+
+    // ── Login gate ───────────────────────────────────────────────
+    const GATE_USER = 'au-group';
+    const GATE_PASS = 'seminars2026';
+
+    function doLogin() {
+      const u = document.getElementById('lg-user').value.trim();
+      const p = document.getElementById('lg-pass').value;
+      if (u === GATE_USER && p === GATE_PASS) {
+        sessionStorage.setItem('au-seminars-auth', '1');
+        showPage();
+      } else {
+        document.getElementById('lg-err').style.display = 'block';
+      }
+    }
+
+    function showPage() {
+      document.getElementById('login-gate').style.display = 'none';
+      document.getElementById('page-content').style.display = '';
+    }
+
+    // Allow Enter key to submit
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && document.getElementById('login-gate').style.display !== 'none') doLogin();
+    });
+
+    // Check session on load
+    if (sessionStorage.getItem('au-seminars-auth') === '1') {
+      showPage();
+    } else {
+      document.getElementById('login-gate').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
