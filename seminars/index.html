@@ -363,7 +363,7 @@
         <h3 class="guidance-heading">Who would make a good seminar speaker?</h3>
         <p>Our seminars are intended to serve the whole Astronomy Unit, so we generally aim for more senior researchers — people who can offer a broad perspective on a field rather than a single paper or highly focused result. That said, there are always exceptions: junior researchers who have produced genuinely exciting work are very welcome, and quality of science and communication should always come first.</p>
         <p>Please be mindful of our budget constraints when inviting speakers from further afield. Our budget does not typically cover international flights, so speakers based in the UK or within easy travelling distance should be the priority. Groups are encouraged to invite visitors whose travel costs are already covered by other means — this is an excellent way to make the most of the budget. If you believe there is a strong case for inviting someone from abroad at the AU&rsquo;s expense, please discuss this with your group contact before extending an invitation.</p>
-        <p>We actively encourage groups to look beyond their own immediate research area. When assembling the programme, please also be mindful of our Athena SWAN commitments: maintaining gender balance across the seminar series is something the unit takes seriously, and it should be a factor in who you consider inviting.</p>
+        <p>We actively encourage groups to look beyond their own immediate research area. When assembling the programme, please also be mindful of our Athena SWAN commitment to gender balance.</p>
       </div>
 
       <!-- Sub-section 2: Choosing a date -->
@@ -390,7 +390,7 @@
       <div class="guidance-block">
         <h3 class="guidance-heading">Logistical organisation</h3>
         <p>For speakers travelling significant distances, the AU budget can cover one night&rsquo;s accommodation on campus via <strong>Academic Lets</strong>. If you think this applies, ask the speaker whether they would like to arrange this. If so, email <a href="mailto:academiclets@qmul.ac.uk">academiclets@qmul.ac.uk</a> to arrange it — there is a draft email in the workflow steps below.</p>
-        <p>For speakers making the journey on the day, we also offer a subsidised pub lunch at 12:30 before the seminar. Speaker costs are covered in full; AU students may claim up to &pound;10 and postdocs up to &pound;15. The host is responsible for covering these costs on the day and claiming them back — see the hosting duties step below for details.</p>
+        <p>For speakers making the journey on the day, we also offer a subsidised pub lunch at 13:00 before the seminar. Speaker costs are covered in full; AU students get lunch capped at &pound;10 and postdocs capped at &pound;15. The host is responsible for covering the remaining costs on the day and claiming them back — see the hosting duties step below for details.</p>
         <p>Travel expenses are reimbursed by the university using budget code <strong>SPC4005B</strong>. The logistics email draft includes full instructions and a link to the expense claim form.</p>
       </div>
 
@@ -437,8 +437,8 @@
           </p>
           <ul class="logistics-list">
             <li>Request for title, abstract &amp; publicity image</li>
-            <li>Venue &mdash; G. O. Jones building, 14:30</li>
-            <li>Lunch from 12:30 at Mile End</li>
+            <li>Venue &mdash; G. O. Jones building, 15:00</li>
+            <li>Lunch from 13:00 at Mile End</li>
             <li>Career path slide request</li>
             <li>Accessible talk guidance</li>
             <li>Expense instructions &amp; budget code (SPC4005B)</li>
@@ -501,7 +501,7 @@
           <ul class="logistics-list">
             <li>Get in touch with the speaker ahead of the event to introduce yourself and confirm arrangements</li>
             <li>Meet the speaker on their arrival at the G.&thinsp;O. Jones building</li>
-            <li>Take the speaker for the pub lunch at 12:30, if this was offered — you cover the costs on the day and claim them back afterwards. If this is a problem, speak to your group&rsquo;s nominated contact before the event</li>
+            <li>Take the speaker for the pub lunch at 13:00, if this was offered — you cover the costs on the day and claim them back afterwards. If this is a problem, speak to your group&rsquo;s nominated contact before the event</li>
             <li>Purchase refreshments on the morning of the seminar (up to around &pound;40, to be reimbursed)</li>
             <li>Introduce the speaker at the seminar</li>
             <li>Stay for refreshments with the speaker after the talk</li>
@@ -833,13 +833,13 @@
 
       const pubParagraph = withPub ? [
         '',
-        'As you\'ll be making the journey to QMUL, we\'d also love to invite you to join us for lunch at a local pub before the seminar — we usually leave at 12:30, and your costs would be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk.',
+        'As you\'ll be making the journey to QMUL, we\'d also love to invite you to join us for lunch at a local pub before the seminar — we usually leave at 13:00, and your costs would be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk.',
       ] : [];
 
       const body = [
         'Dear [Name],',
         '',
-        'My name is [SENDER NAME], and I am organising the astronomy seminars at Queen Mary University of London. I would be delighted if you were interested in giving a talk at our weekly seminar. They take place on Fridays at 14:30 at the Mile End campus. Typically this involves going to lunch before and some casual refreshments afterwards.',
+        'My name is [SENDER NAME], and I am organising the astronomy seminars at Queen Mary University of London. I would be delighted if you were interested in giving a talk at our weekly seminar. They take place on Fridays at 15:00 at the Mile End campus. Typically this involves going to lunch before and some casual refreshments afterwards.',
         ...pubParagraph,
         '',
         'Research in our department is broad—ranging from exoplanets and planet & star formation to plasma physics and cosmology—and we are interested in keeping an equally broad seminar programme.',
@@ -865,8 +865,8 @@
       const expenseUrl = window.location.origin + window.location.pathname.replace('index.html','') +
                          'Expense%20Claim%20Template%20-%20Jan%202026.xlsx';
       const pubLine = withPub
-        ? 'We\'d love to invite you to join us for lunch at a local pub before the seminar — we usually leave from Mile End at 12:30, and your costs will be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk. Let me know if that works for you.'
-        : 'We would normally go for lunch with the speaker beforehand, leaving from Mile End at 12:30 — let me know if that works for you.';
+        ? 'We\'d love to invite you to join us for lunch at a local pub before the seminar — we usually leave from Mile End at 13:00, and your costs will be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk. Let me know if that works for you.'
+        : 'We would normally go for lunch with the speaker beforehand, leaving from Mile End at 13:00 — let me know if that works for you.';
       const body = [
         'Dear [Name],',
         '',
@@ -876,7 +876,7 @@
         '',
         'We ask all our speakers to include a brief slide (or a few) about their career path — our students and early-career researchers find it really valuable to see the diverse routes people take into research. Please also aim to pitch the abstract and talk to as broad an astrophysics audience as possible, as we have researchers and students spanning plasma physics, planet formation, and cosmology.',
         '',
-        'The seminar is at 14:30 in the G. O. Jones building at the Mile End campus. There\'s a campus map here:',
+        'The seminar is at 15:00 in the G. O. Jones building at the Mile End campus. There\'s a campus map here:',
         'https://www.qmul.ac.uk/about/howtofindus/mileend/',
         '',
         pubLine,
