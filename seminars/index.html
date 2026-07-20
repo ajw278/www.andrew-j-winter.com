@@ -516,7 +516,7 @@
             After the seminar, claim back any costs you covered (pub lunch, refreshments, etc.) using the AU budget code <strong>SPC4005B</strong>. There are two ways to do this:
           </p>
           <ul class="logistics-list">
-            <li><strong>T4 expenses system</strong> — submit online via <a href="https://ubw.unit4cloud.com/uk_qml_prod_web/" target="_blank" rel="noopener">Unit4 Business World</a> using budget code SPC4005B</li>
+            <li><strong>T4 expenses system</strong> — if you have access, you can submit online via <a href="https://ubw.unit4cloud.com/uk_qml_prod_web/" target="_blank" rel="noopener">Unit4 Business World</a> using budget code SPC4005B</li>
             <li><strong>Expense claim form</strong> — fill in the form, attach receipts, and email to <a href="mailto:spcs-operations@qmul.ac.uk">spcs-operations@qmul.ac.uk</a>, stating you hosted an AU seminar and are claiming expenses (CC <a href="mailto:andrew.winter@qmul.ac.uk">andrew.winter@qmul.ac.uk</a>)</li>
           </ul>
           <a href="Expense%20Claim%20Template%20-%20Jan%202026.xlsx" download class="sbtn-dl" style="margin-top:1.1rem;">
@@ -839,7 +839,7 @@
       const body = [
         'Dear [Name],',
         '',
-        'My name is [SENDER NAME], and I am organising the astronomy seminars at Queen Mary University of London. I would be delighted if you were interested in giving a talk at our weekly seminar. They take place on Fridays at 15:00 at the Mile End campus. Typically this involves going to lunch before and some casual refreshments afterwards.',
+        'My name is [SENDER NAME], and I am organising the astronomy seminars at Queen Mary University of London. I would be delighted if you were interested in giving a talk at our weekly seminar. They take place on Fridays at 15:00 at the Mile End campus.',
         ...pubParagraph,
         '',
         'Research in our department is broad—ranging from exoplanets and planet & star formation to plasma physics and cosmology—and we are interested in keeping an equally broad seminar programme.',
@@ -866,7 +866,7 @@
                          'Expense%20Claim%20Template%20-%20Jan%202026.xlsx';
       const pubLine = withPub
         ? 'We\'d love to invite you to join us for lunch at a local pub before the seminar — we usually leave from Mile End at 13:00, and your costs will be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk. Let me know if that works for you.'
-        : 'We would normally go for lunch with the speaker beforehand, leaving from Mile End at 13:00 — let me know if that works for you.';
+        : null;
       const body = [
         'Dear [Name],',
         '',
@@ -878,13 +878,13 @@
         '',
         'The seminar is at 15:00 in the G. O. Jones building at the Mile End campus. There\'s a campus map here:',
         'https://www.qmul.ac.uk/about/howtofindus/mileend/',
-        '',
+        pubLine ? '' : null,
         pubLine,
-        '',
+        pubLine ? '' : null,
         'When you know your arrival time, please let me know so I can meet you at the G. O. Jones building.',
         '',
         'For travel expenses, the instructions are below (budget code: SPC4005B):',
-        '  • Fill out the attached expense form (also available to download from our seminar page).',
+        '  • Fill out the attached expense form.',
         '  • Finance prefers the form in Excel format — the signature can just be typed.',
         '  • Please use budget code: SPC4005B',
         '  • Attach your receipts (scanned or photographed).',
@@ -896,7 +896,7 @@
         '',
         'Best wishes,',
         '[SENDER NAME]',
-      ].join('\n');
+      ].filter(l => l !== null).join('\n');
 
       window.location.href =
         'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
