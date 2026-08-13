@@ -16,29 +16,246 @@
     }
   },
   "slots": [
-    {"date": "2026-10-02", "group": "plasma",     "status": "special",  "event": "AU Jamboree", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-10-16", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-10-23", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-10-30", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-11-06", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-11-20", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-11-27", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-12-04", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2026-12-18", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-01-15", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-01-22", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-01-29", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-02-05", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-02-19", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-02-26", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-03-05", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-03-19", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-03-26", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-04-30", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-05-07", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-05-21", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-05-28", "group": "plasma",     "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-06-04", "group": "planets",    "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""},
-    {"date": "2027-06-18", "group": "cosmology",  "status": "unfilled", "speaker": "", "affiliation": "", "title": "", "abstract": "", "host": ""}
+    {
+      "date": "2026-10-02",
+      "group": "plasma",
+      "status": "special",
+      "event": "AU Jamboree",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-10-16",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-10-23",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-10-30",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-11-06",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-11-20",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-11-27",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-12-04",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2026-12-18",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-01-14",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-01-21",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-01-28",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-02-04",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-02-18",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-02-25",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-03-04",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-03-18",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-03-25",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-04-29",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-05-06",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-05-20",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-05-27",
+      "group": "plasma",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-06-03",
+      "group": "planets",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    },
+    {
+      "date": "2027-06-17",
+      "group": "cosmology",
+      "status": "unfilled",
+      "speaker": "",
+      "affiliation": "",
+      "title": "",
+      "abstract": "",
+      "host": ""
+    }
   ]
 }
