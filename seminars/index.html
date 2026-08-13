@@ -211,6 +211,55 @@
     .guidance-list strong { color: var(--navy); }
     .req { color: #e74c3c; font-weight: 700; }
 
+    /* Recent speakers */
+    .recent-year {
+      margin-bottom: 2.5rem;
+    }
+    .recent-year-heading {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .recent-terms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .recent-term-heading {
+      font-family: var(--font-sans);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 .65rem;
+    }
+    .recent-list {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+    .recent-list li {
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+      font-size: .875rem;
+    }
+    .rs-name { color: var(--text); font-weight: 500; }
+    .rs-inst { color: var(--text-muted); font-size: .8rem; }
+    .rs-inreach {
+      font-size: .7rem; font-weight: 700; letter-spacing: .04em;
+      text-transform: uppercase; color: #fff;
+      background: #8e44ad; border-radius: 2rem;
+      padding: .1rem .5rem;
+    }
+
     .contacts-strip {
       display: flex;
       align-items: center;
@@ -577,6 +626,111 @@
       <div id="cal-container">
         <div class="loading">Loading schedule<span class="spinner"></span></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── Recent speakers ──────────────────────────────────────── -->
+  <section id="recent">
+    <div class="container">
+      <p class="section-label">For Reference</p>
+      <h2 class="section-heading">Recent Speakers</h2>
+      <p class="section-intro">
+        When inviting speakers, please bear in mind who has spoken recently — as a general rule we try to avoid repeat invitations within a two-year window. The lists below cover the last three academic years.
+      </p>
+
+      <!-- 2025/26 -->
+      <div class="recent-year">
+        <h3 class="recent-year-heading">2025/26</h3>
+        <div class="recent-terms">
+          <div class="recent-term">
+            <h4 class="recent-term-heading">Autumn 2025</h4>
+            <ul class="recent-list">
+              <li><span class="rs-name">Richard Anslow</span><span class="rs-inst">IoA / Cambridge</span></li>
+              <li><span class="rs-name">Ignas Juodžbalis</span><span class="rs-inst">Kavli / Cambridge</span></li>
+              <li><span class="rs-name">Imogen Gingell</span><span class="rs-inst">Southampton</span></li>
+              <li><span class="rs-name">David Clements</span><span class="rs-inst">Imperial</span></li>
+              <li><span class="rs-name">John Ilee</span><span class="rs-inst">Leeds</span></li>
+              <li><span class="rs-name">Claudia Maraston</span><span class="rs-inst">Portsmouth</span></li>
+              <li><span class="rs-name">Syksy Räsänen</span><span class="rs-inst">Helsinki</span></li>
+            </ul>
+          </div>
+          <div class="recent-term">
+            <h4 class="recent-term-heading">Spring 2026</h4>
+            <ul class="recent-list">
+              <li><span class="rs-name">Sanson Poon</span><span class="rs-inst rs-inreach">In-reach</span></li>
+              <li><span class="rs-name">Anke Ardern-Arentsen</span><span class="rs-inst">IoA / Cambridge</span></li>
+              <li><span class="rs-name">Sara Maleubre Molinero</span><span class="rs-inst">Oxford</span></li>
+              <li><span class="rs-name">George Miloshevich</span><span class="rs-inst">KU Leuven</span></li>
+              <li><span class="rs-name">Alison Young</span><span class="rs-inst">Leeds</span></li>
+              <li><span class="rs-name">Lucy Oswald</span><span class="rs-inst">Southampton / Cambridge</span></li>
+              <li><span class="rs-name">Pippa Cole</span><span class="rs-inst">QMUL</span></li>
+              <li><span class="rs-name">Tim Harries</span><span class="rs-inst">Exeter</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024/25 -->
+      <div class="recent-year">
+        <h3 class="recent-year-heading">2024/25</h3>
+        <div class="recent-terms">
+          <div class="recent-term">
+            <h4 class="recent-term-heading">Autumn 2024</h4>
+            <ul class="recent-list">
+              <li><span class="rs-name">Jonathan Eastwood</span></li>
+              <li><span class="rs-name">Paul Clark</span></li>
+              <li><span class="rs-name">Ian Jones</span></li>
+              <li><span class="rs-name">Beth Biller</span></li>
+              <li><span class="rs-name">Ignacio Ferreras</span></li>
+              <li><span class="rs-name">Anthony Challinor</span></li>
+            </ul>
+          </div>
+          <div class="recent-term">
+            <h4 class="recent-term-heading">Spring 2025</h4>
+            <ul class="recent-list">
+              <li><span class="rs-name">Zoe Leinhardt</span></li>
+              <li><span class="rs-name">Jan Forbrich</span></li>
+              <li><span class="rs-name">David Long</span></li>
+              <li><span class="rs-name">Nils Andersson</span></li>
+              <li><span class="rs-name">John Ilee</span></li>
+              <li><span class="rs-name">Nick Wright</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023/24 -->
+      <div class="recent-year">
+        <h3 class="recent-year-heading">2023/24</h3>
+        <div class="recent-terms">
+          <div class="recent-term">
+            <h4 class="recent-term-heading">Autumn 2023</h4>
+            <ul class="recent-list">
+              <li><span class="rs-name">Sierk van Terwisga</span><span class="rs-inst">MPIA Heidelberg</span></li>
+              <li><span class="rs-name">Farzana Meru</span><span class="rs-inst">Warwick</span></li>
+              <li><span class="rs-name">Oscar Barragán</span><span class="rs-inst">Oxford</span></li>
+              <li><span class="rs-name">Mike Edmunds</span><span class="rs-inst">Cardiff</span></li>
+              <li><span class="rs-name">Pedro Ferreira</span><span class="rs-inst">Oxford</span></li>
+              <li><span class="rs-name">Enrico Camporeale</span><span class="rs-inst">QMUL</span></li>
+              <li><span class="rs-name">Chris Owen</span><span class="rs-inst">UCL</span></li>
+              <li><span class="rs-name">Alberto Vecchio</span><span class="rs-inst">Birmingham</span></li>
+            </ul>
+          </div>
+          <div class="recent-term">
+            <h4 class="recent-term-heading">Spring 2024</h4>
+            <ul class="recent-list">
+              <li><span class="rs-name">Laura Iacconi</span></li>
+              <li><span class="rs-name">Kazuya Koyama</span><span class="rs-inst">Portsmouth</span></li>
+              <li><span class="rs-name">David Stefanyszyn</span><span class="rs-inst">Nottingham</span></li>
+              <li><span class="rs-name">Beatriz Sanchez-Cano</span><span class="rs-inst">Leicester</span></li>
+              <li><span class="rs-name">Antony Lewis</span><span class="rs-inst">Sussex</span></li>
+              <li><span class="rs-name">Debora Sijacki</span><span class="rs-inst">Cambridge</span></li>
+              <li><span class="rs-name">Sasha Hinkley</span><span class="rs-inst">Exeter</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
