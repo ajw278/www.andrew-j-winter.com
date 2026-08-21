@@ -1,3 +1,10 @@
+
+    {"date":"2026-10-16","group":"planets",   "status":"confirmed","speaker":"Tamara Molyarova","affiliation":"University of Leeds","title":"","abstract":"","host":"Luke Keyte"},
+    {"date":"2026-10-23","group":"cosmology", "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-10-30","group":"plasma",    "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-11-06","group":"planets",   "status":"unfilled","speaker":"","affiliation":"","title":"","abstract":"","host":""},
+    {"date":"2026-11-20","group":"cosmology", "status":"confirmed","speaker":"Johannes Noller","affiliation":"UCL","title":"","abstract":"","host":"Laura Iacconi"},
+
 {
   "adminEmail": "andrew.winter@qmul.ac.uk",
   "passwordHash": "421801f03ccc8d7628f65d4098c0ba225400dd8d11b708f0f2f0ed67f167e9fd",
@@ -28,14 +35,14 @@
       "host": ""
     },
     {
-      "date": "2026-10-16",
-      "group": "planets",
-      "status": "unfilled",
-      "speaker": "",
-      "affiliation": "",
-      "title": "",
-      "abstract": "",
-      "host": ""
+      "date":"2026-10-16",
+      "group":"planets",   
+      "status":"confirmed",
+      "speaker":"Tamara Molyarova",
+      "affiliation":"University of Leeds",
+      "title":"",
+      "abstract":"",
+      "host":"Luke Keyte"
     },
     {
       "date": "2026-10-23",
@@ -68,14 +75,14 @@
       "host": ""
     },
     {
-      "date": "2026-11-20",
-      "group": "cosmology",
-      "status": "provisional",
-      "speaker": "Johannes Noller",
-      "affiliation": "UCL",
-      "title": "",
-      "abstract": "",
-      "host": "Laura Iacconi"
+      "date":"2026-11-20",
+      "group":"cosmology", 
+      "status":"confirmed",
+      "speaker":"Johannes Noller",
+      "affiliation":"UCL",
+      "title":"",
+      "abstract":"",
+      "host":"Laura Iacconi"
     },
     {
       "date": "2026-11-27",
