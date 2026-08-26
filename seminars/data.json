@@ -40,19 +40,19 @@
       "status":"confirmed",
       "speaker":"Tamara Molyarova",
       "affiliation":"University of Leeds",
-      "title":"",
-      "abstract":"",
+      "title":"TBC",
+      "abstract":"TBC",
       "host":"Luke Keyte"
     },
     {
       "date": "2026-10-23",
       "group": "cosmology",
-      "status": "unfilled",
-      "speaker": "",
-      "affiliation": "",
-      "title": "",
+      "status": "confirmed",
+      "speaker": "David Wands",
+      "affiliation": "ICG (Portsmouth)",
+      "title": "TBC",
       "abstract": "",
-      "host": ""
+      "host": "Laura Iacconi"
     },
     {
       "date": "2026-10-30",
@@ -80,8 +80,8 @@
       "status":"confirmed",
       "speaker":"Johannes Noller",
       "affiliation":"UCL",
-      "title":"",
-      "abstract":"",
+      "title":"TBC",
+      "abstract":"TBC",
       "host":"Laura Iacconi"
     },
     {
@@ -137,12 +137,12 @@
     {
       "date": "2027-01-29",
       "group": "cosmology",
-      "status": "unfilled",
-      "speaker": "",
-      "affiliation": "",
-      "title": "",
-      "abstract": "",
-      "host": ""
+      "status": "confirmed",
+      "speaker": "Laura Wolz",
+      "affiliation": "Manchester",
+      "title": "TBC",
+      "abstract": "TBC",
+      "host": "Laura Iacconi"
     },
     {
       "date": "2027-02-05",
