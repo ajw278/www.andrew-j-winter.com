@@ -19,13 +19,12 @@
     {
       "date": "2026-10-02",
       "group": "plasma",
-      "status": "special",
-      "event": "AU Jamboree",
+      "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2026-10-16",
@@ -33,9 +32,9 @@
       "status": "confirmed",
       "speaker": "Tamara Molyarova",
       "affiliation": "University of Leeds",
+      "host": "Luke Keyte",
       "title": "TBC",
-      "abstract": "TBC",
-      "host": "Luke Keyte"
+      "abstract": "TBC"
     },
     {
       "date": "2026-10-23",
@@ -43,19 +42,19 @@
       "status": "confirmed",
       "speaker": "David Wands",
       "affiliation": "ICG (Portsmouth)",
+      "host": "Laura Iacconi",
       "title": "TBC",
-      "abstract": "",
-      "host": "Laura Iacconi"
+      "abstract": ""
     },
     {
       "date": "2026-10-30",
       "group": "plasma",
-      "status": "unfilled",
-      "speaker": "",
-      "affiliation": "",
-      "title": "",
-      "abstract": "",
-      "host": ""
+      "status": "confirmed",
+      "speaker": "Stuart Bale",
+      "affiliation": "UC Berkeley",
+      "host": "Martin Lindberg",
+      "title": "TBC",
+      "abstract": "TBC"
     },
     {
       "date": "2026-11-06",
@@ -63,9 +62,9 @@
       "status": "confirmed",
       "speaker": "Cristiano Longarini",
       "affiliation": "Institute of Astronomy, University of Cambridge",
+      "host": "Álvaro Ribas",
       "title": "TBC",
-      "abstract": "TBC",
-      "host": "Álvaro Ribas"
+      "abstract": "TBC"
     },
     {
       "date": "2026-11-20",
@@ -73,9 +72,9 @@
       "status": "confirmed",
       "speaker": "Johannes Noller",
       "affiliation": "UCL",
+      "host": "Laura Iacconi",
       "title": "TBC",
-      "abstract": "TBC",
-      "host": "Laura Iacconi"
+      "abstract": "TBC"
     },
     {
       "date": "2026-11-27",
@@ -83,9 +82,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2026-12-04",
@@ -93,9 +92,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2026-12-18",
@@ -103,9 +102,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-01-15",
@@ -113,9 +112,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-01-22",
@@ -123,9 +122,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-01-29",
@@ -133,9 +132,9 @@
       "status": "confirmed",
       "speaker": "Laura Wolz",
       "affiliation": "Manchester",
+      "host": "Laura Iacconi",
       "title": "TBC",
-      "abstract": "TBC",
-      "host": "Laura Iacconi"
+      "abstract": "TBC"
     },
     {
       "date": "2027-02-05",
@@ -143,9 +142,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-02-19",
@@ -153,9 +152,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-02-26",
@@ -163,9 +162,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-03-05",
@@ -173,9 +172,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-03-19",
@@ -183,9 +182,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-03-26",
@@ -193,9 +192,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-04-30",
@@ -203,9 +202,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-05-07",
@@ -213,9 +212,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-05-21",
@@ -223,9 +222,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-05-28",
@@ -233,9 +232,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-06-04",
@@ -243,9 +242,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     },
     {
       "date": "2027-06-18",
@@ -253,9 +252,9 @@
       "status": "unfilled",
       "speaker": "",
       "affiliation": "",
+      "host": "",
       "title": "",
-      "abstract": "",
-      "host": ""
+      "abstract": ""
     }
   ]
 }
