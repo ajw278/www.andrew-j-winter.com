@@ -51,7 +51,7 @@
       "group": "plasma",
       "status": "confirmed",
       "speaker": "Stuart Bale",
-      "affiliation": "UC Berkeley",
+      "affiliation": "UC Berkeley (visiting Imperial College London)",
       "host": "Martin Lindberg",
       "title": "TBC",
       "abstract": "TBC"
@@ -79,10 +79,10 @@
     {
       "date": "2026-11-27",
       "group": "plasma",
-      "status": "unfilled",
-      "speaker": "",
-      "affiliation": "",
-      "host": "",
+      "status": "confirmed",
+      "speaker": "Sandra Chapman",
+      "affiliation": "University of Warwick",
+      "host": "Laura Vuorinen",
       "title": "",
       "abstract": ""
     },
