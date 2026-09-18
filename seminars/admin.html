@@ -353,14 +353,8 @@
       if (!pw) return;
       const hash = await sha256(pw);
       if (hash === ADMIN_HASH) {
-        document.getElementById('gate').classList.add('hidden');
-        document.getElementById('admin-wrap').style.display = 'block';
-        document.getElementById('current-hash-display').textContent = ADMIN_HASH;
-        // Restore saved token and refresh button state
-        const savedTok = sessionStorage.getItem('gh_token');
-        if (savedTok) document.getElementById('gh-token').value = savedTok;
-        updatePublishBtn();
-        await loadData();
+        sessionStorage.setItem('admin_auth', '1');
+        showAdmin();
       } else {
         document.getElementById('gate-error').style.display = 'block';
         document.getElementById('pw-input').value = '';
@@ -368,7 +362,18 @@
       }
     }
 
+    async function showAdmin() {
+      document.getElementById('gate').classList.add('hidden');
+      document.getElementById('admin-wrap').style.display = 'block';
+      document.getElementById('current-hash-display').textContent = ADMIN_HASH;
+      const savedTok = sessionStorage.getItem('gh_token');
+      if (savedTok) document.getElementById('gh-token').value = savedTok;
+      updatePublishBtn();
+      await loadData();
+    }
+
     function logout() {
+      sessionStorage.removeItem('admin_auth');
       document.getElementById('gate').classList.remove('hidden');
       document.getElementById('admin-wrap').style.display = 'none';
       document.getElementById('pw-input').value = '';
@@ -679,6 +684,11 @@
       if (!pw) { el.textContent = 'Hash will appear here…'; return; }
       el.textContent = await sha256(pw);
     }
+
+    // ── Auto-restore session on page load ───────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('admin_auth') === '1') showAdmin();
+    });
 
     // ── Utils ───────────────────────────────────────────────────
     function escHtml(s) {
