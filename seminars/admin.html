@@ -246,7 +246,7 @@
                 <th>Date</th>
                 <th>Group</th>
                 <th>Status</th>
-                <th>Speaker</th>
+                <th>Event / Speaker</th>
                 <th>Affiliation</th>
                 <th>Host</th>
                 <th>Title</th>
@@ -446,7 +446,13 @@
                 ${statusSel}
               </select>
             </td>
-            <td><input type="text" class="ti sl-speaker" value="${escAttr(slot.speaker||'')}" placeholder="Speaker name" style="min-width:140px"></td>
+            <td>
+              ${slot.status === 'special'
+                ? `<input type="text" class="ti sl-event" value="${escAttr(slot.event||'')}" placeholder="Event name" style="min-width:140px;border-left:3px solid #8e44ad;">`
+                : `<input type="text" class="ti sl-speaker" value="${escAttr(slot.speaker||'')}" placeholder="Speaker name" style="min-width:140px">
+                   <input type="hidden" class="ti sl-event" value="${escAttr(slot.event||'')}">`
+              }
+            </td>
             <td><input type="text" class="ti sl-affil"   value="${escAttr(slot.affiliation||'')}" placeholder="Affiliation"  style="min-width:140px"></td>
             <td><input type="text" class="ti sl-host"    value="${escAttr(slot.host||'')}"    placeholder="Host name"     style="min-width:120px"></td>
             <td><input type="text" class="ti sl-title"   value="${escAttr(slot.title||'')}"   placeholder="Talk title"    style="min-width:160px"></td>
@@ -489,17 +495,22 @@
       const slots = DATA.slots.map((slot, i) => {
         const row = document.querySelector(`tr[data-row="${i}"]`);
         if (!row) return slot;
-        return {
+        const status = row.querySelector('.sl-status').value;
+        const eventVal = (row.querySelector('.sl-event') || {value:''}).value.trim();
+        const out = {
           ...slot,
           date:        slot.date,
           group:       row.querySelector('.sl-group').value,
-          status:      row.querySelector('.sl-status').value,
-          speaker:     row.querySelector('.sl-speaker').value.trim(),
+          status,
+          speaker:     (row.querySelector('.sl-speaker') || {value:''}).value.trim(),
           affiliation: row.querySelector('.sl-affil').value.trim(),
           host:        row.querySelector('.sl-host').value.trim(),
           title:       row.querySelector('.sl-title').value.trim(),
           abstract:    row.querySelector('.sl-abstract').value.trim(),
         };
+        if (status === 'special' && eventVal) out.event = eventVal;
+        else if (status !== 'special') delete out.event;
+        return out;
       });
 
       const contacts = {};
