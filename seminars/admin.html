@@ -434,6 +434,7 @@
         const row = document.querySelector(`tr[data-row="${i}"]`);
         if (!row) return slot;
         return {
+          ...slot,
           date:        slot.date,
           group:       row.querySelector('.sl-group').value,
           status:      row.querySelector('.sl-status').value,
