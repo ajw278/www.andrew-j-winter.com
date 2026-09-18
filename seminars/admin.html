@@ -432,6 +432,14 @@
           `<option value="${g}" ${slot.group===g?'selected':''}>${g.charAt(0).toUpperCase()+g.slice(1)}</option>`
         ).join('');
 
+        let speakerCell;
+        if (slot.status === 'special') {
+          speakerCell = '<input type="text" class="ti sl-event" value="' + escAttr(slot.event||'') + '" placeholder="Event name" style="min-width:140px;border-left:3px solid #8e44ad;">';
+        } else {
+          speakerCell = '<input type="text" class="ti sl-speaker" value="' + escAttr(slot.speaker||'') + '" placeholder="Speaker name" style="min-width:140px">'
+                      + '<input type="hidden" class="sl-event" value="' + escAttr(slot.event||'') + '">';
+        }
+
         html += `
           <tr data-row="${i}">
             <td class="date-cell">${fmtAdmin(slot.date)}</td>
@@ -446,13 +454,7 @@
                 ${statusSel}
               </select>
             </td>
-            <td>
-              ${slot.status === 'special'
-                ? `<input type="text" class="ti sl-event" value="${escAttr(slot.event||'')}" placeholder="Event name" style="min-width:140px;border-left:3px solid #8e44ad;">`
-                : `<input type="text" class="ti sl-speaker" value="${escAttr(slot.speaker||'')}" placeholder="Speaker name" style="min-width:140px">
-                   <input type="hidden" class="ti sl-event" value="${escAttr(slot.event||'')}">`
-              }
-            </td>
+            <td>${speakerCell}</td>
             <td><input type="text" class="ti sl-affil"   value="${escAttr(slot.affiliation||'')}" placeholder="Affiliation"  style="min-width:140px"></td>
             <td><input type="text" class="ti sl-host"    value="${escAttr(slot.host||'')}"    placeholder="Host name"     style="min-width:120px"></td>
             <td><input type="text" class="ti sl-title"   value="${escAttr(slot.title||'')}"   placeholder="Talk title"    style="min-width:160px"></td>
@@ -697,9 +699,7 @@
     }
 
     // ── Auto-restore session on page load ───────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-      if (sessionStorage.getItem('admin_auth') === '1') showAdmin();
-    });
+    if (sessionStorage.getItem('admin_auth') === '1') showAdmin();
 
     // ── Utils ───────────────────────────────────────────────────
     function escHtml(s) {
