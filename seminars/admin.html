@@ -115,6 +115,7 @@
     .si-unfilled    { border-left: 3px solid #e74c3c; }
     .si-provisional { border-left: 3px solid #f39c12; }
     .si-confirmed   { border-left: 3px solid #27ae60; }
+    .si-special     { border-left: 3px solid #8e44ad; }
 
     /* Contacts */
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
@@ -418,7 +419,7 @@
           lastTerm = term;
         }
 
-        const statusSel = ['unfilled','provisional','confirmed'].map(s =>
+        const statusSel = ['unfilled','provisional','confirmed','special'].map(s =>
           `<option value="${s}" ${slot.status===s?'selected':''}>${s.charAt(0).toUpperCase()+s.slice(1)}</option>`
         ).join('');
 
