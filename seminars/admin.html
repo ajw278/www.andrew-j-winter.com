@@ -155,10 +155,10 @@
     .save-bar {
       position: sticky; bottom: 0; background: #fff;
       border-top: 1px solid var(--border); padding: .9rem 2rem;
-      display: flex; align-items: center; gap: 1rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
       box-shadow: 0 -4px 20px rgba(0,0,0,.07);
     }
-    .save-bar-note { font-size: .78rem; color: var(--text-muted); }
+    .save-bar-note { font-size: .78rem; color: var(--text-muted); flex: 1; min-width: 180px; }
     .save-bar-note code { font-size: .73rem; background: var(--bg-light); padding: .1rem .3rem; border-radius: 3px; }
 
     .btn-dl {
@@ -168,6 +168,28 @@
       white-space: nowrap;
     }
     .btn-dl:hover { background: #219a52; }
+    .btn-publish {
+      padding: .65rem 1.4rem; background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius); font-family: var(--font-sans);
+      font-size: .9rem; font-weight: 600; cursor: pointer; transition: background .2s;
+      white-space: nowrap;
+    }
+    .btn-publish:hover { background: var(--navy-mid); }
+    .btn-publish:disabled { background: #aaa; cursor: not-allowed; }
+
+    /* GitHub settings */
+    .gh-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.75rem; max-width: 520px; box-shadow: var(--shadow);
+    }
+    .gh-card p { font-size: .875rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6; }
+    .gh-row { margin-bottom: .9rem; }
+    .gh-row label { display: block; font-size: .85rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+    .gh-row input { width: 100%; padding: .55rem .8rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: .9rem; font-family: var(--font-sans); }
+    .gh-row input:focus { outline: none; border-color: var(--accent); }
+    .gh-status { font-size: .83rem; margin-top: .5rem; padding: .4rem .7rem; border-radius: 4px; display: none; }
+    .gh-status.ok  { background: #eafaf1; color: #1e8449; display: block; }
+    .gh-status.err { background: #fdedec; color: #c0392b; display: block; }
 
     .hidden { display: none !important; }
     @media (max-width: 700px) { .admin-body { padding: 1rem; } }
@@ -194,7 +216,8 @@
     <div class="topbar">
       <span class="topbar-title">QMUL Seminars &mdash; Admin Panel</span>
       <div class="topbar-actions">
-        <button class="tbtn tbtn-save" onclick="saveAll()">&#8595; Download Updated Files</button>
+        <button class="tbtn tbtn-publish" style="background:#2e86c1;color:#fff;" onclick="publishToGitHub()">&#8679; Publish to GitHub</button>
+      <button class="tbtn tbtn-save" onclick="saveAll()">&#8595; Download</button>
         <button class="tbtn tbtn-logout" onclick="logout()">Logout</button>
       </div>
     </div>
@@ -203,6 +226,7 @@
       <button class="tab active" onclick="showTab('slots',this)">Seminar Slots</button>
       <button class="tab" onclick="showTab('contacts',this)">Group Contacts</button>
       <button class="tab" onclick="showTab('password',this)">Password</button>
+      <button class="tab" onclick="showTab('github',this)">GitHub</button>
     </div>
 
     <!-- Slots tab -->
@@ -271,12 +295,34 @@
       </div>
     </div>
 
+    <!-- GitHub tab -->
+    <div id="tab-github" class="tab-pane">
+      <div class="admin-body">
+        <h2 class="admin-h2">GitHub Publishing</h2>
+        <p class="admin-sub">
+          Set a GitHub Personal Access Token to enable one-click publishing directly to the repository.
+          The token is stored only in this browser tab's session memory and is never sent anywhere except the GitHub API.
+        </p>
+        <div class="gh-card">
+          <p>
+            Create a token at <strong>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong>.
+            Give it <strong>Contents: Read and write</strong> access on the <code>ajw278/www.andrew-j-winter.com</code> repository only.
+          </p>
+          <div class="gh-row">
+            <label for="gh-token">Personal Access Token</label>
+            <input type="password" id="gh-token" placeholder="github_pat_…" oninput="saveGhToken()" autocomplete="off">
+          </div>
+          <div id="gh-status" class="gh-status"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Save bar -->
     <div class="save-bar">
-      <button class="btn-dl" onclick="saveAll()">&#8595; Download Updated Files</button>
-      <p class="save-bar-note">
-        Downloads <code>data.json</code> and an updated <code>index.html</code> with the data embedded.
-        Place both in the <code>seminars/</code> folder and commit to GitHub.
+      <button class="btn-publish" id="btn-publish" onclick="publishToGitHub()">&#8679; Publish to GitHub</button>
+      <button class="btn-dl" onclick="saveAll()">&#8595; Download Files</button>
+      <p class="save-bar-note" id="save-bar-note">
+        Enter a GitHub token on the <strong>GitHub</strong> tab to enable one-click publishing.
       </p>
     </div>
 
@@ -309,6 +355,10 @@
         document.getElementById('gate').classList.add('hidden');
         document.getElementById('admin-wrap').style.display = 'block';
         document.getElementById('current-hash-display').textContent = ADMIN_HASH;
+        // Restore saved token and refresh button state
+        const savedTok = sessionStorage.getItem('gh_token');
+        if (savedTok) document.getElementById('gh-token').value = savedTok;
+        updatePublishBtn();
         await loadData();
       } else {
         document.getElementById('gate-error').style.display = 'block';
@@ -469,6 +519,124 @@
       a.href = url; a.download = filename;
       document.body.appendChild(a); a.click();
       document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
+
+    // ── GitHub publishing ───────────────────────────────────────
+    const GH_REPO  = 'ajw278/www.andrew-j-winter.com';
+    const GH_BRANCH = 'main';
+
+    function getGhToken() {
+      return sessionStorage.getItem('gh_token') || document.getElementById('gh-token').value.trim();
+    }
+
+    function saveGhToken() {
+      const tok = document.getElementById('gh-token').value.trim();
+      sessionStorage.setItem('gh_token', tok);
+      updatePublishBtn();
+    }
+
+    function updatePublishBtn() {
+      const tok = getGhToken();
+      const btn = document.getElementById('btn-publish');
+      const note = document.getElementById('save-bar-note');
+      if (tok) {
+        btn.disabled = false;
+        note.innerHTML = 'Click <strong>Publish to GitHub</strong> to update the live site directly.';
+      } else {
+        btn.disabled = true;
+        note.innerHTML = 'Enter a GitHub token on the <strong>GitHub</strong> tab to enable one-click publishing.';
+      }
+    }
+
+    async function ghGetSHA(token, path) {
+      const r = await fetch(
+        `https://api.github.com/repos/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`,
+        { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' } }
+      );
+      if (!r.ok) throw new Error(`Could not read ${path}: ${r.status}`);
+      const j = await r.json();
+      return j.sha;
+    }
+
+    async function ghPutFile(token, path, content, sha, message) {
+      const r = await fetch(
+        `https://api.github.com/repos/${GH_REPO}/contents/${path}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message,
+            content: btoa(unescape(encodeURIComponent(content))),
+            sha,
+            branch: GH_BRANCH,
+          }),
+        }
+      );
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        throw new Error(err.message || `HTTP ${r.status}`);
+      }
+      return r.json();
+    }
+
+    async function publishToGitHub() {
+      const token = getGhToken();
+      if (!token) {
+        alert('Please enter a GitHub Personal Access Token on the GitHub tab first.');
+        return;
+      }
+
+      const data = collectData();
+      if (!data) { alert('No data loaded yet.'); return; }
+
+      const btn = document.getElementById('btn-publish');
+      const status = document.getElementById('gh-status');
+      btn.disabled = true;
+      btn.textContent = 'Publishing…';
+      status.className = 'gh-status';
+      status.style.display = 'none';
+
+      try {
+        const jsonStr = JSON.stringify(data, null, 2);
+
+        // Fetch current index.html from GitHub to update its inline JSON
+        const idxR = await fetch(
+          `https://api.github.com/repos/${GH_REPO}/contents/seminars/index.html?ref=${GH_BRANCH}`,
+          { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' } }
+        );
+        if (!idxR.ok) throw new Error(`Could not read index.html: ${idxR.status}`);
+        const idxJ = await idxR.json();
+        let html = decodeURIComponent(escape(atob(idxJ.content.replace(/\n/g,''))));
+
+        html = html.replace(
+          /(<script[^>]+id="seminar-data"[^>]*>)([\s\S]*?)(<\/script>)/,
+          `$1\n${jsonStr}\n  $3`
+        );
+
+        // Get SHA for data.json
+        const dataSha = await ghGetSHA(token, 'seminars/data.json');
+
+        // Push both files
+        await ghPutFile(token, 'seminars/data.json', jsonStr, dataSha,
+          'Update seminar data via admin panel');
+        await ghPutFile(token, 'seminars/index.html', html, idxJ.sha,
+          'Sync inline seminar data in index.html');
+
+        status.className = 'gh-status ok';
+        status.textContent = '✓ Published successfully. The live site will update in ~30 seconds.';
+        status.style.display = 'block';
+      } catch(e) {
+        status.className = 'gh-status err';
+        status.textContent = '✗ ' + e.message;
+        status.style.display = 'block';
+      } finally {
+        btn.disabled = !getGhToken();
+        btn.textContent = '⬆ Publish to GitHub';
+      }
     }
 
     async function saveAll() {
