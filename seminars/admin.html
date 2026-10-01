@@ -365,7 +365,7 @@
       document.getElementById('gate').classList.add('hidden');
       document.getElementById('admin-wrap').style.display = 'block';
       document.getElementById('current-hash-display').textContent = ADMIN_HASH;
-      const savedTok = sessionStorage.getItem('gh_token');
+      const savedTok = getGhToken();
       if (savedTok) document.getElementById('gh-token').value = savedTok;
       updatePublishBtn();
       await loadData();
@@ -382,8 +382,21 @@
     // ── Data ────────────────────────────────────────────────────
     async function loadData() {
       try {
-        const r = await fetch('data.json?v=' + Date.now());
-        DATA = await r.json();
+        DATA = null;
+        const token = getGhToken();
+        if (token) {
+          try {
+            const r = await fetch(
+              `https://api.github.com/repos/${GH_REPO}/contents/seminars/data.json?ref=${GH_BRANCH}`,
+              { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' }
+            );
+            if (r.ok) DATA = await r.json();
+          } catch (e) {}
+        }
+        if (!DATA) {
+          const r = await fetch('data.json?v=' + Date.now());
+          DATA = await r.json();
+        }
         renderSlotsTable();
         renderContactsForm();
         document.getElementById('admin-email').value = DATA.adminEmail || '';
@@ -544,24 +557,33 @@
     const GH_BRANCH = 'main';
 
     function getGhToken() {
-      return sessionStorage.getItem('gh_token') || document.getElementById('gh-token').value.trim();
+      try { return localStorage.getItem('gh_token') || document.getElementById('gh-token').value.trim(); }
+      catch (e) { return document.getElementById('gh-token').value.trim(); }
     }
 
     function saveGhToken() {
       const tok = document.getElementById('gh-token').value.trim();
-      sessionStorage.setItem('gh_token', tok);
+      try { tok ? localStorage.setItem('gh_token', tok) : localStorage.removeItem('gh_token'); } catch (e) {}
       updatePublishBtn();
     }
 
-    function updatePublishBtn() {
-      const tok = getGhToken();
-      const btn = document.getElementById('btn-publish');
+    function setPublishStatus(kind, msg) {
       const note = document.getElementById('save-bar-note');
-      if (tok) {
-        btn.disabled = false;
+      const status = document.getElementById('gh-status');
+      const color = kind === 'ok' ? '#1e8449' : kind === 'err' ? '#c0392b' : '';
+      note.style.color = color;
+      note.textContent = msg;
+      status.className = 'gh-status' + (kind ? ' ' + kind : '');
+      status.textContent = msg;
+      status.style.display = msg ? 'block' : 'none';
+    }
+
+    function updatePublishBtn() {
+      const note = document.getElementById('save-bar-note');
+      note.style.color = '';
+      if (getGhToken()) {
         note.innerHTML = 'Click <strong>Publish to GitHub</strong> to update the live site directly.';
       } else {
-        btn.disabled = true;
         note.innerHTML = 'Enter a GitHub token on the <strong>GitHub</strong> tab to enable one-click publishing.';
       }
     }
@@ -602,21 +624,20 @@
     }
 
     async function publishToGitHub() {
-      const token = getGhToken();
+      let token = getGhToken();
       if (!token) {
-        alert('Please enter a GitHub Personal Access Token on the GitHub tab first.');
-        return;
+        token = (prompt('Paste your GitHub Personal Access Token (it will be remembered in this browser):') || '').trim();
+        if (!token) return;
+        document.getElementById('gh-token').value = token;
+        saveGhToken();
       }
 
       const data = collectData();
       if (!data) { alert('No data loaded yet.'); return; }
 
-      const btn = document.getElementById('btn-publish');
-      const status = document.getElementById('gh-status');
-      btn.disabled = true;
-      btn.textContent = 'Publishing…';
-      status.className = 'gh-status';
-      status.style.display = 'none';
+      const btns = document.querySelectorAll('.tbtn-publish, #btn-publish');
+      btns.forEach(b => { b.disabled = true; b.textContent = 'Publishing…'; });
+      setPublishStatus('', 'Publishing to GitHub…');
 
       try {
         const jsonStr = JSON.stringify(data, null, 2);
@@ -644,16 +665,17 @@
         await ghPutFile(token, 'seminars/index.html', html, idxJ.sha,
           'Sync inline seminar data in index.html');
 
-        status.className = 'gh-status ok';
-        status.textContent = '✓ Published successfully. The live site will update in ~30 seconds.';
-        status.style.display = 'block';
+        DATA = data;
+        setPublishStatus('ok', '✓ Published at ' + new Date().toLocaleTimeString('en-GB') +
+          '. The live site will update in about a minute.');
       } catch(e) {
-        status.className = 'gh-status err';
-        status.textContent = '✗ ' + e.message;
-        status.style.display = 'block';
+        let msg = e.message;
+        if (/401|Bad credentials/i.test(msg)) msg += ' — the token is invalid or expired. Update it on the GitHub tab.';
+        else if (/403|404|Resource not accessible/i.test(msg)) msg += ' — the token needs "Contents: Read and write" on ajw278/www.andrew-j-winter.com.';
+        setPublishStatus('err', '✗ Publish failed: ' + msg);
+        alert('Publish failed: ' + msg);
       } finally {
-        btn.disabled = !getGhToken();
-        btn.textContent = '⬆ Publish to GitHub';
+        btns.forEach(b => { b.disabled = false; b.textContent = '⬆ Publish to GitHub'; });
       }
     }
 
