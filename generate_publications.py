@@ -13,6 +13,7 @@ Requirements:
     pip install requests
 """
 
+import json
 import os
 import re
 import html as html_module
@@ -27,6 +28,8 @@ API_KEY    = os.getenv("ADS_API_KEY",    "m2WhxZnX56sVSewEwcEORL9szXB1JBm7GwE3hW
 LIBRARY_ID = os.getenv("ADS_LIBRARY_ID", "PK0RWOWOTIKWfo-5Fck9sg")
 
 OUT_FILE   = Path(__file__).parent / "publications.html"
+TAGS_FILE  = Path(__file__).parent / "pub_tags.json"
+TAG_ORDER  = ["External photoevaporation", "Star and planet dynamics", "Late-stage infall", "ALMA"]
 
 FIRST_AUTHOR_RE = re.compile(
     r"^Winter,\s+(Andrew(?:\s+J\.?)*\.?|A\.(?:\s*J\.?)?)\s*$", re.IGNORECASE
@@ -100,7 +103,7 @@ def fetch_metadata(bibcodes):
             headers=ads_headers(),
             params={
                 "q": q,
-                "fl": "bibcode,title,author,author_count,pub,year,pubdate,citation_count,doi,doctype",
+                "fl": "bibcode,identifier,title,author,author_count,pub,year,pubdate,citation_count,doi,doctype",
                 "rows": batch_size,
             },
             timeout=60,
@@ -188,6 +191,27 @@ def format_authors(doc):
     return ", ".join(parts)
 
 
+def load_tags():
+    if not TAGS_FILE.exists():
+        return {}
+    return {k: v.get("tags", []) for k, v in json.loads(TAGS_FILE.read_text(encoding="utf-8")).items()}
+
+
+TAGS = load_tags()
+
+
+def tags_for(doc):
+    # Match on any ADS identifier so tags survive an arXiv bibcode becoming a journal bibcode.
+    for ident in [doc.get("bibcode", "")] + list(doc.get("identifier") or []):
+        if ident in TAGS:
+            return TAGS[ident]
+    return []
+
+
+def slug(tag):
+    return re.sub(r"[^a-z0-9]+", "-", tag.lower()).strip("-")
+
+
 def ads_url(bibcode):
     return f"https://ui.adsabs.harvard.edu/abs/{requests.utils.quote(bibcode)}/abstract"
 
@@ -205,9 +229,11 @@ NAV = """\
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="research.html">Research</a></li>
+        <li><a href="software.html">Software</a></li>
         <li><a href="teaching.html">Teaching</a></li>
         <li><a href="cv.html">CV</a></li>
         <li><a href="publications.html" class="active">Publications</a></li>
+        <li><a href="seminars/">Seminars</a></li>
       </ul>
     </div>
   </nav>"""
@@ -225,12 +251,14 @@ def build_entry(doc, show_cites=True):
     bibcode  = doc.get("bibcode", "")
     first    = is_first_author(doc)
 
-    badge = (
-        '<span class="badge badge-first">First author</span>'
-        if first else
-        '<span class="badge badge-coauth">Co-author</span>'
-    )
     data_type = "first" if first else "coauth"
+    tags      = tags_for(doc)
+    data_tags = " ".join(slug(t) for t in tags)
+    tags_html = (
+        '<div class="pub-tags">'
+        + "".join(f'<span class="pub-tag">{html_module.escape(t)}</span>' for t in tags)
+        + "</div>"
+    ) if tags else ""
 
     cite_str = (
         f'&ensp;<span class="pub-cites">{cites} citations</span>'
@@ -238,10 +266,10 @@ def build_entry(doc, show_cites=True):
     )
 
     return f"""\
-          <div class="pub-entry" data-type="{data_type}">
-            <div class="pub-badge">{badge}</div>
+          <div class="pub-entry" data-type="{data_type}" data-tags="{data_tags}">
             <div>
               <div class="pub-title">{html_module.escape(title)}</div>
+              {tags_html}
               <div class="pub-authors">{format_authors(doc)}</div>
               <div class="pub-journal"><em>{html_module.escape(journal)}</em>{(', ' + str(year)) if year else ''}{cite_str}</div>
               <div class="pub-links">
@@ -273,16 +301,30 @@ def tab_section(tab_id, label, docs, show_cites=True, extra_note=""):
     n_total  = len(docs)
     year_html = build_year_groups(docs, show_cites)
     note_html = f'<p class="updated-note" style="margin-bottom:1rem;">{extra_note}</p>' if extra_note else ""
+    present = [t for t in TAG_ORDER if any(t in tags_for(d) for d in docs)]
+    topic_html = ""
+    if present:
+        btns = "\n".join(
+            f'          <button class="filter-btn topic-btn" onclick="filterTopic(\'{tab_id}\',\'{slug(t)}\',this)">'
+            f'{html_module.escape(t)} ({sum(1 for d in docs if t in tags_for(d))})</button>'
+            for t in present
+        )
+        topic_html = f"""
+        <div class="pub-filter-bar">
+          <span style="font-size:.82rem;color:var(--text-muted);font-weight:600;">Topic:</span>
+          <button class="filter-btn topic-btn active" onclick="filterTopic('{tab_id}','all',this)">All topics</button>
+{btns}
+        </div>"""
     return f"""\
       <!-- ===== TAB: {label} ===== -->
       <div id="tab-{tab_id}" class="tab-panel" style="display:none;">
 
         <div class="pub-filter-bar">
           <span style="font-size:.82rem;color:var(--text-muted);font-weight:600;">Filter:</span>
-          <button class="filter-btn active" onclick="filterPubs('{tab_id}','all',this)">All ({n_total})</button>
-          <button class="filter-btn" onclick="filterPubs('{tab_id}','first',this)">First-author ({n_first})</button>
-          <button class="filter-btn" onclick="filterPubs('{tab_id}','coauth',this)">Co-author ({n_total - n_first})</button>
-        </div>
+          <button class="filter-btn author-btn active" onclick="filterPubs('{tab_id}','all',this)">All ({n_total})</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('{tab_id}','first',this)">First-author ({n_first})</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('{tab_id}','coauth',this)">Co-author ({n_total - n_first})</button>
+        </div>{topic_html}
         {note_html}
 {year_html}
 
@@ -363,8 +405,7 @@ def build_html(docs):
       border-bottom: 2px solid var(--border); padding-bottom: .4rem; margin-bottom: 1.25rem;
     }}
     .pub-entry {{
-      display: grid; grid-template-columns: auto 1fr;
-      gap: 0 1.25rem; padding: 1rem 0; border-bottom: 1px solid var(--border);
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
       transition: background .15s;
     }}
     .pub-entry:last-child {{ border-bottom: none; }}
@@ -373,14 +414,11 @@ def build_html(docs):
       margin: 0 -.75rem; padding-left: .75rem; padding-right: .75rem;
       border-radius: 6px;
     }}
-    .pub-badge {{ margin-top: 3px; flex-shrink: 0; }}
-    .badge {{
-      display: inline-block; font-size: .65rem; font-weight: 700;
-      letter-spacing: .07em; text-transform: uppercase;
-      padding: .2rem .55rem; border-radius: 4px; white-space: nowrap;
+    .pub-tags    {{ display: flex; gap: .35rem; flex-wrap: wrap; margin: .15rem 0 .35rem; }}
+    .pub-tag {{
+      font-size: .7rem; font-weight: 600; padding: .12rem .5rem; border-radius: 999px;
+      background: rgba(46,134,193,.08); color: var(--accent); border: 1px solid rgba(46,134,193,.25);
     }}
-    .badge-first  {{ background: rgba(46,134,193,.12); color: var(--accent); border: 1px solid rgba(46,134,193,.3); }}
-    .badge-coauth {{ background: rgba(212,168,67,.12); color: #a07830; border: 1px solid rgba(212,168,67,.3); }}
     .pub-title   {{ font-weight: 600; font-size: .95rem; color: var(--text); line-height: 1.4; margin-bottom: .2rem; }}
     .pub-authors {{ font-size: .85rem; color: var(--text-muted); margin-bottom: .2rem; }}
     .pub-authors strong {{ color: var(--text); }}
@@ -403,13 +441,11 @@ def build_html(docs):
 
   <header class="page-hero">
     <div class="container">
-      <span class="section-label">Research Output</span>
       <h1>Publications</h1>
       <p>Complete list from the
          <a href="https://ui.adsabs.harvard.edu/user/libraries/PK0RWOWOTIKWfo-5Fck9sg"
             target="_blank" rel="noopener"
-            style="color:rgba(255,255,255,.8);text-decoration:underline;">NASA ADS library</a>.
-         Automatically updated weekly.</p>
+            style="color:rgba(255,255,255,.8);text-decoration:underline;">NASA ADS library</a>.</p>
     </div>
   </header>
 
@@ -458,7 +494,6 @@ def build_html(docs):
 
   <section class="contact-section">
     <div class="container">
-      <p class="section-label">Get in Touch</p>
       <h2 class="section-heading">Contact</h2>
       <p>For questions about any of my research, please get in touch.</p>
       <div class="contact-grid" style="margin-top:2rem;">
@@ -498,19 +533,29 @@ def build_html(docs):
       document.getElementById('tab-articles').style.display = '';
     }});
 
-    // ── Per-tab first/co-author filter ──
-    function filterPubs(tabId, type, btn) {{
+    // ── Per-tab author + topic filters ──
+    const FILTERS = {{}};
+    function applyFilters(tabId) {{
       const panel = document.getElementById('tab-' + tabId);
-      panel.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      const f = FILTERS[tabId] || {{ type: 'all', topic: 'all' }};
       panel.querySelectorAll('.pub-entry').forEach(el => {{
-        el.style.display = (type === 'all' || el.dataset.type === type) ? '' : 'none';
+        const okType  = f.type === 'all' || el.dataset.type === f.type;
+        const okTopic = f.topic === 'all' || (el.dataset.tags || '').split(' ').includes(f.topic);
+        el.style.display = (okType && okTopic) ? '' : 'none';
       }});
       panel.querySelectorAll('.pub-year-group').forEach(g => {{
         const vis = [...g.querySelectorAll('.pub-entry')].some(e => e.style.display !== 'none');
         g.style.display = vis ? '' : 'none';
       }});
     }}
+    function setFilter(tabId, key, value, btn, cls) {{
+      FILTERS[tabId] = Object.assign({{ type: 'all', topic: 'all' }}, FILTERS[tabId], {{ [key]: value }});
+      document.getElementById('tab-' + tabId).querySelectorAll('.' + cls).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters(tabId);
+    }}
+    function filterPubs(tabId, type, btn)   {{ setFilter(tabId, 'type',  type,  btn, 'author-btn'); }}
+    function filterTopic(tabId, topic, btn) {{ setFilter(tabId, 'topic', topic, btn, 'topic-btn'); }}
   </script>
 
 </body>

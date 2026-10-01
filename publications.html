@@ -52,8 +52,7 @@
       border-bottom: 2px solid var(--border); padding-bottom: .4rem; margin-bottom: 1.25rem;
     }
     .pub-entry {
-      display: grid; grid-template-columns: auto 1fr;
-      gap: 0 1.25rem; padding: 1rem 0; border-bottom: 1px solid var(--border);
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
       transition: background .15s;
     }
     .pub-entry:last-child { border-bottom: none; }
@@ -62,14 +61,11 @@
       margin: 0 -.75rem; padding-left: .75rem; padding-right: .75rem;
       border-radius: 6px;
     }
-    .pub-badge { margin-top: 3px; flex-shrink: 0; }
-    .badge {
-      display: inline-block; font-size: .65rem; font-weight: 700;
-      letter-spacing: .07em; text-transform: uppercase;
-      padding: .2rem .55rem; border-radius: 4px; white-space: nowrap;
+    .pub-tags    { display: flex; gap: .35rem; flex-wrap: wrap; margin: .15rem 0 .35rem; }
+    .pub-tag {
+      font-size: .7rem; font-weight: 600; padding: .12rem .5rem; border-radius: 999px;
+      background: rgba(46,134,193,.08); color: var(--accent); border: 1px solid rgba(46,134,193,.25);
     }
-    .badge-first  { background: rgba(46,134,193,.12); color: var(--accent); border: 1px solid rgba(46,134,193,.3); }
-    .badge-coauth { background: rgba(212,168,67,.12); color: #a07830; border: 1px solid rgba(212,168,67,.3); }
     .pub-title   { font-weight: 600; font-size: .95rem; color: var(--text); line-height: 1.4; margin-bottom: .2rem; }
     .pub-authors { font-size: .85rem; color: var(--text-muted); margin-bottom: .2rem; }
     .pub-authors strong { color: var(--text); }
@@ -98,22 +94,22 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="research.html">Research</a></li>
+        <li><a href="software.html">Software</a></li>
         <li><a href="teaching.html">Teaching</a></li>
         <li><a href="cv.html">CV</a></li>
         <li><a href="publications.html" class="active">Publications</a></li>
+        <li><a href="seminars/">Seminars</a></li>
       </ul>
     </div>
   </nav>
 
   <header class="page-hero">
     <div class="container">
-      <span class="section-label">Research Output</span>
       <h1>Publications</h1>
       <p>Complete list from the
          <a href="https://ui.adsabs.harvard.edu/user/libraries/PK0RWOWOTIKWfo-5Fck9sg"
             target="_blank" rel="noopener"
-            style="color:rgba(255,255,255,.8);text-decoration:underline;">NASA ADS library</a>.
-         Automatically updated weekly.</p>
+            style="color:rgba(255,255,255,.8);text-decoration:underline;">NASA ADS library</a>.</p>
     </div>
   </header>
 
@@ -127,7 +123,7 @@
             <span>First-author papers</span>
           </div>
           <div class="pub-stat">
-            <strong>78</strong>
+            <strong>79</strong>
             <span>Journal articles</span>
           </div>
           <div class="pub-stat">
@@ -137,12 +133,12 @@
           </div>
         </div>
 
-        <p class="updated-note">Last updated: 28 Sep 2026 UTC</p>
+        <p class="updated-note">Last updated: 01 Oct 2026 UTC</p>
 
         <!-- Tab navigation -->
         <div class="tab-nav">
           <button class="tab-btn active" onclick="switchTab('articles', this)">
-            Journal Articles (78)
+            Journal Articles (79)
           </button>
           <button class="tab-btn" onclick="switchTab('conferences', this)">
             Published Conference Talks (4)
@@ -157,17 +153,25 @@
 
         <div class="pub-filter-bar">
           <span style="font-size:.82rem;color:var(--text-muted);font-weight:600;">Filter:</span>
-          <button class="filter-btn active" onclick="filterPubs('articles','all',this)">All (78)</button>
-          <button class="filter-btn" onclick="filterPubs('articles','first',this)">First-author (18)</button>
-          <button class="filter-btn" onclick="filterPubs('articles','coauth',this)">Co-author (60)</button>
+          <button class="filter-btn author-btn active" onclick="filterPubs('articles','all',this)">All (79)</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('articles','first',this)">First-author (18)</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('articles','coauth',this)">Co-author (61)</button>
+        </div>
+        <div class="pub-filter-bar">
+          <span style="font-size:.82rem;color:var(--text-muted);font-weight:600;">Topic:</span>
+          <button class="filter-btn topic-btn active" onclick="filterTopic('articles','all',this)">All topics</button>
+          <button class="filter-btn topic-btn" onclick="filterTopic('articles','external-photoevaporation',this)">External photoevaporation (27)</button>
+          <button class="filter-btn topic-btn" onclick="filterTopic('articles','star-and-planet-dynamics',this)">Star and planet dynamics (17)</button>
+          <button class="filter-btn topic-btn" onclick="filterTopic('articles','late-stage-infall',this)">Late-stage infall (6)</button>
+          <button class="filter-btn topic-btn" onclick="filterTopic('articles','alma',this)">ALMA (29)</button>
         </div>
         
         <div class="pub-year-group">
           <div class="pub-year-label">2026</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Flyby-induced high-eccentricity migration and the prevalence of hot Jupiters in M67</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">M. V. Kontiainen, C. J. Clarke, <strong>A. J. Winter</strong></div>
               <div class="pub-journal"><em>MNRAS</em>, 2026</div>
               <div class="pub-links">
@@ -175,10 +179,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">Far-ultraviolet flux distribution in Orion and its relation to stellar accretion</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">R. Anania, <strong>A. J. Winter</strong>, M. Vioque, G. P. Rosotti, G. Beccari, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">1 citations</span></div>
               <div class="pub-links">
@@ -186,10 +190,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="late-stage-infall alma">
             <div>
               <div class="pub-title">A Streamer Driving Misalignment in the Circumtriple Disk of GW Ori</div>
+              <div class="pub-tags"><span class="pub-tag">Late-stage infall</span><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">M. Galloway-Sprietsma, J. Bae, T. Phillips, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>AJ</em>, 2026</div>
               <div class="pub-links">
@@ -197,32 +201,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">XUE. ProDiMo models of internally and externally irradiated planet-forming disks around 0.3-4.0 solar mass stars (The IRIS project I)</div>
-              <div class="pub-authors">J. Frediani, K. V. Getman, P. Woitke, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>arXiv</em>, 2026</div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260908621F/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">Stellar age is not disk age</div>
-              <div class="pub-authors">M. Kuffmeier, <strong>A. Winter</strong>, A. Kuznetsova, M. Vioque, A. Gupta</div>
-              <div class="pub-journal"><em>arXiv</em>, 2026</div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260917046K/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">JWST/MIRI Imaging Search for Kinematically Detected Protoplanetary Candidates</div>
+              
               <div class="pub-authors">G. Cugno, M. Benisty, R. Teague, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>arXiv</em>, 2026</div>
               <div class="pub-links">
@@ -230,10 +212,43 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
+            <div>
+              <div class="pub-title">XUE. ProDiMo models of internally and externally irradiated planet-forming disks around 0.3-4.0 solar mass stars (The IRIS project I)</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
+              <div class="pub-authors">J. Frediani, K. V. Getman, P. Woitke, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>arXiv</em>, 2026</div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260908621F/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="late-stage-infall">
+            <div>
+              <div class="pub-title">Stellar age is not disk age</div>
+              <div class="pub-tags"><span class="pub-tag">Late-stage infall</span></div>
+              <div class="pub-authors">M. Kuffmeier, <strong>A. Winter</strong>, A. Kuznetsova, M. Vioque, A. Gupta</div>
+              <div class="pub-journal"><em>arXiv</em>, 2026</div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260917046K/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
+            <div>
+              <div class="pub-title">Upside down: GJ 3090 b the first retrograde exoplanet around an M dwarf detected with NIRPS</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
+              <div class="pub-authors">Y. Carteret, V. Bourrier, L. Parc, <strong>A. Winter</strong>, R. Allart, <em>et al.</em></div>
+              <div class="pub-journal"><em>A&amp;A</em>, 2026</div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2026A%26A...713L..15C/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">An analysis of the Herbig star population and their protoplanetary disks within 1 kpc</div>
+              
               <div class="pub-authors">L. M. Stapper, M. Vioque, <strong>A. J. Winter</strong>, D. J. Wilner, J. P. Williams, <em>et al.</em></div>
               <div class="pub-journal"><em>arXiv</em>, 2026</div>
               <div class="pub-links">
@@ -241,10 +256,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">The Effect of External Photoevaporation on the Disk Fraction in M17</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">S. Millstone, M. Reiter, M. Andersen, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJ</em>, 2026</div>
               <div class="pub-links">
@@ -252,10 +267,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Planet-forming disks and their environment across regions and time from the full NIR census</div>
+              
               <div class="pub-authors">A. Garufi, C. Ginski, M. Benisty, M. Vioque, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">7 citations</span></div>
               <div class="pub-links">
@@ -263,10 +278,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">The circumbinary disc of HD 34700A: II. Analysis of a strong dust asymmetry</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">D. Fasano, M. Benisty, J. Stadler, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">1 citations</span></div>
               <div class="pub-links">
@@ -274,10 +289,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">XUE. Modeling MIR Molecular Gas Tracers of Truncation in Highly Irradiated Planet-forming Disks</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">S. Hernández Arboleda, G. Chaparro, P. Cuartas-Restrepo, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJ</em>, 2026</div>
               <div class="pub-links">
@@ -285,10 +300,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. XXI. The Morphology and Dynamics of Vertical Flows</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">M. Benisty, A. F. Izquierdo, J. Stadler, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2026&ensp;<span class="pub-cites">3 citations</span></div>
               <div class="pub-links">
@@ -296,21 +311,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. XX. Tomographic Detection of Embedded Planets in Protoplanetary Disks</div>
-              <div class="pub-authors">A. F. Izquierdo, J. Bae, S. Facchini, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2026</div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..13I/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="late-stage-infall alma">
             <div>
               <div class="pub-title">The circumbinary disk of HD34700A: I. CO gas kinematics indicate spirals, infall, and vortex motions</div>
+              <div class="pub-tags"><span class="pub-tag">Late-stage infall</span><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">J. Stadler, M. Benisty, F. Zagaria, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">5 citations</span></div>
               <div class="pub-links">
@@ -318,10 +322,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. XX. Tomographic Detection of Embedded Planets in Protoplanetary Disks</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">A. F. Izquierdo, J. Bae, S. Facchini, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2026&ensp;<span class="pub-cites">1 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..13I/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA XXII: A Two-dimensional Atlas of Deviations from Keplerian Disks</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">M. Fukagawa, A. F. Izquierdo, J. Stadler, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2026&ensp;<span class="pub-cites">1 citations</span></div>
               <div class="pub-links">
@@ -329,10 +344,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. XXIII. Estimating Disk and Planet Properties from Dust Morphologies with DBNets 2.0</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">A. Ruzza, G. Lodato, G. Rosotti, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2026&ensp;<span class="pub-cites">2 citations</span></div>
               <div class="pub-links">
@@ -340,10 +355,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. XIX. Confirmation of Non-thermal Line Broadening in the DM Tau Protoplanetary Disk</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">C. Hardiman, C. Pinte, D. J. Price, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2026&ensp;<span class="pub-cites">4 citations</span></div>
               <div class="pub-links">
@@ -351,21 +366,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Astrometric view of companions in the inner dust cavities of protoplanetary discs</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">M. Vioque, R. A. Booth, E. Ragusa, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">12 citations</span></div>
+              <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">13 citations</span></div>
               <div class="pub-links">
                 <a href="https://ui.adsabs.harvard.edu/abs/2026A%26A...705A.238V/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">Inferring the physics of protoplanetary disc evolution from the irradiated Cygnus OB2 region: A comparison of viscous and MHD wind-driven scenarios</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">J. Weder, <strong>A. J. Winter</strong>, C. Mordasini</div>
               <div class="pub-journal"><em>A&amp;A</em>, 2026&ensp;<span class="pub-cites">4 citations</span></div>
               <div class="pub-links">
@@ -376,10 +391,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2025</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Spatial mixing of stellar populations in globular clusters via binary─single star scattering</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">V. Pavlík, M. B. Davies, E. I. Leitinger, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2025&ensp;<span class="pub-cites">3 citations</span></div>
               <div class="pub-links">
@@ -387,10 +402,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">XUE: JWST spectroscopy of externally irradiated disks around young intermediate-mass stars</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">M. C. Ramírez-Tannus, A. Bik, K. V. Getman, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2025&ensp;<span class="pub-cites">10 citations</span></div>
               <div class="pub-links">
@@ -398,21 +413,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. XVIII. Interpreting Large-scale Kinematic Structures as Moderate Warping</div>
-              <div class="pub-authors"><strong>A. J. Winter</strong>, M. Benisty, A. F. Izquierdo, G. Lodato, R. Teague, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">14 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...990L..10W/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">XUE: The CO&lt;SUB&gt;2&lt;/SUB&gt;-rich terrestrial planet-forming region of an externally irradiated Herbig disk</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">J. Frediani, A. Bik, M. C. Ramírez-Tannus, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2025&ensp;<span class="pub-cites">11 citations</span></div>
               <div class="pub-links">
@@ -420,10 +424,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. XVIII. Interpreting Large-scale Kinematic Structures as Moderate Warping</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors"><strong>A. J. Winter</strong>, M. Benisty, A. F. Izquierdo, G. Lodato, R. Teague, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">14 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...990L..10W/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Hot Jupiter formation in dense stellar clusters: a Monte Carlo model applied to 47 Tucanae</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">J. A. Wirth, C. J. Clarke, <strong>A. J. Winter</strong></div>
               <div class="pub-journal"><em>MNRAS</em>, 2025&ensp;<span class="pub-cites">3 citations</span></div>
               <div class="pub-links">
@@ -431,10 +446,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">SO Emission in the Dynamically Perturbed Protoplanetary Disks around CQ Tau and MWC 758</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">F. Zagaria, H. Jiang, G. Cataldi, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJ</em>, 2025&ensp;<span class="pub-cites">14 citations</span></div>
               <div class="pub-links">
@@ -442,10 +457,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">On hot Jupiters and stellar clustering: the role of host star demographics</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">M. V. Kontiainen, C. J. Clarke, <strong>A. J. Winter</strong></div>
               <div class="pub-journal"><em>MNRAS</em>, 2025&ensp;<span class="pub-cites">3 citations</span></div>
               <div class="pub-links">
@@ -453,10 +468,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Disc─planet misalignment from an unstable triple system: IRAS04125</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">R. Nealon, J. L. Smallwood, H. Aly, <strong>A. J. Winter</strong>, C. Longarini, <em>et al.</em></div>
               <div class="pub-journal"><em>MNRAS</em>, 2025&ensp;<span class="pub-cites">8 citations</span></div>
               <div class="pub-links">
@@ -464,76 +479,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. I. Science Goals, Project Design, and Data Products</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">R. Teague, M. Benisty, S. Facchini, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">66 citations</span></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">69 citations</span></div>
               <div class="pub-links">
                 <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L...6T/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. V. Gaseous Emission Surfaces and Temperature Structures</div>
-              <div class="pub-authors">M. Galloway-Sprietsma, J. Bae, A. F. Izquierdo, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">42 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..10G/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. III. Line-intensity Modeling and System Property Extraction from Protoplanetary Disks</div>
-              <div class="pub-authors">A. F. Izquierdo, J. Stadler, M. Galloway-Sprietsma, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">40 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L...8I/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. IV. Substructures, Asymmetries, and the Faint Outer Disk in Continuum Emission</div>
-              <div class="pub-authors">P. Curone, S. Facchini, S. M. Andrews, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">43 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L...9C/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. VI. Rotating under Pressure: Rotation Curves, Azimuthal Velocity Substructures, and Gas Pressure Variations</div>
-              <div class="pub-authors">J. Stadler, M. Benisty, <strong>A. J. Winter</strong>, A. F. Izquierdo, C. Longarini, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">29 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..11S/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. XII. Weighing and Sizing exoALMA Disks with Rotation Curve Modelling</div>
-              <div class="pub-authors">C. Longarini, G. Lodato, G. Rosotti, S. Andrews, <strong>A. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">39 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..17L/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">The past, present and future of observations of externally irradiated disks</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">M. Allen, R. Anania, M. Andersen, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>OJAp</em>, 2025&ensp;<span class="pub-cites">24 citations</span></div>
               <div class="pub-links">
@@ -541,10 +501,32 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. IV. Substructures, Asymmetries, and the Faint Outer Disk in Continuum Emission</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">P. Curone, S. Facchini, S. M. Andrews, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">46 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L...9C/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. V. Gaseous Emission Surfaces and Temperature Structures</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">M. Galloway-Sprietsma, J. Bae, A. F. Izquierdo, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">44 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..10G/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. X. Channel Maps Reveal Complex &lt;SUP&gt;12&lt;/SUP&gt;CO Abundance Distributions and a Variety of Kinematic Structures with Evidence for Embedded Planets</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">C. Pinte, J. D. Ilee, J. Huang, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">20 citations</span></div>
               <div class="pub-links">
@@ -552,10 +534,32 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. XII. Weighing and Sizing exoALMA Disks with Rotation Curve Modelling</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">C. Longarini, G. Lodato, G. Rosotti, S. Andrews, <strong>A. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">40 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..17L/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. VI. Rotating under Pressure: Rotation Curves, Azimuthal Velocity Substructures, and Gas Pressure Variations</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">J. Stadler, M. Benisty, <strong>A. J. Winter</strong>, A. F. Izquierdo, C. Longarini, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">30 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..11S/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. XIII. Gas Masses from N&lt;SUB&gt;2&lt;/SUB&gt;H&lt;SUP&gt;+&lt;/SUP&gt; and C&lt;SUP&gt;18&lt;/SUP&gt;O: A Comparison of Measurement Techniques for Protoplanetary Gas Disk Masses</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">L. Trapman, C. Longarini, G. P. Rosotti, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">23 citations</span></div>
               <div class="pub-links">
@@ -563,32 +567,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
-              <div class="pub-title">exoALMA. XVII. Characterizing the Gas Dynamics around Dust Asymmetries</div>
-              <div class="pub-authors">L. Wölfer, M. Barraza-Alfaro, R. Teague, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">18 citations</span></div>
+              <div class="pub-title">exoALMA. III. Line-intensity Modeling and System Property Extraction from Protoplanetary Disks</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">A. F. Izquierdo, J. Stadler, M. Galloway-Sprietsma, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">41 citations</span></div>
               <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..22W/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L...8I/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">XUE: Thermochemical Modeling Suggests a Compact and Gas-depleted Structure for a Distant, Irradiated Protoplanetary Disk</div>
-              <div class="pub-authors">B. Portilla-Revelo, K. V. Getman, M. C. Ramírez-Tannus, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJ</em>, 2025&ensp;<span class="pub-cites">7 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...985...72P/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. XV. Interpreting the Height of CO Emission Layer</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">G. P. Rosotti, C. Longarini, T. Paneque-Carreño, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">18 citations</span></div>
               <div class="pub-links">
@@ -596,10 +589,32 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
+            <div>
+              <div class="pub-title">XUE: Thermochemical Modeling Suggests a Compact and Gas-depleted Structure for a Distant, Irradiated Protoplanetary Disk</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
+              <div class="pub-authors">B. Portilla-Revelo, K. V. Getman, M. C. Ramírez-Tannus, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJ</em>, 2025&ensp;<span class="pub-cites">7 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...985...72P/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. XVII. Characterizing the Gas Dynamics around Dust Asymmetries</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">L. Wölfer, M. Barraza-Alfaro, R. Teague, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">18 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..22W/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. XVI. Predicting Signatures of Large-scale Turbulence in Protoplanetary Disks</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">M. Barraza-Alfaro, M. Flock, W. Béthune, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">15 citations</span></div>
               <div class="pub-links">
@@ -607,10 +622,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. XIV. Gas Surface Densities in the RX J1604.3−2130 A Disk from Pressure-broadened CO Line Wings</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">T. C. Yoshida, P. Curone, J. Stadler, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">12 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..19Y/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. VII. Benchmarking Hydrodynamics and Radiative Transfer Codes</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">J. Bae, M. Flock, A. Izquierdo, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">9 citations</span></div>
               <div class="pub-links">
@@ -618,43 +644,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. XIV. Gas Surface Densities in the RX J1604.3−2130 A Disk from Pressure-broadened CO Line Wings</div>
-              <div class="pub-authors">T. C. Yoshida, P. Curone, J. Stadler, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">11 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..19Y/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. XI. ALMA Observations and Hydrodynamic Models of LkCa 15: Implications for Planetary Mass Companions in the Dust Continuum Cavity</div>
-              <div class="pub-authors">C. H. Gardner, A. Isella, H. Li, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">12 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..16G/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">exoALMA. IX. Regularized Maximum Likelihood Imaging of Non-Keplerian Features</div>
-              <div class="pub-authors">B. Zawadzki, I. Czekala, M. Galloway-Sprietsma, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">6 citations</span></div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..14Z/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">exoALMA. VIII. Probabilistic Moment Maps and Data Products Using Nonparametric Linear Models</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">T. Hilder, A. R. Casey, D. J. Price, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">11 citations</span></div>
               <div class="pub-links">
@@ -662,10 +655,32 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. XI. ALMA Observations and Hydrodynamic Models of LkCa 15: Implications for Planetary Mass Companions in the Dust Continuum Cavity</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">C. H. Gardner, A. Isella, H. Li, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">12 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..16G/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
+            <div>
+              <div class="pub-title">exoALMA. IX. Regularized Maximum Likelihood Imaging of Non-Keplerian Features</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
+              <div class="pub-authors">B. Zawadzki, I. Czekala, M. Galloway-Sprietsma, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>ApJL</em>, 2025&ensp;<span class="pub-cites">6 citations</span></div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..14Z/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">A novel method for estimating the far-ultraviolet flux, and a catalogue for disc-hosting stars in nearby star-forming regions</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">R. Anania, <strong>A. J. Winter</strong>, G. Rosotti, M. Vioque, E. Zari, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2025&ensp;<span class="pub-cites">23 citations</span></div>
               <div class="pub-links">
@@ -673,10 +688,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">EWOCS-III: JWST observations of the supermassive star cluster Westerlund 1</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">M. G. Guarcello, V. Almendros-Abad, J. B. Lovell, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2025&ensp;<span class="pub-cites">17 citations</span></div>
               <div class="pub-links">
@@ -687,10 +702,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2024</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation alma">
             <div>
               <div class="pub-title">A tell-tale tracer for externally irradiated protoplanetary disks: Comparing the [C I] 8727 Å line and ALMA observations in proplyds</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">M. Aru, K. Maucó, C. F. Manara, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">10 citations</span></div>
               <div class="pub-links">
@@ -698,21 +713,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="late-stage-infall">
             <div>
               <div class="pub-title">Spatially correlated stellar accretion in the Lupus star-forming region: Evidence for ongoing infall from the interstellar medium</div>
+              <div class="pub-tags"><span class="pub-tag">Late-stage infall</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, M. Benisty, C. F. Manara, A. Gupta</div>
-              <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">24 citations</span></div>
+              <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">25 citations</span></div>
               <div class="pub-links">
                 <a href="https://ui.adsabs.harvard.edu/abs/2024A%26A...691A.169W/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Running with the bulls: The frequency of star-disc encounters in the Taurus star-forming region</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, M. Benisty, L. Shuai, G. Dûchene, N. Cuello, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">14 citations</span></div>
               <div class="pub-links">
@@ -720,10 +735,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="late-stage-infall">
             <div>
               <div class="pub-title">Planet Formation Regulated by Galactic-scale Interstellar Turbulence</div>
+              <div class="pub-tags"><span class="pub-tag">Late-stage infall</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, M. Benisty, S. M. Andrews</div>
               <div class="pub-journal"><em>ApJL</em>, 2024&ensp;<span class="pub-cites">42 citations</span></div>
               <div class="pub-links">
@@ -731,10 +746,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">Kaleidoscope of irradiated disks: MUSE observations of proplyds in the Orion Nebula Cluster. I. Sample presentation and ionization front sizes</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">M. Aru, K. Maucó, C. F. Manara, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">32 citations</span></div>
               <div class="pub-links">
@@ -742,10 +757,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Planet-driven spirals in protoplanetary discs: Limitations of the semi-analytical theory for observations</div>
+              
               <div class="pub-authors">D. Fasano, <strong>A. J. Winter</strong>, M. Benisty, G. Rosotti, A. Ruzza, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">4 citations</span></div>
               <div class="pub-links">
@@ -753,10 +768,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="alma">
             <div>
               <div class="pub-title">Rotation curves in protoplanetary disks with thermal stratification. Physical model and observational evidence in MAPS disks</div>
+              <div class="pub-tags"><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">P. Martire, C. Longarini, G. Lodato, G. P. Rosotti, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">43 citations</span></div>
               <div class="pub-links">
@@ -764,10 +779,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">EWOCS-I: The catalog of X-ray sources in Westerlund 1 from the Extended Westerlund 1 and 2 Open Clusters Survey</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">M. G. Guarcello, E. Flaccomio, J. F. Albacete-Colombo, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>A&amp;A</em>, 2024&ensp;<span class="pub-cites">8 citations</span></div>
               <div class="pub-links">
@@ -778,10 +793,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2023</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">XUE: Molecular Inventory in the Inner Region of an Extremely Irradiated Protoplanetary Disk</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">M. C. Ramírez-Tannus, A. Bik, L. Cuijpers, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>ApJL</em>, 2023&ensp;<span class="pub-cites">40 citations</span></div>
               <div class="pub-links">
@@ -789,21 +804,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Roman CCS White Paper: Adding Fields Hosting Globular Clusters To The Galactic Bulge Time Domain Survey</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">S. K. Grunblatt, R. F. Wilson, <strong>A. Winter</strong>, B. S. Gaudi, D. Huber, <em>et al.</em></div>
-              <div class="pub-journal"><em>arXiv</em>, 2023&ensp;<span class="pub-cites">5 citations</span></div>
+              <div class="pub-journal"><em>arXiv</em>, 2023&ensp;<span class="pub-cites">6 citations</span></div>
               <div class="pub-links">
                 <a href="https://ui.adsabs.harvard.edu/abs/2023arXiv230610647G/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="late-stage-infall star-and-planet-dynamics">
             <div>
               <div class="pub-title">Accretion of substellar companions as the origin of chemical abundance inhomogeneities in globular clusters</div>
+              <div class="pub-tags"><span class="pub-tag">Late-stage infall</span><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, C. J. Clarke</div>
               <div class="pub-journal"><em>MNRAS</em>, 2023&ensp;<span class="pub-cites">12 citations</span></div>
               <div class="pub-links">
@@ -814,10 +829,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2022</div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">The external photoevaporation of planet-forming discs</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, T. J. Haworth</div>
               <div class="pub-journal"><em>European Physical Journal Plus</em>, 2022&ensp;<span class="pub-cites">129 citations</span></div>
               <div class="pub-links">
@@ -825,10 +840,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">The growth and migration of massive planets under the influence of external photoevaporation</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, T. J. Haworth, G. A. L. Coleman, S. Nayakshin</div>
               <div class="pub-journal"><em>MNRAS</em>, 2022&ensp;<span class="pub-cites">40 citations</span></div>
               <div class="pub-links">
@@ -836,10 +851,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Forming short period sub-stellar companions in 47 Tucanae - II. Analytical expressions for the orbital evolution of planets in dense environments</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, C. J. Clarke, G. Rosotti, M. Giersz</div>
               <div class="pub-journal"><em>MNRAS</em>, 2022&ensp;<span class="pub-cites">6 citations</span></div>
               <div class="pub-links">
@@ -847,10 +862,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">An APEX search for carbon emission from NGC 1977 proplyds</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">T. J. Haworth, J. S. Kim, L. Qiao, <strong>A. J. Winter</strong>, J. P. Williams, <em>et al.</em></div>
               <div class="pub-journal"><em>MNRAS</em>, 2022&ensp;<span class="pub-cites">12 citations</span></div>
               <div class="pub-links">
@@ -858,10 +873,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Forming short-period substellar companions in 47 Tucanae - I. Dynamical model and brown dwarf tidal capture rates</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, G. P. Rosotti, C. Clarke, M. Giersz</div>
               <div class="pub-journal"><em>MNRAS</em>, 2022&ensp;<span class="pub-cites">3 citations</span></div>
               <div class="pub-links">
@@ -872,10 +887,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2021</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">The influence of the environment on the spin evolution of low-mass stars - I. External photoevaporation of circumstellar discs</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">J. Roquette, S. P. Matt, <strong>A. J. Winter</strong>, L. Amard, S. Stasevic</div>
               <div class="pub-journal"><em>MNRAS</em>, 2021&ensp;<span class="pub-cites">33 citations</span></div>
               <div class="pub-links">
@@ -883,10 +898,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">A scaling relation for the molecular cloud lifetime in Milky Way-like galaxies</div>
+              
               <div class="pub-authors">S. M. R. Jeffreson, B. W. Keller, <strong>A. J. Winter</strong>, M. Chevance, J. M. D. Kruijssen, <em>et al.</em></div>
               <div class="pub-journal"><em>MNRAS</em>, 2021&ensp;<span class="pub-cites">28 citations</span></div>
               <div class="pub-links">
@@ -894,10 +909,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="">
             <div>
               <div class="pub-title">An upper limit for the growth of inner planets?</div>
+              
               <div class="pub-authors"><strong>A. J. Winter</strong>, R. Alexander</div>
               <div class="pub-journal"><em>MNRAS</em>, 2021&ensp;<span class="pub-cites">5 citations</span></div>
               <div class="pub-links">
@@ -905,10 +920,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">Proplyds in the flame nebula NGC 2024</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">T. J. Haworth, J. S. Kim, <strong>A. J. Winter</strong>, D. C. Hines, C. J. Clarke, <em>et al.</em></div>
               <div class="pub-journal"><em>MNRAS</em>, 2021&ensp;<span class="pub-cites">40 citations</span></div>
               <div class="pub-links">
@@ -919,10 +934,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2020</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation alma">
             <div>
               <div class="pub-title">An ALMA Survey of λ Orionis Disks: From Supernovae to Planet Formation</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span><span class="pub-tag">ALMA</span></div>
               <div class="pub-authors">M. Ansdell, T. J. Haworth, J. P. Williams, S. Facchini, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>AJ</em>, 2020&ensp;<span class="pub-cites">38 citations</span></div>
               <div class="pub-links">
@@ -930,21 +945,21 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Stellar clustering shapes the architecture of planetary systems</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, J. M. D. Kruijssen, S. N. Longmore, M. Chevance</div>
-              <div class="pub-journal"><em>Nature</em>, 2020&ensp;<span class="pub-cites">91 citations</span></div>
+              <div class="pub-journal"><em>Nature</em>, 2020&ensp;<span class="pub-cites">92 citations</span></div>
               <div class="pub-links">
                 <a href="https://ui.adsabs.harvard.edu/abs/2020Natur.586..528W/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">Testing viscous disc theory using the balance between stellar accretion and external photoevaporation of protoplanetary discs</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, M. Ansdell, T. J. Haworth, J. M. D. Kruijssen</div>
               <div class="pub-journal"><em>MNRAS</em>, 2020&ensp;<span class="pub-cites">27 citations</span></div>
               <div class="pub-links">
@@ -952,10 +967,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Flybys in protoplanetary discs - II. Observational signatures</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors">N. Cuello, F. Louvet, D. Mentiplay, &hellip;, <strong>A. J. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>MNRAS</em>, 2020&ensp;<span class="pub-cites">76 citations</span></div>
               <div class="pub-links">
@@ -963,10 +978,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">Prevalent externally driven protoplanetary disc dispersal as a function of the galactic environment</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, J. M. D. Kruijssen, M. Chevance, B. W. Keller, S. N. Longmore</div>
               <div class="pub-journal"><em>MNRAS</em>, 2020&ensp;<span class="pub-cites">65 citations</span></div>
               <div class="pub-links">
@@ -977,10 +992,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2019</div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">A solution to the proplyd lifetime problem</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, C. J. Clarke, G. P. Rosotti, A. Hacar, R. Alexander</div>
               <div class="pub-journal"><em>MNRAS</em>, 2019&ensp;<span class="pub-cites">57 citations</span></div>
               <div class="pub-links">
@@ -988,10 +1003,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">External photoevaporation of protoplanetary discs in Cygnus OB2: linking discs to star formation dynamical history</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, C. J. Clarke, G. P. Rosotti</div>
               <div class="pub-journal"><em>MNRAS</em>, 2019&ensp;<span class="pub-cites">26 citations</span></div>
               <div class="pub-links">
@@ -1002,10 +1017,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2018</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="external-photoevaporation">
             <div>
               <div class="pub-title">The FRIED grid of mass-loss rates for externally irradiated protoplanetary discs</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span></div>
               <div class="pub-authors">T. J. Haworth, C. J. Clarke, W. Rahman, <strong>A. J. Winter</strong>, S. Facchini</div>
               <div class="pub-journal"><em>MNRAS</em>, 2018&ensp;<span class="pub-cites">124 citations</span></div>
               <div class="pub-links">
@@ -1013,10 +1028,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Evidence of a past disc-disc encounter: HV and DO Tau</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, R. A. Booth, C. J. Clarke</div>
               <div class="pub-journal"><em>MNRAS</em>, 2018&ensp;<span class="pub-cites">40 citations</span></div>
               <div class="pub-links">
@@ -1024,10 +1039,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="external-photoevaporation star-and-planet-dynamics">
             <div>
               <div class="pub-title">Protoplanetary disc truncation mechanisms in stellar clusters: comparing external photoevaporation and tidal encounters</div>
+              <div class="pub-tags"><span class="pub-tag">External photoevaporation</span><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, C. J. Clarke, G. Rosotti, J. Ih, S. Facchini, <em>et al.</em></div>
               <div class="pub-journal"><em>MNRAS</em>, 2018&ensp;<span class="pub-cites">186 citations</span></div>
               <div class="pub-links">
@@ -1035,10 +1050,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="star-and-planet-dynamics">
             <div>
               <div class="pub-title">Protoplanetary disc response to distant tidal encounters in stellar clusters</div>
+              <div class="pub-tags"><span class="pub-tag">Star and planet dynamics</span></div>
               <div class="pub-authors"><strong>A. J. Winter</strong>, C. J. Clarke, G. Rosotti, R. A. Booth</div>
               <div class="pub-journal"><em>MNRAS</em>, 2018&ensp;<span class="pub-cites">45 citations</span></div>
               <div class="pub-links">
@@ -1054,17 +1069,17 @@
 
         <div class="pub-filter-bar">
           <span style="font-size:.82rem;color:var(--text-muted);font-weight:600;">Filter:</span>
-          <button class="filter-btn active" onclick="filterPubs('conferences','all',this)">All (4)</button>
-          <button class="filter-btn" onclick="filterPubs('conferences','first',this)">First-author (2)</button>
-          <button class="filter-btn" onclick="filterPubs('conferences','coauth',this)">Co-author (2)</button>
+          <button class="filter-btn author-btn active" onclick="filterPubs('conferences','all',this)">All (4)</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('conferences','first',this)">First-author (2)</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('conferences','coauth',this)">Co-author (2)</button>
         </div>
         
         <div class="pub-year-group">
           <div class="pub-year-label">2026</div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="">
             <div>
               <div class="pub-title">Disk Evolution (review)</div>
+              
               <div class="pub-authors"><strong>A. Winter</strong></div>
               <div class="pub-journal"><em>Planetary formation and Exoplanets in the ELT era (Exo-ELT)</em>, 2026</div>
               <div class="pub-links">
@@ -1075,10 +1090,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2024</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Kaleidoscope of irradiated disks: MUSE observations of proplyds in the Orion Nebula Cluster</div>
+              
               <div class="pub-authors">M. Aru, K. Mauco, C. F. Manara, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>EAS2024, European Astronomical Society Annual Meeting</em>, 2024</div>
               <div class="pub-links">
@@ -1086,10 +1101,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Probing the Physics of Stellar Clusters through Gaia Positions and Velocities</div>
+              
               <div class="pub-authors">R. Anania, <strong>A. Winter</strong>, G. Rosotti</div>
               <div class="pub-journal"><em>EAS2024, European Astronomical Society Annual Meeting</em>, 2024</div>
               <div class="pub-links">
@@ -1100,10 +1115,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2022</div>
-          <div class="pub-entry" data-type="first">
-            <div class="pub-badge"><span class="badge badge-first">First author</span></div>
+          <div class="pub-entry" data-type="first" data-tags="">
             <div>
               <div class="pub-title">The importance of hot Jupiters in stellar clusters for understanding planet formation</div>
+              
               <div class="pub-authors"><strong>A. Winter</strong></div>
               <div class="pub-journal"><em>Disks and Planets across ESO Facilities</em>, 2022</div>
               <div class="pub-links">
@@ -1119,17 +1134,17 @@
 
         <div class="pub-filter-bar">
           <span style="font-size:.82rem;color:var(--text-muted);font-weight:600;">Filter:</span>
-          <button class="filter-btn active" onclick="filterPubs('proposals','all',this)">All (6)</button>
-          <button class="filter-btn" onclick="filterPubs('proposals','first',this)">First-author (0)</button>
-          <button class="filter-btn" onclick="filterPubs('proposals','coauth',this)">Co-author (6)</button>
+          <button class="filter-btn author-btn active" onclick="filterPubs('proposals','all',this)">All (6)</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('proposals','first',this)">First-author (0)</button>
+          <button class="filter-btn author-btn" onclick="filterPubs('proposals','coauth',this)">Co-author (6)</button>
         </div>
         <p class="updated-note" style="margin-bottom:1rem;">JWST and other facility proposals as listed on NASA ADS.</p>
         <div class="pub-year-group">
           <div class="pub-year-label">2025</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">A pocket of last resistance: characterizing the evaporating globule near a massive O-star binary</div>
+              
               <div class="pub-authors">A. Bik, M. C. Ramirez-Tannus, A. De Koter, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>JWST Proposal. Cycle 4</em>, 2025</div>
               <div class="pub-links">
@@ -1140,10 +1155,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2024</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">The Crucible of Planet Formation - Protoplanetary Disks in the Extreme Environment of Trumpler 14</div>
+              
               <div class="pub-authors">M. A. Kuhn, A. Bik, E. D. Feigelson, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>JWST Proposal. Cycle 3</em>, 2024</div>
               <div class="pub-links">
@@ -1154,10 +1169,10 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2023</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Evolution of protoplanetary disks and early stellar evolution in starburst: A NIRCam and MIRI observation of the young starburst cluster Westerlund 2</div>
+              
               <div class="pub-authors">M. G. Guarcello, M. Andersen, A. M. Bayo, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>JWST Proposal. Cycle 2</em>, 2023</div>
               <div class="pub-links">
@@ -1165,10 +1180,10 @@
               </div>
             </div>
           </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Direct detection of kinematically-detected protoplanet candidates</div>
+              
               <div class="pub-authors">M. Benisty, S. Facchini, M. Fukagawa, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>JWST Proposal. Cycle 2</em>, 2023</div>
               <div class="pub-links">
@@ -1179,25 +1194,25 @@
         </div>
         <div class="pub-year-group">
           <div class="pub-year-label">2021</div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
-            <div>
-              <div class="pub-title">Physics and Chemistry of Planet-Forming Disks in Extreme Radiation Environments</div>
-              <div class="pub-authors">M. C. Ramirez-Tannus, F. Backs, A. Bik, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
-              <div class="pub-journal"><em>JWST Proposal. Cycle 1</em>, 2021</div>
-              <div class="pub-links">
-                <a href="https://ui.adsabs.harvard.edu/abs/2021jwst.prop.1759R/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
-              </div>
-            </div>
-          </div>
-          <div class="pub-entry" data-type="coauth">
-            <div class="pub-badge"><span class="badge badge-coauth">Co-author</span></div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
             <div>
               <div class="pub-title">Testing protoplanetary disk evolution and brown dwarf formation in starburst: NIRCAM and MIRI observations of the young cluster Westerlund 1</div>
+              
               <div class="pub-authors">M. G. Guarcello, R. Bonito, S. J. Clark, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
               <div class="pub-journal"><em>JWST Proposal. Cycle 1</em>, 2021</div>
               <div class="pub-links">
                 <a href="https://ui.adsabs.harvard.edu/abs/2021jwst.prop.1905G/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
+              </div>
+            </div>
+          </div>
+          <div class="pub-entry" data-type="coauth" data-tags="">
+            <div>
+              <div class="pub-title">Physics and Chemistry of Planet-Forming Disks in Extreme Radiation Environments</div>
+              
+              <div class="pub-authors">M. C. Ramirez-Tannus, F. Backs, A. Bik, &hellip;, <strong>A. Winter</strong>, <em>et al.</em></div>
+              <div class="pub-journal"><em>JWST Proposal. Cycle 1</em>, 2021</div>
+              <div class="pub-links">
+                <a href="https://ui.adsabs.harvard.edu/abs/2021jwst.prop.1759R/abstract" target="_blank" rel="noopener" class="pub-link">ADS &#8599;</a>
               </div>
             </div>
           </div>
@@ -1211,7 +1226,6 @@
 
   <section class="contact-section">
     <div class="container">
-      <p class="section-label">Get in Touch</p>
       <h2 class="section-heading">Contact</h2>
       <p>For questions about any of my research, please get in touch.</p>
       <div class="contact-grid" style="margin-top:2rem;">
@@ -1251,19 +1265,29 @@
       document.getElementById('tab-articles').style.display = '';
     });
 
-    // ── Per-tab first/co-author filter ──
-    function filterPubs(tabId, type, btn) {
+    // ── Per-tab author + topic filters ──
+    const FILTERS = {};
+    function applyFilters(tabId) {
       const panel = document.getElementById('tab-' + tabId);
-      panel.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      const f = FILTERS[tabId] || { type: 'all', topic: 'all' };
       panel.querySelectorAll('.pub-entry').forEach(el => {
-        el.style.display = (type === 'all' || el.dataset.type === type) ? '' : 'none';
+        const okType  = f.type === 'all' || el.dataset.type === f.type;
+        const okTopic = f.topic === 'all' || (el.dataset.tags || '').split(' ').includes(f.topic);
+        el.style.display = (okType && okTopic) ? '' : 'none';
       });
       panel.querySelectorAll('.pub-year-group').forEach(g => {
         const vis = [...g.querySelectorAll('.pub-entry')].some(e => e.style.display !== 'none');
         g.style.display = vis ? '' : 'none';
       });
     }
+    function setFilter(tabId, key, value, btn, cls) {
+      FILTERS[tabId] = Object.assign({ type: 'all', topic: 'all' }, FILTERS[tabId], { [key]: value });
+      document.getElementById('tab-' + tabId).querySelectorAll('.' + cls).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters(tabId);
+    }
+    function filterPubs(tabId, type, btn)   { setFilter(tabId, 'type',  type,  btn, 'author-btn'); }
+    function filterTopic(tabId, topic, btn) { setFilter(tabId, 'topic', topic, btn, 'topic-btn'); }
   </script>
 
 </body>
