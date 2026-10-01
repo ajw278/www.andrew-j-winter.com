@@ -29,7 +29,7 @@ LIBRARY_ID = os.getenv("ADS_LIBRARY_ID", "PK0RWOWOTIKWfo-5Fck9sg")
 
 OUT_FILE   = Path(__file__).parent / "publications.html"
 TAGS_FILE  = Path(__file__).parent / "pub_tags.json"
-TAG_ORDER  = ["External photoevaporation", "Star and planet dynamics", "Late-stage infall", "ALMA"]
+TAG_ORDER  = ["External photoevaporation", "Star and planet dynamics", "Late-stage infall", "Herbigs", "ALMA", "JWST"]
 
 FIRST_AUTHOR_RE = re.compile(
     r"^Winter,\s+(Andrew(?:\s+J\.?)*\.?|A\.(?:\s*J\.?)?)\s*$", re.IGNORECASE

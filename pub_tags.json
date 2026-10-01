@@ -20,12 +20,17 @@
   },
   "2026arXiv260913123C": {
     "title": "JWST/MIRI Imaging Search for Kinematically Detected Protoplanetary Candidates",
-    "tags": []
+    "tags": [
+      "JWST",
+      "Herbigs"
+    ]
   },
   "2026arXiv260908621F": {
     "title": "XUE. ProDiMo models of internally and externally irradiated planet-forming disks around 0.3-4.0 solar mass stars (The IRIS project I)",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST",
+      "Herbigs"
     ]
   },
   "2026arXiv260917046K": {
@@ -42,7 +47,9 @@
   },
   "2026arXiv260823729S": {
     "title": "An analysis of the Herbig star population and their protoplanetary disks within 1 kpc",
-    "tags": []
+    "tags": [
+      "Herbigs"
+    ]
   },
   "2026ApJ..1005...13M": {
     "title": "The Effect of External Photoevaporation on the Disk Fraction in M17",
@@ -52,61 +59,72 @@
   },
   "2026A&A...709A.269G": {
     "title": "Planet-forming disks and their environment across regions and time from the full NIR census",
-    "tags": []
+    "tags": [
+      "Herbigs"
+    ]
   },
   "2026A&A...709A.174F": {
     "title": "The circumbinary disc of HD 34700A: II. Analysis of a strong dust asymmetry",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026ApJ..1002...59H": {
     "title": "XUE. Modeling MIR Molecular Gas Tracers of Truncation in Highly Irradiated Planet-forming Disks",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST"
     ]
   },
   "2026ApJ..1000L..14B": {
     "title": "exoALMA. XXI. The Morphology and Dynamics of Vertical Flows",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026A&A...707A.160S": {
     "title": "The circumbinary disk of HD34700A: I. CO gas kinematics indicate spirals, infall, and vortex motions",
     "tags": [
       "Late-stage infall",
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026ApJ..1000L..13I": {
     "title": "exoALMA. XX. Tomographic Detection of Embedded Planets in Protoplanetary Disks",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026ApJ..1000L..15F": {
     "title": "exoALMA XXII: A Two-dimensional Atlas of Deviations from Keplerian Disks",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026ApJ..1000L..16R": {
     "title": "exoALMA. XXIII. Estimating Disk and Planet Properties from Dust Morphologies with DBNets 2.0",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026ApJ...997L..47H": {
     "title": "exoALMA. XIX. Confirmation of Non-thermal Line Broadening in the DM Tau Protoplanetary Disk",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2026A&A...705A.238V": {
     "title": "Astrometric view of companions in the inner dust cavities of protoplanetary discs",
     "tags": [
-      "Star and planet dynamics"
+      "Star and planet dynamics",
+      "Herbigs"
     ]
   },
   "2026A&A...705A.102W": {
@@ -124,19 +142,24 @@
   "2025A&A...701A.139R": {
     "title": "XUE: JWST spectroscopy of externally irradiated disks around young intermediate-mass stars",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST",
+      "Herbigs"
     ]
   },
   "2025A&A...701A..14F": {
     "title": "XUE: The CO<SUB>2</SUB>-rich terrestrial planet-forming region of an externally irradiated Herbig disk",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST",
+      "Herbigs"
     ]
   },
   "2025ApJ...990L..10W": {
     "title": "exoALMA. XVIII. Interpreting Large-scale Kinematic Structures as Moderate Warping",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025MNRAS.542.1761W": {
@@ -148,7 +171,8 @@
   "2025ApJ...989...30Z": {
     "title": "SO Emission in the Dynamically Perturbed Protoplanetary Disks around CQ Tau and MWC 758",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025MNRAS.541.3134K": {
@@ -166,49 +190,57 @@
   "2025ApJ...984L...6T": {
     "title": "exoALMA. I. Science Goals, Project Design, and Data Products",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025OJAp....8E..54A": {
     "title": "The past, present and future of observations of externally irradiated disks",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST"
     ]
   },
   "2025ApJ...984L...9C": {
     "title": "exoALMA. IV. Substructures, Asymmetries, and the Faint Outer Disk in Continuum Emission",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..10G": {
     "title": "exoALMA. V. Gaseous Emission Surfaces and Temperature Structures",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..15P": {
     "title": "exoALMA. X. Channel Maps Reveal Complex <SUP>12</SUP>CO Abundance Distributions and a Variety of Kinematic Structures with Evidence for Embedded Planets",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..17L": {
     "title": "exoALMA. XII. Weighing and Sizing exoALMA Disks with Rotation Curve Modelling",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..11S": {
     "title": "exoALMA. VI. Rotating under Pressure: Rotation Curves, Azimuthal Velocity Substructures, and Gas Pressure Variations",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..18T": {
     "title": "exoALMA. XIII. Gas Masses from N<SUB>2</SUB>H<SUP>+</SUP> and C<SUP>18</SUP>O: A Comparison of Measurement Techniques for Protoplanetary Gas Disk Masses",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L...8I": {
@@ -220,31 +252,36 @@
   "2025ApJ...984L..20R": {
     "title": "exoALMA. XV. Interpreting the Height of CO Emission Layer",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...985...72P": {
     "title": "XUE: Thermochemical Modeling Suggests a Compact and Gas-depleted Structure for a Distant, Irradiated Protoplanetary Disk",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST"
     ]
   },
   "2025ApJ...984L..22W": {
     "title": "exoALMA. XVII. Characterizing the Gas Dynamics around Dust Asymmetries",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..21B": {
     "title": "exoALMA. XVI. Predicting Signatures of Large-scale Turbulence in Protoplanetary Disks",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..19Y": {
     "title": "exoALMA. XIV. Gas Surface Densities in the RX J1604.3−2130 A Disk from Pressure-broadened CO Line Wings",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..12B": {
@@ -256,7 +293,8 @@
   "2025ApJ...984L..13H": {
     "title": "exoALMA. VIII. Probabilistic Moment Maps and Data Products Using Nonparametric Linear Models",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2025ApJ...984L..16G": {
@@ -280,7 +318,8 @@
   "2025A&A...693A.120G": {
     "title": "EWOCS-III: JWST observations of the supermassive star cluster Westerlund 1",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST"
     ]
   },
   "2024A&A...692A.137A": {
@@ -321,19 +360,22 @@
   "2024A&A...686A...9M": {
     "title": "Rotation curves in protoplanetary disks with thermal stratification. Physical model and observational evidence in MAPS disks",
     "tags": [
-      "ALMA"
+      "ALMA",
+      "Herbigs"
     ]
   },
   "2024A&A...682A..49G": {
     "title": "EWOCS-I: The catalog of X-ray sources in Westerlund 1 from the Extended Westerlund 1 and 2 Open Clusters Survey",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST"
     ]
   },
   "2023ApJ...958L..30R": {
     "title": "XUE: Molecular Inventory in the Inner Region of an Extremely Irradiated Protoplanetary Disk",
     "tags": [
-      "External photoevaporation"
+      "External photoevaporation",
+      "JWST"
     ]
   },
   "2023arXiv230610647G": {
