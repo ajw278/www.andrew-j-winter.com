@@ -366,7 +366,13 @@
       document.getElementById('admin-wrap').style.display = 'block';
       document.getElementById('current-hash-display').textContent = ADMIN_HASH;
       const savedTok = getGhToken();
-      if (savedTok) document.getElementById('gh-token').value = savedTok;
+      if (savedTok) {
+        document.getElementById('gh-token').value = savedTok;
+        const s = document.getElementById('gh-status');
+        s.className = 'gh-status ok';
+        s.textContent = '✓ Using the token saved in this browser.';
+        s.style.display = 'block';
+      }
       updatePublishBtn();
       await loadData();
     }
@@ -563,7 +569,19 @@
 
     function saveGhToken() {
       const tok = document.getElementById('gh-token').value.trim();
-      try { tok ? localStorage.setItem('gh_token', tok) : localStorage.removeItem('gh_token'); } catch (e) {}
+      let saved = false;
+      try {
+        tok ? localStorage.setItem('gh_token', tok) : localStorage.removeItem('gh_token');
+        saved = !!tok && localStorage.getItem('gh_token') === tok;
+      } catch (e) {}
+      const s = document.getElementById('gh-status');
+      if (tok) {
+        s.className = 'gh-status ' + (saved ? 'ok' : 'err');
+        s.textContent = saved
+          ? '✓ Token saved in this browser — you won\'t need to enter it again here.'
+          : '✗ This browser is blocking storage (private window or privacy setting), so the token will be forgotten when you close the tab.';
+        s.style.display = 'block';
+      }
       updatePublishBtn();
     }
 
