@@ -1370,13 +1370,12 @@
       const affil = slot.affiliation ? ` (${slot.affiliation})` : '';
       const title = slot.title && slot.title !== 'TBC' ? slot.title : '[TITLE]';
       const abstract = slot.abstract && slot.abstract !== 'TBC' ? slot.abstract : '[ABSTRACT]';
-      const pageUrl = 'https://andrew-j-winter.com/seminars/';
       const body = [
         'Dear all,',
         '',
-        `We will continue our AU seminar series ${when} at 15:00 in G. O. Jones, hearing from ${speaker}${affil} — see below and here: ${pageUrl}`,
+        `We will continue our AU seminar series ${when} at 15:00 in G. O. Jones with ${speaker}${affil} — see below.`,
         lunch ? '' : null,
-        lunch ? `We will go for lunch with ${first} at [PUB NAME], meeting at [TIME] on the 5th floor of G. O. Jones. It’s useful if you can let me know if you’re coming, although you can also join at the last minute. As always, lunch is covered up to £10 for AU PhD students and £15 for postdocs.` : null,
+        lunch ? `We will go for lunch with ${first} at [PUB NAME], meeting at [TIME] on the 5th floor of G. O. Jones. It’s useful if you can let me know if you’re coming, although you can also join at the last minute. Lunch is covered up to £10 for AU PhD students and £15 for postdocs.` : null,
         '',
         'Look forward to seeing everyone there.',
         '',
