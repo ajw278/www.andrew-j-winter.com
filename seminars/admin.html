@@ -216,7 +216,7 @@
     <div class="topbar">
       <span class="topbar-title">QMUL Seminars &mdash; Admin Panel</span>
       <div class="topbar-actions">
-        <button class="tbtn tbtn-publish" style="background:#2e86c1;color:#fff;" onclick="publishToGitHub()">&#8679; Publish to GitHub</button>
+        <button class="tbtn tbtn-publish" style="background:#2e86c1;color:#fff;" onclick="publishToGitHub()">Save</button>
       <button class="tbtn tbtn-save" onclick="saveAll()">&#8595; Download</button>
         <button class="tbtn tbtn-logout" onclick="logout()">Logout</button>
       </div>
@@ -319,7 +319,7 @@
 
     <!-- Save bar -->
     <div class="save-bar">
-      <button class="btn-publish" id="btn-publish" onclick="publishToGitHub()">&#8679; Publish to GitHub</button>
+      <button class="btn-publish" id="btn-publish" onclick="publishToGitHub()">Save</button>
       <button class="btn-dl" onclick="saveAll()">&#8595; Download Files</button>
       <p class="save-bar-note" id="save-bar-note">
         Enter a GitHub token on the <strong>GitHub</strong> tab to enable one-click publishing.
@@ -600,7 +600,7 @@
       const note = document.getElementById('save-bar-note');
       note.style.color = '';
       if (getGhToken()) {
-        note.innerHTML = 'Click <strong>Publish to GitHub</strong> to update the live site directly.';
+        note.innerHTML = 'Click <strong>Save</strong> to update the live site directly.';
       } else {
         note.innerHTML = 'Enter a GitHub token on the <strong>GitHub</strong> tab to enable one-click publishing.';
       }
@@ -654,8 +654,8 @@
       if (!data) { alert('No data loaded yet.'); return; }
 
       const btns = document.querySelectorAll('.tbtn-publish, #btn-publish');
-      btns.forEach(b => { b.disabled = true; b.textContent = 'Publishing…'; });
-      setPublishStatus('', 'Publishing to GitHub…');
+      btns.forEach(b => { b.disabled = true; b.textContent = 'Saving…'; });
+      setPublishStatus('', 'Saving…');
 
       try {
         const jsonStr = JSON.stringify(data, null, 2);
@@ -684,16 +684,16 @@
           'Sync inline seminar data in index.html');
 
         DATA = data;
-        setPublishStatus('ok', '✓ Published at ' + new Date().toLocaleTimeString('en-GB') +
+        setPublishStatus('ok', '✓ Saved at ' + new Date().toLocaleTimeString('en-GB') +
           '. The live site will update in about a minute.');
       } catch(e) {
         let msg = e.message;
         if (/401|Bad credentials/i.test(msg)) msg += ' — the token is invalid or expired. Update it on the GitHub tab.';
         else if (/403|404|Resource not accessible/i.test(msg)) msg += ' — the token needs "Contents: Read and write" on ajw278/www.andrew-j-winter.com.';
-        setPublishStatus('err', '✗ Publish failed: ' + msg);
-        alert('Publish failed: ' + msg);
+        setPublishStatus('err', '✗ Save failed: ' + msg);
+        alert('Save failed: ' + msg);
       } finally {
-        btns.forEach(b => { b.disabled = false; b.textContent = '⬆ Publish to GitHub'; });
+        btns.forEach(b => { b.disabled = false; b.textContent = 'Save'; });
       }
     }
 
