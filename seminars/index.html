@@ -545,9 +545,42 @@
           </button>
         </div>
 
-        <!-- Step 5: Hosting duties -->
+        <!-- Step 5: Advertise the talk -->
         <div class="email-draft-card">
           <div class="email-draft-num">5</div>
+          <h3>Advertise the Talk</h3>
+          <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
+            On the Wednesday or Thursday before the seminar, email a reminder with the title and abstract to the AU mailing lists:
+          </p>
+          <ul class="logistics-list">
+            <li>au-academics@qmul.ac.uk</li>
+            <li>au-research@qmul.ac.uk</li>
+            <li>au-postdocs@qmul.ac.uk</li>
+            <li>au-phds@qmul.ac.uk</li>
+          </ul>
+          <div class="fg" style="margin:1.1rem 0 .85rem;">
+            <label for="advert-slot">Seminar</label>
+            <select id="advert-slot">
+              <option value="">Select seminar&hellip;</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:.5rem;margin-top:.75rem;">
+            <button class="sbtn sbtn-primary" style="flex:1;" onclick="openAdvertEmail(true)">
+              &#9993; Draft with pub lunch
+            </button>
+            <button class="sbtn" style="cursor:pointer;" title="Copy email text" onclick="copyAdvertEmail(true, this)">Copy</button>
+          </div>
+          <div style="display:flex;gap:.5rem;margin-top:.5rem;">
+            <button class="sbtn sbtn-primary" style="flex:1;" onclick="openAdvertEmail(false)">
+              &#9993; Draft without pub lunch
+            </button>
+            <button class="sbtn" style="cursor:pointer;" title="Copy email text" onclick="copyAdvertEmail(false, this)">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 6: Hosting duties -->
+        <div class="email-draft-card">
+          <div class="email-draft-num">6</div>
           <h3>Hosting Duties</h3>
           <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
             As the designated host, you are the speaker&rsquo;s main point of contact for the day. Please make sure you:
@@ -562,9 +595,9 @@
           </ul>
         </div>
 
-        <!-- Step 6: Claim expenses -->
+        <!-- Step 7: Claim expenses -->
         <div class="email-draft-card">
-          <div class="email-draft-num">6</div>
+          <div class="email-draft-num">7</div>
           <h3>Claim Expenses</h3>
           <p style="color:var(--text-muted);font-size:.875rem;margin:.5rem 0 1.25rem;">
             After the seminar, claim back any costs you covered (pub lunch, refreshments, etc.) using the AU budget code <strong>SPC4003B</strong>. There are two ways to do this:
@@ -1304,12 +1337,85 @@
         'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
 
+    const AU_LISTS = ['au-academics@qmul.ac.uk', 'au-research@qmul.ac.uk', 'au-postdocs@qmul.ac.uk', 'au-phds@qmul.ac.uk'];
+
+    function updateAdvertOptions() {
+      const sel = document.getElementById('advert-slot');
+      if (!sel || !DATA) return;
+      const prev = sel.value;
+      const today = new Date().toISOString().slice(0, 10);
+      const upcoming = DATA.slots.filter(s => s.status === 'confirmed' && s.date >= today);
+      sel.innerHTML = '<option value="">Select seminar…</option>' + upcoming.map(s => {
+        const d = new Date(s.date + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+        return `<option value="${s.date}">${d} — ${esc(s.speaker || 'TBC')}</option>`;
+      }).join('');
+      sel.value = upcoming.some(s => s.date === prev) ? prev : (upcoming[0] ? upcoming[0].date : '');
+    }
+
+    function ordinal(n) {
+      const sfx = (n % 100 >= 11 && n % 100 <= 13) ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th');
+      return n + sfx;
+    }
+
+    function buildAdvertEmail(lunch) {
+      const date = document.getElementById('advert-slot').value;
+      const slot = (DATA && DATA.slots.find(s => s.date === date)) || {};
+      const d = date ? new Date(date + 'T12:00:00') : null;
+      const when = d
+        ? `this Friday (${ordinal(d.getDate())} ${d.toLocaleDateString('en-GB', { month: 'long' })})`
+        : 'this Friday ([DATE])';
+      const speaker = slot.speaker || '[SPEAKER]';
+      const first = speaker.split(' ')[0];
+      const affil = slot.affiliation ? ` (${slot.affiliation})` : '';
+      const title = slot.title && slot.title !== 'TBC' ? slot.title : '[TITLE]';
+      const abstract = slot.abstract && slot.abstract !== 'TBC' ? slot.abstract : '[ABSTRACT]';
+      const pageUrl = 'https://andrew-j-winter.com/seminars/';
+      const body = [
+        'Dear all,',
+        '',
+        `We will continue our AU seminar series ${when} at 15:00 in G. O. Jones, hearing from ${speaker}${affil} — see below and here: ${pageUrl}`,
+        lunch ? '' : null,
+        lunch ? `We will go for lunch with ${first} at [PUB NAME], meeting at [TIME] on the 5th floor of G. O. Jones. It’s useful if you can let me know if you’re coming, although you can also join at the last minute. As always, lunch is covered up to £10 for AU PhD students and £15 for postdocs.` : null,
+        '',
+        'Look forward to seeing everyone there.',
+        '',
+        `Title: ${title}`,
+        '',
+        `Abstract: ${abstract}`,
+        '',
+        'Best,',
+        '[SENDER NAME]',
+      ].filter(l => l !== null).join('\n');
+      const subject = `AU seminar ${when.replace(/^this /, '')}: ${speaker} — ${title}`;
+      return { subject, body };
+    }
+
+    function openAdvertEmail(lunch) {
+      const { subject, body } = buildAdvertEmail(lunch);
+      window.location.href = 'mailto:' + AU_LISTS.join(',') +
+        '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
+    async function copyAdvertEmail(lunch, btn) {
+      const { subject, body } = buildAdvertEmail(lunch);
+      const text = `To: ${AU_LISTS.join(', ')}\nSubject: ${subject}\n\n${body}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        const old = btn.innerHTML;
+        btn.textContent = '✓ Copied';
+        setTimeout(() => { btn.innerHTML = old; }, 2000);
+      } catch (e) {
+        alert(text);
+      }
+    }
+
     // ── Data ────────────────────────────────────────────────────
     // Step 1: always read inline data (works with file:// and when offline)
     // Step 2: try fetching data.json to override with latest (works on a server)
     function renderAll() {
       renderCalendar();
       updateInviteDates();
+      updateAdvertOptions();
       updateSubDates();
       updateSwapMyDates();
       updateSwapTgtDates();
