@@ -310,7 +310,9 @@
           </p>
           <div class="gh-row">
             <label for="gh-token">Personal Access Token</label>
-            <input type="password" id="gh-token" placeholder="github_pat_…" oninput="saveGhToken()" autocomplete="off">
+            <input type="text" id="gh-token" name="gh-pat" placeholder="github_pat_…" oninput="saveGhToken()"
+                   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                   data-lpignore="true" data-1p-ignore data-bwignore style="-webkit-text-security:disc;">
           </div>
           <div id="gh-status" class="gh-status"></div>
         </div>
@@ -562,13 +564,24 @@
     const GH_REPO  = 'ajw278/www.andrew-j-winter.com';
     const GH_BRANCH = 'main';
 
+    const TOKEN_RE = /^(github_pat_|ghp_)[A-Za-z0-9_]{20,}$/;
+
     function getGhToken() {
-      try { return localStorage.getItem('gh_token') || document.getElementById('gh-token').value.trim(); }
-      catch (e) { return document.getElementById('gh-token').value.trim(); }
+      let tok = '';
+      try { tok = localStorage.getItem('gh_token') || ''; } catch (e) {}
+      if (!TOKEN_RE.test(tok)) tok = document.getElementById('gh-token').value.trim();
+      return TOKEN_RE.test(tok) ? tok : '';
     }
 
     function saveGhToken() {
       const tok = document.getElementById('gh-token').value.trim();
+      const s0 = document.getElementById('gh-status');
+      if (tok && !TOKEN_RE.test(tok)) {
+        s0.className = 'gh-status err';
+        s0.textContent = '✗ That doesn’t look like a GitHub token (it should start with github_pat_ or ghp_). Not saved.';
+        s0.style.display = 'block';
+        return;
+      }
       let saved = false;
       try {
         tok ? localStorage.setItem('gh_token', tok) : localStorage.removeItem('gh_token');
@@ -646,6 +659,10 @@
       if (!token) {
         token = (prompt('Paste your GitHub Personal Access Token (it will be remembered in this browser):') || '').trim();
         if (!token) return;
+        if (!TOKEN_RE.test(token)) {
+          alert('That doesn’t look like a GitHub token — it should start with github_pat_ or ghp_.');
+          return;
+        }
         document.getElementById('gh-token').value = token;
         saveGhToken();
       }
