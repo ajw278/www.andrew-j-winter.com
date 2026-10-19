@@ -444,7 +444,7 @@
       <div class="guidance-block">
         <h3 class="guidance-heading">Logistical organisation</h3>
         <p>For speakers travelling significant distances, the AU budget can cover one night&rsquo;s accommodation on campus via <strong>Academic Lets</strong>. If you think this applies, ask the speaker whether they would like to arrange this. If so, email <a href="mailto:academiclets@qmul.ac.uk">academiclets@qmul.ac.uk</a> to arrange it — there is a draft email in the workflow steps below.</p>
-        <p>For speakers making the journey on the day, we also offer a subsidised pub lunch at 13:00 before the seminar. Speaker costs are covered in full; AU students get lunch capped at &pound;10 and postdocs capped at &pound;15. The host is responsible for covering the remaining costs on the day and claiming them back — see the hosting duties step below for details.</p>
+        <p>For speakers making the journey on the day, we also offer a subsidised pub lunch at 13:00 before the seminar. Speaker costs are covered in full, and the AU covers the rest so that AU PhD students pay at most &pound;10 and postdocs at most &pound;15. The host is responsible for covering the remaining costs on the day and claiming them back — see the hosting duties step below for details.</p>
         <p>Travel expenses are reimbursed by the university using budget code <strong>SPC4003B</strong>. The logistics email draft includes full instructions and a link to the expense claim form.</p>
       </div>
 
@@ -553,10 +553,10 @@
             On the Wednesday or Thursday before the seminar, email a reminder with the title and abstract to the AU mailing lists:
           </p>
           <ul class="logistics-list">
-            <li>au-academics@qmul.ac.uk</li>
-            <li>au-research@qmul.ac.uk</li>
-            <li>au-postdocs@qmul.ac.uk</li>
-            <li>au-phds@qmul.ac.uk</li>
+            <li>au-academics@qmlists.qmul.ac.uk</li>
+            <li>au-research@qmlists.qmul.ac.uk</li>
+            <li>au-postdocs@qmlists.qmul.ac.uk</li>
+            <li>au-phds@qmlists.qmul.ac.uk</li>
           </ul>
           <div class="fg" style="margin:1.1rem 0 .85rem;">
             <label for="advert-slot">Seminar</label>
@@ -1247,7 +1247,7 @@
 
       const pubParagraph = withPub ? [
         '',
-        'As you\'ll be making the journey to QMUL, we\'d also love to invite you to join us for lunch at a local pub before the seminar — we usually leave at 13:00, and your costs would be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk.',
+        'As you\'ll be making the journey to QMUL, we\'d also love to invite you to join us for lunch at a local pub before the seminar — we usually leave at 13:00, and your costs would be entirely on us. We also subsidise lunch for the group (AU PhD students pay at most £10 and postdocs at most £15), making it a nice opportunity to meet the group before the talk.',
       ] : [];
 
       const body = [
@@ -1279,7 +1279,7 @@
       const expenseUrl = window.location.origin + window.location.pathname.replace('index.html','') +
                          'Expense%20Claim%20Template%20-%20Jan%202026.xlsx';
       const pubLine = withPub
-        ? 'We\'d love to invite you to join us for lunch at a local pub before the seminar — we usually leave from Mile End at 13:00, and your costs will be entirely on us. We can also subsidise attendance for AU students (up to £10) and postdocs (up to £15), making it a nice opportunity to meet the group before the talk. Let me know if that works for you.'
+        ? 'We\'d love to invite you to join us for lunch at a local pub before the seminar — we usually leave from Mile End at 13:00, and your costs will be entirely on us. We also subsidise lunch for the group (AU PhD students pay at most £10 and postdocs at most £15), making it a nice opportunity to meet the group before the talk. Let me know if that works for you.'
         : null;
       const body = [
         'Dear [Name],',
@@ -1338,7 +1338,7 @@
         'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
 
-    const AU_LISTS = ['au-academics@qmul.ac.uk', 'au-research@qmul.ac.uk', 'au-postdocs@qmul.ac.uk', 'au-phds@qmul.ac.uk'];
+    const AU_LISTS = ['au-academics@qmlists.qmul.ac.uk', 'au-research@qmlists.qmul.ac.uk', 'au-postdocs@qmlists.qmul.ac.uk', 'au-phds@qmlists.qmul.ac.uk'];
 
     function updateAdvertOptions() {
       const sel = document.getElementById('advert-slot');
@@ -1375,7 +1375,7 @@
         '',
         `We will continue our AU seminar series ${when} at 15:00 in G. O. Jones with ${speaker}${affil} — see below.`,
         lunch ? '' : null,
-        lunch ? `We will go for lunch with ${first} at [PUB NAME], meeting at [TIME] on the 5th floor of G. O. Jones. It’s useful if you can let me know if you’re coming, although you can also join at the last minute. Lunch is covered up to £10 for AU PhD students and £15 for postdocs.` : null,
+        lunch ? `We will go for lunch with ${first} at [PUB NAME], meeting at [TIME] on the 5th floor of G. O. Jones. It’s useful if you can let me know if you’re coming, although you can also join at the last minute. The AU covers the rest of the bill, so AU PhD students pay at most £10 and postdocs at most £15.` : null,
         '',
         'Look forward to seeing everyone there.',
         '',
